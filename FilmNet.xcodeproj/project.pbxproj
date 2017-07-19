@@ -1,0 +1,357 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		81A244B91F1FD012003147D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244B81F1FD012003147D3 /* main.m */; };
+		81A244BC1F1FD012003147D3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244BB1F1FD012003147D3 /* AppDelegate.m */; };
+		81A244BF1F1FD012003147D3 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244BE1F1FD012003147D3 /* FirstViewController.m */; };
+		81A244C21F1FD012003147D3 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244C11F1FD012003147D3 /* SecondViewController.m */; };
+		81A244C51F1FD012003147D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A244C31F1FD012003147D3 /* Main.storyboard */; };
+		81A244C71F1FD012003147D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81A244C61F1FD012003147D3 /* Assets.xcassets */; };
+		81A244CA1F1FD012003147D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A244C81F1FD012003147D3 /* LaunchScreen.storyboard */; };
+		81A244D31F1FD246003147D3 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244D21F1FD246003147D3 /* IntroViewController.m */; };
+		81A244D71F1FD256003147D3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244D51F1FD256003147D3 /* LoginViewController.m */; };
+		81A244D81F1FD256003147D3 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A244D61F1FD256003147D3 /* LoginViewController.xib */; };
+		81A244DC1F1FD26C003147D3 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244DA1F1FD26C003147D3 /* SignupViewController.m */; };
+		81A244DD1F1FD26C003147D3 /* SignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A244DB1F1FD26C003147D3 /* SignupViewController.xib */; };
+		81A244E31F1FD649003147D3 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244E21F1FD649003147D3 /* BaseViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		81A244B41F1FD012003147D3 /* FilmNet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmNet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		81A244B81F1FD012003147D3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		81A244BA1F1FD012003147D3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		81A244BB1F1FD012003147D3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		81A244BD1F1FD012003147D3 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		81A244BE1F1FD012003147D3 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		81A244C01F1FD012003147D3 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		81A244C11F1FD012003147D3 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		81A244C41F1FD012003147D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		81A244C61F1FD012003147D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		81A244C91F1FD012003147D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		81A244CB1F1FD012003147D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81A244D11F1FD246003147D3 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
+		81A244D21F1FD246003147D3 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
+		81A244D41F1FD256003147D3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		81A244D51F1FD256003147D3 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		81A244D61F1FD256003147D3 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		81A244D91F1FD26C003147D3 /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		81A244DA1F1FD26C003147D3 /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
+		81A244DB1F1FD26C003147D3 /* SignupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignupViewController.xib; sourceTree = "<group>"; };
+		81A244E11F1FD649003147D3 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		81A244E21F1FD649003147D3 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		81A244B11F1FD012003147D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		81A244AB1F1FD012003147D3 = {
+			isa = PBXGroup;
+			children = (
+				81A244B61F1FD012003147D3 /* FilmNet */,
+				81A244B51F1FD012003147D3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		81A244B51F1FD012003147D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				81A244B41F1FD012003147D3 /* FilmNet.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		81A244B61F1FD012003147D3 /* FilmNet */ = {
+			isa = PBXGroup;
+			children = (
+				81A244BA1F1FD012003147D3 /* AppDelegate.h */,
+				81A244BB1F1FD012003147D3 /* AppDelegate.m */,
+				81A244C61F1FD012003147D3 /* Assets.xcassets */,
+				81A244E11F1FD649003147D3 /* BaseViewController.h */,
+				81A244E21F1FD649003147D3 /* BaseViewController.m */,
+				81A244BD1F1FD012003147D3 /* FirstViewController.h */,
+				81A244BE1F1FD012003147D3 /* FirstViewController.m */,
+				81A244CB1F1FD012003147D3 /* Info.plist */,
+				81A244D11F1FD246003147D3 /* IntroViewController.h */,
+				81A244D21F1FD246003147D3 /* IntroViewController.m */,
+				81A244C81F1FD012003147D3 /* LaunchScreen.storyboard */,
+				81A244D41F1FD256003147D3 /* LoginViewController.h */,
+				81A244D51F1FD256003147D3 /* LoginViewController.m */,
+				81A244D61F1FD256003147D3 /* LoginViewController.xib */,
+				81A244C31F1FD012003147D3 /* Main.storyboard */,
+				81A244C01F1FD012003147D3 /* SecondViewController.h */,
+				81A244C11F1FD012003147D3 /* SecondViewController.m */,
+				81A244D91F1FD26C003147D3 /* SignupViewController.h */,
+				81A244DA1F1FD26C003147D3 /* SignupViewController.m */,
+				81A244DB1F1FD26C003147D3 /* SignupViewController.xib */,
+				81A244B71F1FD012003147D3 /* Supporting Files */,
+			);
+			path = FilmNet;
+			sourceTree = "<group>";
+		};
+		81A244B71F1FD012003147D3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				81A244B81F1FD012003147D3 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		81A244B31F1FD012003147D3 /* FilmNet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81A244CE1F1FD012003147D3 /* Build configuration list for PBXNativeTarget "FilmNet" */;
+			buildPhases = (
+				81A244B01F1FD012003147D3 /* Sources */,
+				81A244B11F1FD012003147D3 /* Frameworks */,
+				81A244B21F1FD012003147D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FilmNet;
+			productName = FilmNet;
+			productReference = 81A244B41F1FD012003147D3 /* FilmNet.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		81A244AC1F1FD012003147D3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Thought Foundry";
+				TargetAttributes = {
+					81A244B31F1FD012003147D3 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = S53MWGBWFF;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 81A244AF1F1FD012003147D3 /* Build configuration list for PBXProject "FilmNet" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 81A244AB1F1FD012003147D3;
+			productRefGroup = 81A244B51F1FD012003147D3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				81A244B31F1FD012003147D3 /* FilmNet */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		81A244B21F1FD012003147D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81A244D81F1FD256003147D3 /* LoginViewController.xib in Resources */,
+				81A244DD1F1FD26C003147D3 /* SignupViewController.xib in Resources */,
+				81A244CA1F1FD012003147D3 /* LaunchScreen.storyboard in Resources */,
+				81A244C71F1FD012003147D3 /* Assets.xcassets in Resources */,
+				81A244C51F1FD012003147D3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		81A244B01F1FD012003147D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81A244C21F1FD012003147D3 /* SecondViewController.m in Sources */,
+				81A244E31F1FD649003147D3 /* BaseViewController.m in Sources */,
+				81A244BC1F1FD012003147D3 /* AppDelegate.m in Sources */,
+				81A244D71F1FD256003147D3 /* LoginViewController.m in Sources */,
+				81A244BF1F1FD012003147D3 /* FirstViewController.m in Sources */,
+				81A244B91F1FD012003147D3 /* main.m in Sources */,
+				81A244DC1F1FD26C003147D3 /* SignupViewController.m in Sources */,
+				81A244D31F1FD246003147D3 /* IntroViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		81A244C31F1FD012003147D3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				81A244C41F1FD012003147D3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		81A244C81F1FD012003147D3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				81A244C91F1FD012003147D3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		81A244CC1F1FD012003147D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		81A244CD1F1FD012003147D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		81A244CF1F1FD012003147D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = S53MWGBWFF;
+				INFOPLIST_FILE = FilmNet/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.t12y.FilmNet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		81A244D01F1FD012003147D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = S53MWGBWFF;
+				INFOPLIST_FILE = FilmNet/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.t12y.FilmNet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		81A244AF1F1FD012003147D3 /* Build configuration list for PBXProject "FilmNet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81A244CC1F1FD012003147D3 /* Debug */,
+				81A244CD1F1FD012003147D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81A244CE1F1FD012003147D3 /* Build configuration list for PBXNativeTarget "FilmNet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81A244CF1F1FD012003147D3 /* Debug */,
+				81A244D01F1FD012003147D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 81A244AC1F1FD012003147D3 /* Project object */;
+}
