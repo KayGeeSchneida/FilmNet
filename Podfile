@@ -7,5 +7,8 @@ target 'FilmNet' do
 
   # Pods for FilmNet
 	pod 'Firebase/Core'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Database'
+
 
 end

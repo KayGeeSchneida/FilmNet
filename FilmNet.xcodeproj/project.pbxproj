@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D7E27C9C40169D12DF1C8A4 /* libPods-FilmNet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4AF2F115A9A0BA2B321B43 /* libPods-FilmNet.a */; };
+		8198543D1F200F9B0086AFA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8198543C1F200F9B0086AFA3 /* GoogleService-Info.plist */; };
 		81A1E7A01F200E5600F75D11 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 81A1E79F1F200E5600F75D11 /* Podfile */; };
 		81A244B91F1FD012003147D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244B81F1FD012003147D3 /* main.m */; };
 		81A244BC1F1FD012003147D3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244BB1F1FD012003147D3 /* AppDelegate.m */; };
@@ -28,6 +29,7 @@
 		33674049578006DF5AB2A075 /* Pods-FilmNet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmNet.release.xcconfig"; path = "Pods/Target Support Files/Pods-FilmNet/Pods-FilmNet.release.xcconfig"; sourceTree = "<group>"; };
 		492F43C4C95E524459AA6CAE /* Pods-FilmNet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmNet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FilmNet/Pods-FilmNet.debug.xcconfig"; sourceTree = "<group>"; };
 		7B4AF2F115A9A0BA2B321B43 /* libPods-FilmNet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FilmNet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8198543C1F200F9B0086AFA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		81A1E79F1F200E5600F75D11 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		81A244B41F1FD012003147D3 /* FilmNet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmNet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A244B81F1FD012003147D3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		81A244B71F1FD012003147D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8198543C1F200F9B0086AFA3 /* GoogleService-Info.plist */,
 				81A1E79F1F200E5600F75D11 /* Podfile */,
 				81A244B81F1FD012003147D3 /* main.m */,
 			);
@@ -205,6 +208,7 @@
 				81A244CA1F1FD012003147D3 /* LaunchScreen.storyboard in Resources */,
 				81A244C71F1FD012003147D3 /* Assets.xcassets in Resources */,
 				81A244C51F1FD012003147D3 /* Main.storyboard in Resources */,
+				8198543D1F200F9B0086AFA3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -36,6 +36,9 @@
                         <constraint firstAttribute="height" constant="50" id="r4Q-6t-Ocl"/>
                     </constraints>
                     <state key="normal" title="Sign Up"/>
+                    <connections>
+                        <action selector="tappedSignUp:" destination="-1" eventType="touchUpInside" id="5Ep-ai-C6p"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
