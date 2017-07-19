@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D7E27C9C40169D12DF1C8A4 /* libPods-FilmNet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4AF2F115A9A0BA2B321B43 /* libPods-FilmNet.a */; };
+		81A1E7A01F200E5600F75D11 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 81A1E79F1F200E5600F75D11 /* Podfile */; };
 		81A244B91F1FD012003147D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244B81F1FD012003147D3 /* main.m */; };
 		81A244BC1F1FD012003147D3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244BB1F1FD012003147D3 /* AppDelegate.m */; };
 		81A244BF1F1FD012003147D3 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244BE1F1FD012003147D3 /* FirstViewController.m */; };
@@ -23,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33674049578006DF5AB2A075 /* Pods-FilmNet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmNet.release.xcconfig"; path = "Pods/Target Support Files/Pods-FilmNet/Pods-FilmNet.release.xcconfig"; sourceTree = "<group>"; };
+		492F43C4C95E524459AA6CAE /* Pods-FilmNet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmNet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FilmNet/Pods-FilmNet.debug.xcconfig"; sourceTree = "<group>"; };
+		7B4AF2F115A9A0BA2B321B43 /* libPods-FilmNet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FilmNet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81A1E79F1F200E5600F75D11 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		81A244B41F1FD012003147D3 /* FilmNet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmNet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A244B81F1FD012003147D3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		81A244BA1F1FD012003147D3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -52,17 +58,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D7E27C9C40169D12DF1C8A4 /* libPods-FilmNet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		806D617A3A0B19F39DA27A30 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				492F43C4C95E524459AA6CAE /* Pods-FilmNet.debug.xcconfig */,
+				33674049578006DF5AB2A075 /* Pods-FilmNet.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		81A244AB1F1FD012003147D3 = {
 			isa = PBXGroup;
 			children = (
 				81A244B61F1FD012003147D3 /* FilmNet */,
 				81A244B51F1FD012003147D3 /* Products */,
+				806D617A3A0B19F39DA27A30 /* Pods */,
+				EE5899D3612D0B18E979EF45 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,9 +123,18 @@
 		81A244B71F1FD012003147D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				81A1E79F1F200E5600F75D11 /* Podfile */,
 				81A244B81F1FD012003147D3 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EE5899D3612D0B18E979EF45 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7B4AF2F115A9A0BA2B321B43 /* libPods-FilmNet.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -117,9 +144,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 81A244CE1F1FD012003147D3 /* Build configuration list for PBXNativeTarget "FilmNet" */;
 			buildPhases = (
+				B5ABAB679C7802814078326E /* [CP] Check Pods Manifest.lock */,
 				81A244B01F1FD012003147D3 /* Sources */,
 				81A244B11F1FD012003147D3 /* Frameworks */,
 				81A244B21F1FD012003147D3 /* Resources */,
+				90075C9EDAF3D7AA761A0A88 /* [CP] Embed Pods Frameworks */,
+				21476496A52C56738718F806 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -169,6 +199,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81A1E7A01F200E5600F75D11 /* Podfile in Resources */,
 				81A244D81F1FD256003147D3 /* LoginViewController.xib in Resources */,
 				81A244DD1F1FD26C003147D3 /* SignupViewController.xib in Resources */,
 				81A244CA1F1FD012003147D3 /* LaunchScreen.storyboard in Resources */,
@@ -178,6 +209,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		21476496A52C56738718F806 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FilmNet/Pods-FilmNet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90075C9EDAF3D7AA761A0A88 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FilmNet/Pods-FilmNet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5ABAB679C7802814078326E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		81A244B01F1FD012003147D3 /* Sources */ = {
@@ -309,6 +388,7 @@
 		};
 		81A244CF1F1FD012003147D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 492F43C4C95E524459AA6CAE /* Pods-FilmNet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = S53MWGBWFF;
@@ -321,6 +401,7 @@
 		};
 		81A244D01F1FD012003147D3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33674049578006DF5AB2A075 /* Pods-FilmNet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = S53MWGBWFF;
@@ -350,6 +431,7 @@
 				81A244D01F1FD012003147D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
