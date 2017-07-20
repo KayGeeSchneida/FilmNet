@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
+
+#define ARC4RANDOM_MAX      0x100000000
+
 @import Firebase;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>

@@ -6,6 +6,9 @@
 //  Copyright © 2017 Thought Foundry. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
+#import <AddressBookUI/AddressBookUI.h>
+
 #import "LocationViewController.h"
 #import "AppDelegate.h"
 
@@ -61,9 +64,35 @@
     if (![self validateZip:self.zipField.text]) {
         [self showAlertWithMessage:@"You must enter a valid zip code to finish." andSuccess:NO];
     } else {
-        [self finishSavingUserData];
+        [self fetchLocationDataWithZip:self.zipField.text];
     }
     
+}
+
+- (void)fetchLocationDataWithZip:(NSString*)zip
+{
+    CLGeocoder* geoCoder = [[CLGeocoder alloc] init];
+    [geoCoder geocodeAddressDictionary:@{(NSString*)kABPersonAddressZIPKey : zip}
+                     completionHandler:^(NSArray *placemarks, NSError *error) {
+                         if ([placemarks count] > 0) {
+                             CLPlacemark* placemark = [placemarks objectAtIndex:0];
+                             
+                             NSString* city = placemark.addressDictionary[(NSString*)kABPersonAddressCityKey];
+                             NSString* state = placemark.addressDictionary[(NSString*)kABPersonAddressStateKey];
+                             NSString* country = placemark.addressDictionary[(NSString*)kABPersonAddressCountryCodeKey];
+                             
+                             [self.userData setValue:city
+                                              forKey:@"city"];
+                             [self.userData setValue:state
+                                              forKey:@"state"];
+                             [self.userData setValue:country
+                                              forKey:@"country"];
+                             
+                             [self finishSavingUserData];
+                         } else {
+                             // TODO: Handle Lookup Failed
+                         }
+                     }];
 }
 
 - (void)finishSavingUserData {
