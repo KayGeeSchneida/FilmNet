@@ -53,6 +53,7 @@
 		81A244DB1F1FD26C003147D3 /* SignupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignupViewController.xib; sourceTree = "<group>"; };
 		81A244E11F1FD649003147D3 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		81A244E21F1FD649003147D3 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		81A26E551F2024070056C008 /* FilmNet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FilmNet.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +98,7 @@
 		81A244B61F1FD012003147D3 /* FilmNet */ = {
 			isa = PBXGroup;
 			children = (
+				81A26E551F2024070056C008 /* FilmNet.entitlements */,
 				81A244BA1F1FD012003147D3 /* AppDelegate.h */,
 				81A244BB1F1FD012003147D3 /* AppDelegate.m */,
 				81A244C61F1FD012003147D3 /* Assets.xcassets */,
@@ -176,6 +178,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = S53MWGBWFF;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -395,6 +402,7 @@
 			baseConfigurationReference = 492F43C4C95E524459AA6CAE /* Pods-FilmNet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FilmNet/FilmNet.entitlements;
 				DEVELOPMENT_TEAM = S53MWGBWFF;
 				INFOPLIST_FILE = FilmNet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -408,6 +416,7 @@
 			baseConfigurationReference = 33674049578006DF5AB2A075 /* Pods-FilmNet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FilmNet/FilmNet.entitlements;
 				DEVELOPMENT_TEAM = S53MWGBWFF;
 				INFOPLIST_FILE = FilmNet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

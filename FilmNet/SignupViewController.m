@@ -83,10 +83,8 @@
                                      self.ref = [[FIRDatabase database] reference];
                                      
                                      [[[_ref child:@"users"] child:user.uid]
-                                      setValue:@{@"username": self.emailField.text}];
-                                     
-                                     [[[_ref child:@"users"] child:user.uid]
-                                      setValue:@{@"displayname": self.nameField.text}];
+                                      setValue:@{@"username": self.emailField.text,
+                                                 @"displayname": self.nameField.text}];
                                      
                                      FIRUserProfileChangeRequest *changeRequest = [[FIRAuth auth].currentUser profileChangeRequest];
                                      changeRequest.displayName = self.nameField.text;
