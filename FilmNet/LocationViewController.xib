@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationViewController">
+            <connections>
+                <outlet property="contentView" destination="deR-NN-FW3" id="WZc-dY-cnX"/>
+                <outlet property="contentViewBottomSpace" destination="tAM-LK-rVo" id="CC1-hN-5Pl"/>
+                <outlet property="finishButton" destination="kIN-t7-jDl" id="mFj-TS-rnv"/>
+                <outlet property="scrollView" destination="1ku-Vr-uZx" id="QOP-cn-aRs"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="zipField" destination="Irt-AG-NFY" id="fWT-TP-s8h"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIN-t7-jDl">
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="YAs-o9-e3d"/>
+                    </constraints>
+                    <state key="normal" title="Finish"/>
+                    <state key="disabled">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="tappedFinish:" destination="-1" eventType="touchUpInside" id="uCg-XK-OKY"/>
+                    </connections>
+                </button>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ku-Vr-uZx">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="1ku-Vr-uZx" secondAttribute="trailing" id="FUP-au-OVp"/>
+                <constraint firstItem="1ku-Vr-uZx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="IDt-c7-blD"/>
+                <constraint firstItem="kIN-t7-jDl" firstAttribute="top" secondItem="1ku-Vr-uZx" secondAttribute="bottom" id="M6w-2g-P1l"/>
+                <constraint firstItem="1ku-Vr-uZx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="QT3-jX-XOp"/>
+                <constraint firstAttribute="trailing" secondItem="kIN-t7-jDl" secondAttribute="trailing" id="TYw-hv-3YP"/>
+                <constraint firstItem="kIN-t7-jDl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Yfc-fA-3V1"/>
+                <constraint firstItem="kIN-t7-jDl" firstAttribute="top" secondItem="1ku-Vr-uZx" secondAttribute="bottom" id="i9h-mt-uep"/>
+                <constraint firstAttribute="bottom" secondItem="kIN-t7-jDl" secondAttribute="bottom" id="tAM-LK-rVo"/>
+            </constraints>
+            <point key="canvasLocation" x="37" y="97"/>
+        </view>
+        <view contentMode="scaleToFill" id="deR-NN-FW3">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="261"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NMd-X7-Lg8">
+                    <rect key="frame" x="20" y="100" width="335" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="dOz-kY-wa3"/>
+                    </constraints>
+                    <state key="normal" title="Enable Location Services"/>
+                    <connections>
+                        <action selector="tappedEnableLocationServices:" destination="-1" eventType="touchUpInside" id="ghJ-X3-w1e"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="zipcode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Irt-AG-NFY">
+                    <rect key="frame" x="20" y="211" width="335" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="go"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="OTH-6L-VYS"/>
+                    </connections>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAs-d6-U6h">
+                    <rect key="frame" x="20" y="170" width="335" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Irt-AG-NFY" firstAttribute="leading" secondItem="deR-NN-FW3" secondAttribute="leading" constant="20" id="6vP-pb-8WT"/>
+                <constraint firstAttribute="trailing" secondItem="RAs-d6-U6h" secondAttribute="trailing" constant="20" id="G6y-Bg-iql"/>
+                <constraint firstAttribute="trailing" secondItem="NMd-X7-Lg8" secondAttribute="trailing" constant="20" id="HWM-UU-xIX"/>
+                <constraint firstItem="RAs-d6-U6h" firstAttribute="leading" secondItem="deR-NN-FW3" secondAttribute="leading" constant="20" id="J4w-OO-jgW"/>
+                <constraint firstItem="NMd-X7-Lg8" firstAttribute="top" secondItem="deR-NN-FW3" secondAttribute="top" constant="100" id="Rpu-7H-arU"/>
+                <constraint firstItem="NMd-X7-Lg8" firstAttribute="leading" secondItem="deR-NN-FW3" secondAttribute="leading" constant="20" id="U8W-cz-7wY"/>
+                <constraint firstItem="Irt-AG-NFY" firstAttribute="top" secondItem="RAs-d6-U6h" secondAttribute="bottom" constant="20" id="Wgr-DV-m54"/>
+                <constraint firstItem="RAs-d6-U6h" firstAttribute="top" secondItem="NMd-X7-Lg8" secondAttribute="bottom" constant="20" id="fNP-OE-JQy"/>
+                <constraint firstAttribute="trailing" secondItem="Irt-AG-NFY" secondAttribute="trailing" constant="20" id="png-rF-Pei"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="528.5" y="-106.5"/>
+        </view>
+    </objects>
+</document>

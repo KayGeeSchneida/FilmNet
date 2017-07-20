@@ -19,6 +19,8 @@
 
     [FIRApp configure];
     
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+
     [self registerForPushNotifications];
 
     return YES;
@@ -53,14 +55,18 @@
 
 #pragma mark - Push Notifications
 
-- (void)registerForPushNotifications {
+- (void)registerForPushNotifications
+{
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_9_x_Max) {
+        
         UIUserNotificationType allNotificationTypes =
         (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
         UIUserNotificationSettings *settings =
         [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    } else {
+    }
+    else {
+        
         // iOS 10 or later
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
         // For iOS 10 display notification (sent via APNS)

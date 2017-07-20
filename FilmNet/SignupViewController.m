@@ -8,6 +8,7 @@
 
 #import "SignupViewController.h"
 #import "AppDelegate.h"
+#import "RoleViewController.h"
 
 @interface SignupViewController ()
 
@@ -17,8 +18,6 @@
 @property (nonatomic, weak) IBOutlet UITextField *emailField;
 @property (nonatomic, weak) IBOutlet UITextField *passwordField;
 @property (nonatomic, weak) IBOutlet UITextField *confirmField;
-
-@property (strong, nonatomic) FIRDatabaseReference *ref;
 
 @end
 
@@ -80,12 +79,6 @@
                                  
                                  if (user) {
                                      
-                                     self.ref = [[FIRDatabase database] reference];
-                                     
-                                     [[[_ref child:@"users"] child:user.uid]
-                                      setValue:@{@"username": self.emailField.text,
-                                                 @"displayname": self.nameField.text}];
-                                     
                                      FIRUserProfileChangeRequest *changeRequest = [[FIRAuth auth].currentUser profileChangeRequest];
                                      changeRequest.displayName = self.nameField.text;
                                      [changeRequest commitChangesWithCompletion:^(NSError *_Nullable error) {
@@ -107,7 +100,12 @@
                              }];
 }
 
-
+- (void)navigateToRoleViewController {
+    RoleViewController *vc = [[RoleViewController alloc] init];
+    vc.userData = @{@"username": self.emailField.text,
+                    @"displayname": self.nameField.text}.mutableCopy;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 #pragma mark - Alert
 
@@ -123,7 +121,7 @@
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction *action) {
                                     if (success) {
-                                        [self.navigationController popViewControllerAnimated:YES];
+                                        [self navigateToRoleViewController];
                                     }
                                 }];
     
