@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.roles = @[@"Writer",@"Director",@"Actor",@"Cinematographer",@"Sound"];
+    self.roles = ROLES;
     
     [self toggleTableVisable];
 }
@@ -81,7 +81,7 @@
 {
     [self.primaryRoleButton setTitle:_roles[indexPath.row] forState:(UIControlStateNormal)];
     [self.userData setValue:_roles[indexPath.row]
-                     forKey:@"primaryrole"];
+                     forKey:kPrimaryRole];
     [self toggleTableVisable];
     self.nextButton.enabled = YES;
 }

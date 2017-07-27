@@ -11,6 +11,7 @@
 
 #import "LocationViewController.h"
 #import "AppDelegate.h"
+#import "Constants.h"
 
 @interface LocationViewController ()
 
@@ -82,11 +83,11 @@
                              NSString* country = placemark.addressDictionary[(NSString*)kABPersonAddressCountryCodeKey];
                              
                              [self.userData setValue:city
-                                              forKey:@"city"];
+                                              forKey:kCity];
                              [self.userData setValue:state
-                                              forKey:@"state"];
+                                              forKey:kState];
                              [self.userData setValue:country
-                                              forKey:@"country"];
+                                              forKey:kCountry];
                              
                              [self finishSavingUserData];
                          } else {
@@ -98,11 +99,11 @@
 - (void)finishSavingUserData {
     
     [self.userData setValue:self.zipField.text
-                     forKey:@"zipcode"];
+                     forKey:kZipcode];
     
     self.ref = [[FIRDatabase database] reference];
     
-    [[[_ref child:@"users"] child:[FIRAuth auth].currentUser.uid]
+    [[[_ref child:kUsers] child:[FIRAuth auth].currentUser.uid]
      setValue:self.userData];
     
     [self.navigationController popToRootViewControllerAnimated:YES];

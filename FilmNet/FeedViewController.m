@@ -44,7 +44,7 @@
 
     self.ref = [[FIRDatabase database] reference];
     
-    FIRDatabaseReference *usersRef = [[FIRDatabase database] referenceWithPath:@"users"];
+    FIRDatabaseReference *usersRef = [[FIRDatabase database] referenceWithPath:kUsers];
     
     [usersRef observeEventType:FIRDataEventTypeValue
                   withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
@@ -67,21 +67,12 @@
 {
     UserCollectionViewCell *cell = (UserCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionViewCell" forIndexPath:indexPath];
     
-    double val1 = ((double)arc4random() / ARC4RANDOM_MAX);
-    double val2 = ((double)arc4random() / ARC4RANDOM_MAX);
-    double val3 = ((double)arc4random() / ARC4RANDOM_MAX);
-    
-    cell.backgroundColor = [UIColor colorWithRed:val1
-                                           green:val2
-                                            blue:val3
-                                           alpha:1.0f];
-    
     NSDictionary *user = [self.users objectAtIndex:indexPath.row];
     
-    NSString *location = [NSString stringWithFormat:@"%@, %@", user[@"city"], user[@"state"]];
+    NSString *location = [NSString stringWithFormat:@"%@, %@", user[kCity], user[kState]];
     
-    cell.username.text = [user valueForKey:@"displayname"];
-    cell.role.text = [user valueForKey:@"primaryrole"];
+    cell.username.text = [user valueForKey:kDisplayName];
+    cell.role.text = [user valueForKey:kPrimaryRole];
     cell.location.text = location;
     
     return cell;

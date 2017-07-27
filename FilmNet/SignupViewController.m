@@ -102,8 +102,8 @@
 
 - (void)navigateToRoleViewController {
     RoleViewController *vc = [[RoleViewController alloc] init];
-    vc.userData = @{@"username": self.emailField.text,
-                    @"displayname": self.nameField.text}.mutableCopy;
+    vc.userData = @{kUserEmail: self.emailField.text,
+                    kDisplayName: self.nameField.text}.mutableCopy;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

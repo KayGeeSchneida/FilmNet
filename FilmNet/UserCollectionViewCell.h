@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AFNetworking/AFNetworking.h>
 
 @interface UserCollectionViewCell : UICollectionViewCell
 @property (nonatomic, weak) IBOutlet UILabel *username;
 @property (nonatomic, weak) IBOutlet UILabel *role;
 @property (nonatomic, weak) IBOutlet UILabel *location;
+@property (nonatomic, weak) IBOutlet UIView *card;
+@property (nonatomic, weak) IBOutlet UIImageView *userimage;
+@property (nonatomic, weak) IBOutlet UIImageView *reelimage;
 @end

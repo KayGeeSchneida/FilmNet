@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#define kDeviceWidth    [[UIScreen mainScreen] bounds].size.width
-#define kDeviceHeight   [[UIScreen mainScreen] bounds].size.height
-#define kStatusHeight   [UIApplication sharedApplication].statusBarFrame.size.height
+#import "Constants.h"
 
 @interface BaseViewController : UIViewController
 

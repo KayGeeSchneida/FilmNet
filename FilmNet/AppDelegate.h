@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
 
-#define ARC4RANDOM_MAX      0x100000000
+#import "Constants.h"
 
 @import Firebase;
 

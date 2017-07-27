@@ -15,11 +15,13 @@
 		8137106C1F216B1D00A7DC04 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8137106A1F216B1D00A7DC04 /* FeedViewController.m */; };
 		813710711F2172F900A7DC04 /* UserCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8137106F1F2172F900A7DC04 /* UserCollectionViewCell.m */; };
 		813710721F2172F900A7DC04 /* UserCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 813710701F2172F900A7DC04 /* UserCollectionViewCell.xib */; };
+		81854FAF1F2A6DA600594277 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81854FAD1F2A6DA600594277 /* ProfileViewController.m */; };
+		81854FB41F2A6E6700594277 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81854FB21F2A6E6700594277 /* SettingsViewController.m */; };
+		81854FB51F2A6E6700594277 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81854FB31F2A6E6700594277 /* SettingsViewController.xib */; };
 		8198543D1F200F9B0086AFA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8198543C1F200F9B0086AFA3 /* GoogleService-Info.plist */; };
 		81A1E7A01F200E5600F75D11 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 81A1E79F1F200E5600F75D11 /* Podfile */; };
 		81A244B91F1FD012003147D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244B81F1FD012003147D3 /* main.m */; };
 		81A244BC1F1FD012003147D3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244BB1F1FD012003147D3 /* AppDelegate.m */; };
-		81A244C21F1FD012003147D3 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244C11F1FD012003147D3 /* SecondViewController.m */; };
 		81A244C51F1FD012003147D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A244C31F1FD012003147D3 /* Main.storyboard */; };
 		81A244C71F1FD012003147D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81A244C61F1FD012003147D3 /* Assets.xcassets */; };
 		81A244CA1F1FD012003147D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A244C81F1FD012003147D3 /* LaunchScreen.storyboard */; };
@@ -46,14 +48,18 @@
 		8137106E1F2172F900A7DC04 /* UserCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCollectionViewCell.h; sourceTree = "<group>"; };
 		8137106F1F2172F900A7DC04 /* UserCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCollectionViewCell.m; sourceTree = "<group>"; };
 		813710701F2172F900A7DC04 /* UserCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCollectionViewCell.xib; sourceTree = "<group>"; };
+		817EA2341F2A647F00AE590F /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		81854FAC1F2A6DA600594277 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		81854FAD1F2A6DA600594277 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		81854FB11F2A6E6700594277 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		81854FB21F2A6E6700594277 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		81854FB31F2A6E6700594277 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		8198543C1F200F9B0086AFA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		81A1E79F1F200E5600F75D11 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		81A244B41F1FD012003147D3 /* FilmNet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmNet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A244B81F1FD012003147D3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		81A244BA1F1FD012003147D3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		81A244BB1F1FD012003147D3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		81A244C01F1FD012003147D3 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		81A244C11F1FD012003147D3 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		81A244C41F1FD012003147D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		81A244C61F1FD012003147D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81A244C91F1FD012003147D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -147,19 +153,23 @@
 				81A244C61F1FD012003147D3 /* Assets.xcassets */,
 				81A244E11F1FD649003147D3 /* BaseViewController.h */,
 				81A244E21F1FD649003147D3 /* BaseViewController.m */,
+				817EA2341F2A647F00AE590F /* Constants.h */,
 				813710691F216B1D00A7DC04 /* FeedViewController.h */,
 				8137106A1F216B1D00A7DC04 /* FeedViewController.m */,
+				81A26E551F2024070056C008 /* FilmNet.entitlements */,
+				81A244CB1F1FD012003147D3 /* Info.plist */,
+				813710681F216AD400A7DC04 /* Intro */,
+				81A244C31F1FD012003147D3 /* Main.storyboard */,
+				8137105D1F21498900A7DC04 /* Onboarding */,
+				81854FAC1F2A6DA600594277 /* ProfileViewController.h */,
+				81854FAD1F2A6DA600594277 /* ProfileViewController.m */,
+				81854FB11F2A6E6700594277 /* SettingsViewController.h */,
+				81854FB21F2A6E6700594277 /* SettingsViewController.m */,
+				81854FB31F2A6E6700594277 /* SettingsViewController.xib */,
+				81A244B71F1FD012003147D3 /* Supporting Files */,
 				8137106E1F2172F900A7DC04 /* UserCollectionViewCell.h */,
 				8137106F1F2172F900A7DC04 /* UserCollectionViewCell.m */,
 				813710701F2172F900A7DC04 /* UserCollectionViewCell.xib */,
-				81A26E551F2024070056C008 /* FilmNet.entitlements */,
-				81A244C31F1FD012003147D3 /* Main.storyboard */,
-				81A244CB1F1FD012003147D3 /* Info.plist */,
-				813710681F216AD400A7DC04 /* Intro */,
-				8137105D1F21498900A7DC04 /* Onboarding */,
-				81A244C01F1FD012003147D3 /* SecondViewController.h */,
-				81A244C11F1FD012003147D3 /* SecondViewController.m */,
-				81A244B71F1FD012003147D3 /* Supporting Files */,
 			);
 			path = FilmNet;
 			sourceTree = "<group>";
@@ -251,6 +261,7 @@
 			files = (
 				813710621F2149B600A7DC04 /* RoleViewController.xib in Resources */,
 				813710721F2172F900A7DC04 /* UserCollectionViewCell.xib in Resources */,
+				81854FB51F2A6E6700594277 /* SettingsViewController.xib in Resources */,
 				81A1E7A01F200E5600F75D11 /* Podfile in Resources */,
 				81A244D81F1FD256003147D3 /* LoginViewController.xib in Resources */,
 				81A244DD1F1FD26C003147D3 /* SignupViewController.xib in Resources */,
@@ -317,7 +328,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81A244C21F1FD012003147D3 /* SecondViewController.m in Sources */,
 				81A244E31F1FD649003147D3 /* BaseViewController.m in Sources */,
 				81A244BC1F1FD012003147D3 /* AppDelegate.m in Sources */,
 				81A244D71F1FD256003147D3 /* LoginViewController.m in Sources */,
@@ -327,7 +337,9 @@
 				8137106C1F216B1D00A7DC04 /* FeedViewController.m in Sources */,
 				813710611F2149B600A7DC04 /* RoleViewController.m in Sources */,
 				81A244D31F1FD246003147D3 /* IntroViewController.m in Sources */,
+				81854FAF1F2A6DA600594277 /* ProfileViewController.m in Sources */,
 				813710661F214FD500A7DC04 /* LocationViewController.m in Sources */,
+				81854FB41F2A6E6700594277 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
