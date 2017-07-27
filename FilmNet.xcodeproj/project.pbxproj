@@ -15,6 +15,8 @@
 		8137106C1F216B1D00A7DC04 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8137106A1F216B1D00A7DC04 /* FeedViewController.m */; };
 		813710711F2172F900A7DC04 /* UserCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8137106F1F2172F900A7DC04 /* UserCollectionViewCell.m */; };
 		813710721F2172F900A7DC04 /* UserCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 813710701F2172F900A7DC04 /* UserCollectionViewCell.xib */; };
+		816978CD1F2A96260004F17B /* ValidationsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 816978CC1F2A96260004F17B /* ValidationsUtil.m */; };
+		816978D01F2A977B0004F17B /* RoleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 816978CF1F2A977B0004F17B /* RoleTableViewController.m */; };
 		81854FAF1F2A6DA600594277 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81854FAD1F2A6DA600594277 /* ProfileViewController.m */; };
 		81854FB41F2A6E6700594277 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81854FB21F2A6E6700594277 /* SettingsViewController.m */; };
 		81854FB51F2A6E6700594277 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81854FB31F2A6E6700594277 /* SettingsViewController.xib */; };
@@ -48,6 +50,10 @@
 		8137106E1F2172F900A7DC04 /* UserCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCollectionViewCell.h; sourceTree = "<group>"; };
 		8137106F1F2172F900A7DC04 /* UserCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCollectionViewCell.m; sourceTree = "<group>"; };
 		813710701F2172F900A7DC04 /* UserCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCollectionViewCell.xib; sourceTree = "<group>"; };
+		816978CB1F2A96260004F17B /* ValidationsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidationsUtil.h; sourceTree = "<group>"; };
+		816978CC1F2A96260004F17B /* ValidationsUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidationsUtil.m; sourceTree = "<group>"; };
+		816978CE1F2A977B0004F17B /* RoleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoleTableViewController.h; sourceTree = "<group>"; };
+		816978CF1F2A977B0004F17B /* RoleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoleTableViewController.m; sourceTree = "<group>"; };
 		817EA2341F2A647F00AE590F /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		81854FAC1F2A6DA600594277 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		81854FAD1F2A6DA600594277 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
@@ -98,35 +104,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		8137105D1F21498900A7DC04 /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				81A244D91F1FD26C003147D3 /* SignupViewController.h */,
-				81A244DA1F1FD26C003147D3 /* SignupViewController.m */,
-				81A244DB1F1FD26C003147D3 /* SignupViewController.xib */,
-				8137105E1F2149B600A7DC04 /* RoleViewController.h */,
-				8137105F1F2149B600A7DC04 /* RoleViewController.m */,
-				813710601F2149B600A7DC04 /* RoleViewController.xib */,
-				813710631F214FD500A7DC04 /* LocationViewController.h */,
-				813710641F214FD500A7DC04 /* LocationViewController.m */,
-				813710651F214FD500A7DC04 /* LocationViewController.xib */,
-			);
-			name = Onboarding;
-			sourceTree = "<group>";
-		};
-		813710681F216AD400A7DC04 /* Intro */ = {
-			isa = PBXGroup;
-			children = (
-				81A244D11F1FD246003147D3 /* IntroViewController.h */,
-				81A244D21F1FD246003147D3 /* IntroViewController.m */,
-				81A244C81F1FD012003147D3 /* LaunchScreen.storyboard */,
-				81A244D41F1FD256003147D3 /* LoginViewController.h */,
-				81A244D51F1FD256003147D3 /* LoginViewController.m */,
-				81A244D61F1FD256003147D3 /* LoginViewController.xib */,
-			);
-			name = Intro;
-			sourceTree = "<group>";
-		};
 		81A244AB1F1FD012003147D3 = {
 			isa = PBXGroup;
 			children = (
@@ -158,18 +135,35 @@
 				8137106A1F216B1D00A7DC04 /* FeedViewController.m */,
 				81A26E551F2024070056C008 /* FilmNet.entitlements */,
 				81A244CB1F1FD012003147D3 /* Info.plist */,
-				813710681F216AD400A7DC04 /* Intro */,
+				81A244D11F1FD246003147D3 /* IntroViewController.h */,
+				81A244D21F1FD246003147D3 /* IntroViewController.m */,
+				81A244C81F1FD012003147D3 /* LaunchScreen.storyboard */,
+				813710631F214FD500A7DC04 /* LocationViewController.h */,
+				813710641F214FD500A7DC04 /* LocationViewController.m */,
+				813710651F214FD500A7DC04 /* LocationViewController.xib */,
+				81A244D41F1FD256003147D3 /* LoginViewController.h */,
+				81A244D51F1FD256003147D3 /* LoginViewController.m */,
+				81A244D61F1FD256003147D3 /* LoginViewController.xib */,
 				81A244C31F1FD012003147D3 /* Main.storyboard */,
-				8137105D1F21498900A7DC04 /* Onboarding */,
 				81854FAC1F2A6DA600594277 /* ProfileViewController.h */,
 				81854FAD1F2A6DA600594277 /* ProfileViewController.m */,
+				816978CE1F2A977B0004F17B /* RoleTableViewController.h */,
+				816978CF1F2A977B0004F17B /* RoleTableViewController.m */,
+				8137105E1F2149B600A7DC04 /* RoleViewController.h */,
+				8137105F1F2149B600A7DC04 /* RoleViewController.m */,
+				813710601F2149B600A7DC04 /* RoleViewController.xib */,
 				81854FB11F2A6E6700594277 /* SettingsViewController.h */,
 				81854FB21F2A6E6700594277 /* SettingsViewController.m */,
 				81854FB31F2A6E6700594277 /* SettingsViewController.xib */,
+				81A244D91F1FD26C003147D3 /* SignupViewController.h */,
+				81A244DA1F1FD26C003147D3 /* SignupViewController.m */,
+				81A244DB1F1FD26C003147D3 /* SignupViewController.xib */,
 				81A244B71F1FD012003147D3 /* Supporting Files */,
 				8137106E1F2172F900A7DC04 /* UserCollectionViewCell.h */,
 				8137106F1F2172F900A7DC04 /* UserCollectionViewCell.m */,
 				813710701F2172F900A7DC04 /* UserCollectionViewCell.xib */,
+				816978CB1F2A96260004F17B /* ValidationsUtil.h */,
+				816978CC1F2A96260004F17B /* ValidationsUtil.m */,
 			);
 			path = FilmNet;
 			sourceTree = "<group>";
@@ -332,6 +326,8 @@
 				81A244BC1F1FD012003147D3 /* AppDelegate.m in Sources */,
 				81A244D71F1FD256003147D3 /* LoginViewController.m in Sources */,
 				81A244B91F1FD012003147D3 /* main.m in Sources */,
+				816978CD1F2A96260004F17B /* ValidationsUtil.m in Sources */,
+				816978D01F2A977B0004F17B /* RoleTableViewController.m in Sources */,
 				813710711F2172F900A7DC04 /* UserCollectionViewCell.m in Sources */,
 				81A244DC1F1FD26C003147D3 /* SignupViewController.m in Sources */,
 				8137106C1F216B1D00A7DC04 /* FeedViewController.m in Sources */,

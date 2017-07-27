@@ -8,15 +8,16 @@
 
 #import "RoleViewController.h"
 #import "LocationViewController.h"
+#import "RoleTableViewController.h"
 
-@interface RoleViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface RoleViewController () <RoleTableViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIView *tableHolder;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UIButton *primaryRoleButton;
 @property (nonatomic, weak) IBOutlet UIButton *nextButton;
 
-@property (nonatomic, strong) NSArray *roles;
+@property (nonatomic, strong) RoleTableViewController *roleTVC;
 
 @end
 
@@ -24,24 +25,46 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.roles = ROLES;
-    
+        
     [self toggleTableVisable];
+    
+    [self setupRoleTVC];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - User Interaction
+- (void)dealloc {
+    self.roleTVC.delegate = nil;
+}
 
-- (IBAction)tappedPrimaryRole:(id)sender {
+#pragma mark - Role TVC
+
+- (void)setupRoleTVC {
+    
+    self.roleTVC = [[RoleTableViewController alloc] init];
+    self.tableView.delegate = self.roleTVC;
+    self.tableView.dataSource = self.roleTVC;
+    self.roleTVC.delegate = self;
+}
+
+- (void)rolesTableView:(UITableView *)tableView didSelectRole:(NSString *)role {
+    [self.primaryRoleButton setTitle:role forState:(UIControlStateNormal)];
+    [self.userData setValue:role
+                     forKey:kPrimaryRole];
     [self toggleTableVisable];
+    self.nextButton.enabled = YES;
 }
 
 - (void)toggleTableVisable {
     [self.tableHolder setHidden:!self.tableHolder.hidden];
+}
+
+#pragma mark - User Interaction
+
+- (IBAction)tappedPrimaryRole:(id)sender {
+    [self toggleTableVisable];
 }
 
 - (IBAction)tappedNext:(id)sender {
@@ -52,43 +75,6 @@
     LocationViewController *vc = [[LocationViewController alloc] init];
     vc.userData = self.userData;
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.roles.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"cell"];
-    }
-    
-    cell.textLabel.text = _roles[indexPath.row];
-    
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self.primaryRoleButton setTitle:_roles[indexPath.row] forState:(UIControlStateNormal)];
-    [self.userData setValue:_roles[indexPath.row]
-                     forKey:kPrimaryRole];
-    [self toggleTableVisable];
-    self.nextButton.enabled = YES;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 40.0f;
 }
 
 @end

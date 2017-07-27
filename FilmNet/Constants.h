@@ -27,7 +27,6 @@
 #define kUserEmail      @"useremail"
 #define kDisplayName    @"displayname"
 #define kPrimaryRole    @"primaryrole"
-
-#define DEFAULT_userimageurl   @"https://openclipart.org/download/247319/abstract-user-flat-3.svg"
+#define kUserDetails    @"userdetails"
 
 #endif /* Constants_h */

@@ -12,6 +12,7 @@
 #import "LocationViewController.h"
 #import "AppDelegate.h"
 #import "Constants.h"
+#import "ValidationsUtil.h"
 
 @interface LocationViewController ()
 
@@ -62,7 +63,7 @@
 
 - (void)finish {
     
-    if (![self validateZip:self.zipField.text]) {
+    if (![ValidationsUtil validateZip:self.zipField.text]) {
         [self showAlertWithMessage:@"You must enter a valid zip code to finish." andSuccess:NO];
     } else {
         [self fetchLocationDataWithZip:self.zipField.text];
@@ -136,7 +137,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    self.finishButton.enabled = [self validateZip:
+    self.finishButton.enabled = [ValidationsUtil validateZip:
                                  [textField.text stringByReplacingCharactersInRange:range withString:string]];
     return YES;
 }
@@ -148,20 +149,6 @@
         [self finish];
     }
     return YES;
-}
-
-#pragma mark - Validations
-
-- (BOOL)validateZip:(NSString *)zip
-{
-    if ([zip length] == 0) {
-        return NO;
-    }
-    
-    NSString *postcodeRegex = @"^(\\d{5}(-\\d{4})?|[a-z]\\d[a-z][- ]*\\d[a-z]\\d)$";
-    NSPredicate *postcodeTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", postcodeRegex];
-    BOOL isValid = [postcodeTest evaluateWithObject:zip];
-    return isValid;
 }
 
 @end

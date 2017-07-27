@@ -9,6 +9,7 @@
 #import "SignupViewController.h"
 #import "AppDelegate.h"
 #import "RoleViewController.h"
+#import "ValidationsUtil.h"
 
 @interface SignupViewController ()
 
@@ -61,7 +62,7 @@
     
     if (self.nameField.text.length == 0) {
         [self showAlertWithMessage:@"You must enter a name to sign up." andSuccess:NO];
-    } else if (![self validateEmail:self.emailField.text]) {
+    } else if (![ValidationsUtil validateEmail:self.emailField.text]) {
         [self showAlertWithMessage:@"You must enter a valid email to sign up." andSuccess:NO];
     } else if (self.passwordField.text.length < 8) {
         [self showAlertWithMessage:@"You must enter a password of at least 8 characters to sign up." andSuccess:NO];
@@ -147,20 +148,6 @@
 
     }
     return YES;
-}
-
-#pragma mark - Validations
-
-- (BOOL)validateEmail:(NSString *)email
-{
-    if ([email length] == 0) {
-        return NO;
-    }
-    
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    BOOL isValid = [emailTest evaluateWithObject:email];
-    return isValid;
 }
 
 @end

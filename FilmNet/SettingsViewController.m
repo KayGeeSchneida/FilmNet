@@ -79,7 +79,6 @@
 
 #pragma mark - Actions
 
-
 - (void)logout {
     NSError *signOutError;
     BOOL status = [[FIRAuth auth] signOut:&signOutError];
