@@ -9,6 +9,7 @@
 #import "FeedViewController.h"
 #import "AppDelegate.h"
 #import "UserCollectionViewCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface FeedViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -74,6 +75,12 @@
     cell.username.text = [user valueForKey:kDisplayName];
     cell.role.text = [user valueForKey:kPrimaryRole];
     cell.location.text = location;
+    
+    if ([user valueForKey:kProfilePic]) {
+        [cell.userimage setImageWithURL:[NSURL URLWithString:[user valueForKey:kProfilePic]]];
+    } else {
+        [cell.userimage setImage:[UIImage imageNamed:@"defaultuserimage"]];
+    }
     
     return cell;
 }

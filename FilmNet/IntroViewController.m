@@ -33,9 +33,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if ([self checkUserAuthenticated]) {
-        [self presentHome];
-    }
+    [self checkUserAuthenticated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,11 +61,25 @@
 
 #pragma mark - Authentication
 
-- (BOOL)checkUserAuthenticated {
+- (void)checkUserAuthenticated {
+    
     if ([FIRAuth auth].currentUser) {
-        return YES;
-    } else {
-        return NO;
+        
+        NSString *userID = [FIRAuth auth].currentUser.uid;
+        
+        [[[[[FIRDatabase database] reference] child:kUsers] child:userID] observeSingleEventOfType:FIRDataEventTypeValue
+                                                           withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
+         {
+             if ([snapshot hasChildren] &&
+                 [snapshot.value[kUserEmail] length] > 0) {
+                 [self presentHome];
+             } else {
+                 // No valid user
+             }
+             
+         } withCancelBlock:^(NSError * _Nonnull error) {
+             NSLog(@"%@", error.localizedDescription);
+         }];
     }
 }
 

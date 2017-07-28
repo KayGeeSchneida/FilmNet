@@ -28,5 +28,6 @@
 #define kDisplayName    @"displayname"
 #define kPrimaryRole    @"primaryrole"
 #define kUserDetails    @"userdetails"
+#define kProfilePic     @"profilepic"
 
 #endif /* Constants_h */

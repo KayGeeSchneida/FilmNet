@@ -9,13 +9,17 @@
 #import <CoreLocation/CoreLocation.h>
 #import <AddressBookUI/AddressBookUI.h>
 
+#import "UIImageView+AFNetworking.h"
+
+@import ImagePicker;
+
 #import "ProfileViewController.h"
 #import "SettingsViewController.h"
 #import "AppDelegate.h"
 #import "RoleTableViewController.h"
 #import "ValidationsUtil.h"
 
-@interface ProfileViewController ()  <RoleTableViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
+@interface ProfileViewController ()  <RoleTableViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, ImagePickerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
@@ -24,6 +28,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *role;
 @property (nonatomic, weak) IBOutlet UITextField *location;
 @property (nonatomic, weak) IBOutlet UIImageView *userimage;
+@property (nonatomic, weak) IBOutlet UIButton *selectUserImage;
 @property (nonatomic, weak) IBOutlet UIImageView *reelimage;
 @property (nonatomic, weak) IBOutlet UITextView *details;
 @property (nonatomic, weak) IBOutlet UILabel *detailsPrompt;
@@ -120,6 +125,8 @@
     } withCancelBlock:^(NSError * _Nonnull error) {
         NSLog(@"%@", error.localizedDescription);
     }];
+    
+//    [self loadUserImage];
 }
 
 - (void)setUserData {
@@ -128,6 +135,66 @@
     self.location.text = self.userSnapshot.value[kZipcode];
     self.details.text = self.userSnapshot.value[kUserDetails];
     self.detailsPrompt.hidden = self.details.text.length > 0;
+    [self.userimage setImageWithURL:[NSURL URLWithString:self.userSnapshot.value[kProfilePic]]];
+}
+
+- (void)uploadUserImage:(UIImage *)userimage {
+    
+    CGRect rect = CGRectMake(0,0,512,512);
+    UIGraphicsBeginImageContext( rect.size );
+    [userimage drawInRect:rect];
+    UIImage *resized = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    NSData *imageData = UIImagePNGRepresentation(resized);
+    
+    FIRStorage *storage = [FIRStorage storage];
+
+    FIRStorageReference *storageRef = [storage reference];
+
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+
+    NSString *userPicPath = [NSString stringWithFormat:@"images/profilepics/%@.png", userID];
+    
+    FIRStorageReference *profilePicRef = [storageRef child:userPicPath];
+    
+    [profilePicRef putData:imageData
+                  metadata:nil
+                completion:^(FIRStorageMetadata *metadata,
+                             NSError *error) {
+                    if (error != nil) {
+                        // Uh-oh, an error occurred!
+                    } else {
+                        // Metadata contains file metadata such as size, content-type, and download URL.
+                        NSURL *downloadURL = metadata.downloadURL;
+                        [[[[_ref child:kUsers] child:[FIRAuth auth].currentUser.uid] child:kProfilePic] setValue:downloadURL.absoluteString];
+                        
+                    }
+                }];
+}
+
+- (void)loadUserImage {
+    
+    FIRStorage *storage = [FIRStorage storage];
+    
+    FIRStorageReference *storageRef = [storage reference];
+    
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    
+    NSString *userPicPath = [NSString stringWithFormat:@"images/profilepics/%@.png", userID];
+    
+    FIRStorageReference *profilePicRef = [storageRef child:userPicPath];
+
+    // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+    [profilePicRef dataWithMaxSize:1 * 1024 * 1024 completion:^(NSData *data, NSError *error){
+        if (error != nil) {
+            // Uh-oh, an error occurred!
+        } else {
+            // Data for "images/island.jpg" is returned
+            UIImage *profilePic = [UIImage imageWithData:data];
+            self.userimage.image = profilePic;
+        }
+    }];
 }
 
 #pragma mark - Alert
@@ -165,6 +232,13 @@
 
 - (IBAction)tappedPrimaryRole:(id)sender {
     [self toggleTableVisable];
+}
+
+- (IBAction)tappedSelectUserImage:(id)sender {
+    ImagePickerController *ipc = [[ImagePickerController alloc] init];
+    ipc.delegate = self;
+    ipc.imageLimit = 1;
+    [self.tabBarController presentViewController:ipc animated:YES completion:nil];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -205,6 +279,34 @@
     if (self.details.text.length) {
         [[[[_ref child:kUsers] child:[FIRAuth auth].currentUser.uid] child:kUserDetails] setValue:textView.text];
     }
+}
+
+#pragma mark - ImagePickerDelegate
+
+- (void)wrapperDidPress:(ImagePickerController *)imagePicker images:(NSArray<UIImage *> *)images
+{
+    if (images.count > 0) {
+        UIImage *profileImage = images[0];
+        self.userimage.image = profileImage;
+    }
+    
+    [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)doneButtonDidPress:(ImagePickerController *)imagePicker images:(NSArray<UIImage *> *)images
+{
+    if (images.count > 0) {
+        UIImage *profileImage = images[0];
+        self.userimage.image = profileImage;
+        [self uploadUserImage:profileImage];
+    }
+    
+    [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)cancelButtonDidPress:(ImagePickerController *)imagePicker
+{
+
 }
 
 #pragma mark - Location
