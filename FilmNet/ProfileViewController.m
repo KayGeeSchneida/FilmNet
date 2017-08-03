@@ -18,6 +18,7 @@
 #import "AppDelegate.h"
 #import "RoleTableViewController.h"
 #import "ValidationsUtil.h"
+#import "ReelViewController.h"
 
 @interface ProfileViewController ()  <RoleTableViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, ImagePickerDelegate>
 
@@ -239,6 +240,11 @@
     ipc.delegate = self;
     ipc.imageLimit = 1;
     [self.tabBarController presentViewController:ipc animated:YES completion:nil];
+}
+
+- (IBAction)tappedSelectReel:(id)sender {
+    ReelViewController *vc = [[ReelViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITextFieldDelegate

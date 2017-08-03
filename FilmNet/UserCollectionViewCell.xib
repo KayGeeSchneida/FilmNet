@@ -49,7 +49,7 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AeQ-rT-gMl">
                                 <rect key="frame" x="15" y="110" width="440" height="255"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qIC-OJ-6ff">
                                 <rect key="frame" x="15" y="380" width="440" height="30"/>
@@ -84,6 +84,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ALS-Xu-WEf">
+                                <rect key="frame" x="15" y="110" width="440" height="255"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.99215686274509807" green="0.98431372549019602" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -98,15 +102,19 @@
                             <constraint firstItem="qIC-OJ-6ff" firstAttribute="top" secondItem="AeQ-rT-gMl" secondAttribute="bottom" constant="15" id="N2r-O1-EZU"/>
                             <constraint firstItem="QvS-Le-62s" firstAttribute="leading" secondItem="RXH-vj-r4j" secondAttribute="leading" constant="15" id="TWG-at-lpQ"/>
                             <constraint firstAttribute="trailing" secondItem="AeQ-rT-gMl" secondAttribute="trailing" constant="15" id="UEh-Kt-1uf"/>
+                            <constraint firstItem="ALS-Xu-WEf" firstAttribute="trailing" secondItem="AeQ-rT-gMl" secondAttribute="trailing" id="ViV-AZ-wX8"/>
                             <constraint firstAttribute="trailing" secondItem="qIC-OJ-6ff" secondAttribute="trailing" constant="15" id="Vol-UC-x7e"/>
                             <constraint firstAttribute="bottom" secondItem="QvS-Le-62s" secondAttribute="bottom" constant="15" id="YlY-p7-zn3"/>
+                            <constraint firstItem="ALS-Xu-WEf" firstAttribute="bottom" secondItem="AeQ-rT-gMl" secondAttribute="bottom" id="YrB-sR-qZx"/>
                             <constraint firstAttribute="trailing" secondItem="Lvr-YN-R7W" secondAttribute="trailing" constant="15" id="cLK-Jb-14B"/>
                             <constraint firstItem="oQC-l7-iJD" firstAttribute="leading" secondItem="w9o-FS-0G0" secondAttribute="trailing" constant="15" id="ctc-Jv-ZaU"/>
                             <constraint firstItem="QvS-Le-62s" firstAttribute="top" secondItem="qIC-OJ-6ff" secondAttribute="bottom" constant="15" id="ejw-Gd-csF"/>
                             <constraint firstItem="Lvr-YN-R7W" firstAttribute="leading" secondItem="w9o-FS-0G0" secondAttribute="trailing" constant="15" id="jHb-hc-h5v"/>
+                            <constraint firstItem="ALS-Xu-WEf" firstAttribute="top" secondItem="AeQ-rT-gMl" secondAttribute="top" id="lt3-bU-HS3"/>
                             <constraint firstItem="oQC-l7-iJD" firstAttribute="top" secondItem="RXH-vj-r4j" secondAttribute="top" constant="15" id="nS1-io-m9e"/>
                             <constraint firstItem="AeQ-rT-gMl" firstAttribute="leading" secondItem="RXH-vj-r4j" secondAttribute="leading" constant="15" id="njA-wK-8T4"/>
                             <constraint firstAttribute="trailing" secondItem="oQC-l7-iJD" secondAttribute="trailing" constant="15" id="oPV-Z1-Leh"/>
+                            <constraint firstItem="ALS-Xu-WEf" firstAttribute="leading" secondItem="AeQ-rT-gMl" secondAttribute="leading" id="rmF-X7-N3D"/>
                             <constraint firstItem="w9o-FS-0G0" firstAttribute="leading" secondItem="RXH-vj-r4j" secondAttribute="leading" constant="15" id="zud-yb-wAQ"/>
                         </constraints>
                     </view>
@@ -127,6 +135,7 @@
                 <outlet property="role" destination="rWx-69-Syt" id="7mw-KQ-m38"/>
                 <outlet property="userimage" destination="w9o-FS-0G0" id="Gqt-Ir-G3F"/>
                 <outlet property="username" destination="oQC-l7-iJD" id="nFm-Xe-48U"/>
+                <outlet property="videoContainer" destination="ALS-Xu-WEf" id="R21-g4-A7W"/>
             </connections>
             <point key="canvasLocation" x="21" y="192"/>
         </collectionViewCell>

@@ -29,5 +29,6 @@
 #define kPrimaryRole    @"primaryrole"
 #define kUserDetails    @"userdetails"
 #define kProfilePic     @"profilepic"
+#define kReelURL        @"reelurl"
 
 #endif /* Constants_h */

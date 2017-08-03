@@ -8,12 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <AFNetworking/AFNetworking.h>
+#import <XCDYouTubeKit/XCDYouTubeKit.h>
 
 @interface UserCollectionViewCell : UICollectionViewCell
+
 @property (nonatomic, weak) IBOutlet UILabel *username;
 @property (nonatomic, weak) IBOutlet UILabel *role;
 @property (nonatomic, weak) IBOutlet UILabel *location;
 @property (nonatomic, weak) IBOutlet UIView *card;
 @property (nonatomic, weak) IBOutlet UIImageView *userimage;
 @property (nonatomic, weak) IBOutlet UIImageView *reelimage;
+@property (nonatomic, weak) IBOutlet UIView *videoContainer;
+
+@property(nonatomic, strong) XCDYouTubeVideoPlayerViewController *videoPlayerViewController;
+
 @end

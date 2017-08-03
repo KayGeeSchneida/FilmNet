@@ -15,6 +15,8 @@
 		8137106C1F216B1D00A7DC04 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8137106A1F216B1D00A7DC04 /* FeedViewController.m */; };
 		813710711F2172F900A7DC04 /* UserCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8137106F1F2172F900A7DC04 /* UserCollectionViewCell.m */; };
 		813710721F2172F900A7DC04 /* UserCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 813710701F2172F900A7DC04 /* UserCollectionViewCell.xib */; };
+		816779701F33AE0100DE87A3 /* ReelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8167796E1F33AE0100DE87A3 /* ReelViewController.m */; };
+		816779711F33AE0100DE87A3 /* ReelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8167796F1F33AE0100DE87A3 /* ReelViewController.xib */; };
 		816978CD1F2A96260004F17B /* ValidationsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 816978CC1F2A96260004F17B /* ValidationsUtil.m */; };
 		816978D01F2A977B0004F17B /* RoleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 816978CF1F2A977B0004F17B /* RoleTableViewController.m */; };
 		81854FAF1F2A6DA600594277 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81854FAD1F2A6DA600594277 /* ProfileViewController.m */; };
@@ -90,6 +92,9 @@
 		8137106E1F2172F900A7DC04 /* UserCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCollectionViewCell.h; sourceTree = "<group>"; };
 		8137106F1F2172F900A7DC04 /* UserCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCollectionViewCell.m; sourceTree = "<group>"; };
 		813710701F2172F900A7DC04 /* UserCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCollectionViewCell.xib; sourceTree = "<group>"; };
+		8167796D1F33AE0100DE87A3 /* ReelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReelViewController.h; sourceTree = "<group>"; };
+		8167796E1F33AE0100DE87A3 /* ReelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReelViewController.m; sourceTree = "<group>"; };
+		8167796F1F33AE0100DE87A3 /* ReelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReelViewController.xib; sourceTree = "<group>"; };
 		816978CB1F2A96260004F17B /* ValidationsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidationsUtil.h; sourceTree = "<group>"; };
 		816978CC1F2A96260004F17B /* ValidationsUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidationsUtil.m; sourceTree = "<group>"; };
 		816978CE1F2A977B0004F17B /* RoleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoleTableViewController.h; sourceTree = "<group>"; };
@@ -198,6 +203,9 @@
 				81A244C31F1FD012003147D3 /* Main.storyboard */,
 				81854FAC1F2A6DA600594277 /* ProfileViewController.h */,
 				81854FAD1F2A6DA600594277 /* ProfileViewController.m */,
+				8167796D1F33AE0100DE87A3 /* ReelViewController.h */,
+				8167796E1F33AE0100DE87A3 /* ReelViewController.m */,
+				8167796F1F33AE0100DE87A3 /* ReelViewController.xib */,
 				816978CE1F2A977B0004F17B /* RoleTableViewController.h */,
 				816978CF1F2A977B0004F17B /* RoleTableViewController.m */,
 				8137105E1F2149B600A7DC04 /* RoleViewController.h */,
@@ -332,6 +340,7 @@
 			files = (
 				813710621F2149B600A7DC04 /* RoleViewController.xib in Resources */,
 				813710721F2172F900A7DC04 /* UserCollectionViewCell.xib in Resources */,
+				816779711F33AE0100DE87A3 /* ReelViewController.xib in Resources */,
 				81854FB51F2A6E6700594277 /* SettingsViewController.xib in Resources */,
 				81A1E7A01F200E5600F75D11 /* Podfile in Resources */,
 				81A244D81F1FD256003147D3 /* LoginViewController.xib in Resources */,
@@ -401,6 +410,7 @@
 			files = (
 				81A244E31F1FD649003147D3 /* BaseViewController.m in Sources */,
 				81A244BC1F1FD012003147D3 /* AppDelegate.m in Sources */,
+				816779701F33AE0100DE87A3 /* ReelViewController.m in Sources */,
 				81A244D71F1FD256003147D3 /* LoginViewController.m in Sources */,
 				81A244B91F1FD012003147D3 /* main.m in Sources */,
 				816978CD1F2A96260004F17B /* ValidationsUtil.m in Sources */,

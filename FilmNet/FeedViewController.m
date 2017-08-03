@@ -15,6 +15,8 @@
 
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 
+@property (strong, nonatomic) UserCollectionViewCell *focusedCell;
+
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 
 @property (strong, nonatomic) NSArray *users;
@@ -52,8 +54,9 @@
      {
          self.users = [snapshot.value allValues];
          [self.collectionView reloadData];
-         NSLog(@"users: %@", self.users);
          
+//         NSLog(@"users: %@", self.users);
+
      }];
 }
 
@@ -82,6 +85,23 @@
         [cell.userimage setImage:[UIImage imageNamed:@"defaultuserimage"]];
     }
     
+    if ([user valueForKey:kReelURL]) {
+        [cell.videoPlayerViewController setVideoIdentifier:[user valueForKey:kReelURL]];
+    } else {
+        [cell.videoPlayerViewController setVideoIdentifier:@"sAHSpCDPKn4"];
+    }
+    
+    NSLog(@"vid id: %@", cell.videoPlayerViewController.videoIdentifier);
+    
+    [cell.videoPlayerViewController.moviePlayer stop];
+    self.focusedCell.videoContainer.hidden = YES;
+    
+    if (!self.focusedCell) {
+        self.focusedCell = cell;
+        [self.focusedCell.videoPlayerViewController.moviePlayer play];
+        self.focusedCell.videoContainer.hidden = NO;
+    }
+
     return cell;
 }
 
@@ -89,6 +109,27 @@
 {
     float statusAndTabHeight = 69.0f;
     return CGSizeMake(kDeviceWidth, kDeviceHeight - statusAndTabHeight);
+}
+
+#pragma mark - ScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    for (UICollectionViewCell *cell in _collectionView.visibleCells) {
+        if (CGRectContainsPoint(self.view.frame, [cell.superview convertPoint:cell.center toView:self.view])) {
+            if (self.focusedCell != cell && self.focusedCell != nil) {
+                
+                [self.focusedCell.videoPlayerViewController.moviePlayer stop];
+                self.focusedCell.videoContainer.hidden = YES;
+                
+                self.focusedCell = (UserCollectionViewCell *)cell;
+                
+                [self.focusedCell.videoPlayerViewController.moviePlayer play];
+                self.focusedCell.videoContainer.hidden = NO;
+
+            }
+        }
+    }
 }
 
 @end
