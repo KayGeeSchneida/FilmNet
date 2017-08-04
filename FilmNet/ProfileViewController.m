@@ -8,6 +8,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import <XCDYouTubeKit/XCDYouTubeKit.h>
 
 #import "UIImageView+AFNetworking.h"
 
@@ -34,6 +35,10 @@
 @property (nonatomic, weak) IBOutlet UITextView *details;
 @property (nonatomic, weak) IBOutlet UILabel *detailsPrompt;
 
+@property (nonatomic, weak) IBOutlet UIView *videoContainer;
+
+@property(nonatomic, strong) XCDYouTubeVideoPlayerViewController *videoPlayerViewController;
+
 @property (nonatomic, weak) IBOutlet UIView *tableHolder;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
@@ -56,8 +61,18 @@
     [self setupScrollContent];
     
     [self additionalViewSetup];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     [self prepopulateUserData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.videoPlayerViewController.moviePlayer pause];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,6 +124,10 @@
     self.reelimage.clipsToBounds = YES;
     self.reelimage.layer.borderColor = [UIColor darkGrayColor].CGColor;
     self.reelimage.layer.borderWidth = 1.0f;
+    
+    self.videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:nil];
+    [self.videoPlayerViewController presentInView:self.videoContainer];
+    [self.videoPlayerViewController.moviePlayer prepareToPlay];
 }
 
 #pragma mark - Data
@@ -126,8 +145,6 @@
     } withCancelBlock:^(NSError * _Nonnull error) {
         NSLog(@"%@", error.localizedDescription);
     }];
-    
-//    [self loadUserImage];
 }
 
 - (void)setUserData {
@@ -137,6 +154,14 @@
     self.details.text = self.userSnapshot.value[kUserDetails];
     self.detailsPrompt.hidden = self.details.text.length > 0;
     [self.userimage setImageWithURL:[NSURL URLWithString:self.userSnapshot.value[kProfilePic]]];
+    
+    if (self.userSnapshot.value[kReelURL]) {
+        [self.videoPlayerViewController setVideoIdentifier:self.userSnapshot.value[kReelURL]];
+    } else {
+        [self.videoPlayerViewController setVideoIdentifier:DEFAULT_reel];
+    }
+    
+    [self.videoPlayerViewController.moviePlayer play];
 }
 
 - (void)uploadUserImage:(UIImage *)userimage {
@@ -243,6 +268,7 @@
 }
 
 - (IBAction)tappedSelectReel:(id)sender {
+    [self.videoPlayerViewController.moviePlayer stop];
     ReelViewController *vc = [[ReelViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }

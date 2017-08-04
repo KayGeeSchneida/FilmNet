@@ -37,6 +37,21 @@
     [self fetchFeed];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.focusedCell.videoPlayerViewController.moviePlayer pause];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.focusedCell) {
+        [self.focusedCell.videoPlayerViewController.moviePlayer play];
+        self.focusedCell.videoContainer.hidden = NO;
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -88,10 +103,8 @@
     if ([user valueForKey:kReelURL]) {
         [cell.videoPlayerViewController setVideoIdentifier:[user valueForKey:kReelURL]];
     } else {
-        [cell.videoPlayerViewController setVideoIdentifier:@"sAHSpCDPKn4"];
+        [cell.videoPlayerViewController setVideoIdentifier:DEFAULT_reel];
     }
-    
-    NSLog(@"vid id: %@", cell.videoPlayerViewController.videoIdentifier);
     
     [cell.videoPlayerViewController.moviePlayer stop];
     self.focusedCell.videoContainer.hidden = YES;

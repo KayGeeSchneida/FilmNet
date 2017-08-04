@@ -17,6 +17,8 @@
 
 #define ROLES @[@"Producer",@"Director",@"Screenwriter",@"Production Designer",@"Art Director",@"Costume Designer",@"Cinematographer",@"Editor",@"Actor",@"Music Supervisor",@"Script Supervisor",@"Make-Up Artist",@"Sound Designer",@"Location Sound",@"Production Assistant"]
 
+#define DEFAULT_reel    @"sAHSpCDPKn4"
+
 #define kUsers          @"users"
 
 #define kCity           @"city"
