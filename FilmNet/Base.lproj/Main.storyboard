@@ -12,6 +12,23 @@
     </dependencies>
     <scenes>
         <!--Feed-->
+        <scene sceneID="6cD-fp-9dj">
+            <objects>
+                <navigationController id="Xaa-zh-sJg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Feed" id="yWz-3D-Kfw"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wGg-dW-bZs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="dXj-e4-5Z7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DCt-YU-rmf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2" y="-726"/>
+        </scene>
+        <!--Feed-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="FeedViewController" sceneMemberID="viewController">
@@ -24,7 +41,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1n2-6n-UFh">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" red="0.92156862745098034" green="0.9137254901960784" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="zoO-Gj-7jo">
                                     <size key="itemSize" width="50" height="50"/>
@@ -52,18 +69,19 @@
                         <constraints>
                             <constraint firstItem="1n2-6n-UFh" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="2zv-CG-bjN"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="1n2-6n-UFh" secondAttribute="bottom" id="aup-NX-r1r"/>
-                            <constraint firstItem="1n2-6n-UFh" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" constant="20" id="hwG-vz-Pik"/>
+                            <constraint firstItem="1n2-6n-UFh" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="o6D-y0-b37"/>
                             <constraint firstAttribute="trailing" secondItem="1n2-6n-UFh" secondAttribute="trailing" id="vSB-Hw-G1c"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Feed" image="first" id="acW-dT-cKf"/>
+                    <navigationItem key="navigationItem" id="pxn-hR-Wgq"/>
                     <connections>
                         <outlet property="collectionView" destination="1n2-6n-UFh" id="xkt-je-jqp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
+            <point key="canvasLocation" x="733.60000000000002" y="-726.38680659670172"/>
         </scene>
         <!--Intro View Controller-->
         <scene sceneID="C8Y-37-FfW">
@@ -366,11 +384,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="connections" destination="nP7-Ct-Yns" id="Ghq-G0-4dc"/>
                         <outlet property="contentView" destination="CFa-SD-I9V" id="9zW-bm-QXn"/>
                         <outlet property="contentViewBottomSpace" destination="c4V-PO-3La" id="x8o-mr-Vh6"/>
                         <outlet property="details" destination="8Xu-2t-8aa" id="cWL-Ik-SCA"/>
                         <outlet property="detailsPrompt" destination="rdS-lV-4Cd" id="bwZ-vx-IyI"/>
                         <outlet property="location" destination="1UF-qt-OFA" id="va0-f2-8HU"/>
+                        <outlet property="recommendations" destination="jcL-Xm-5CE" id="P0b-Q6-mIh"/>
                         <outlet property="reelimage" destination="t8U-pS-yL3" id="Gxh-Ug-DDQ"/>
                         <outlet property="role" destination="4A7-hT-aGU" id="eeK-O5-LvI"/>
                         <outlet property="scrollView" destination="bcu-Ih-lnY" id="9JB-oG-2Lc"/>
@@ -414,8 +434,8 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="F4R-RV-cPU" kind="relationship" relationship="viewControllers" id="fvt-Sp-7cr"/>
+                        <segue destination="Xaa-zh-sJg" kind="relationship" relationship="viewControllers" id="ksM-jY-pEo"/>
+                        <segue destination="F4R-RV-cPU" kind="relationship" relationship="viewControllers" id="lSa-gh-9AD"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>

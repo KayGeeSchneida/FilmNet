@@ -22,6 +22,9 @@
 		81854FAF1F2A6DA600594277 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81854FAD1F2A6DA600594277 /* ProfileViewController.m */; };
 		81854FB41F2A6E6700594277 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81854FB21F2A6E6700594277 /* SettingsViewController.m */; };
 		81854FB51F2A6E6700594277 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81854FB31F2A6E6700594277 /* SettingsViewController.xib */; };
+		818A48751F38CA19001EE80C /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818A48731F38CA19001EE80C /* UserViewController.m */; };
+		818A48761F38CA19001EE80C /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818A48741F38CA19001EE80C /* UserViewController.xib */; };
+		818A487A1F38F269001EE80C /* RecommendService.m in Sources */ = {isa = PBXBuildFile; fileRef = 818A48791F38F269001EE80C /* RecommendService.m */; };
 		818EA87E1F2AB48A003C08DA /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818EA87B1F2AB447003C08DA /* ImagePicker.framework */; };
 		818EA87F1F2AB48A003C08DA /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 818EA87B1F2AB447003C08DA /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8198543D1F200F9B0086AFA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8198543C1F200F9B0086AFA3 /* GoogleService-Info.plist */; };
@@ -105,6 +108,11 @@
 		81854FB11F2A6E6700594277 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		81854FB21F2A6E6700594277 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		81854FB31F2A6E6700594277 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		818A48721F38CA19001EE80C /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		818A48731F38CA19001EE80C /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		818A48741F38CA19001EE80C /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
+		818A48781F38F269001EE80C /* RecommendService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendService.h; sourceTree = "<group>"; };
+		818A48791F38F269001EE80C /* RecommendService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendService.m; sourceTree = "<group>"; };
 		818EA8751F2AB447003C08DA /* ImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ImagePicker.xcodeproj; path = "ImagePicker-master/ImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		8198543C1F200F9B0086AFA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		81A1E79F1F200E5600F75D11 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -203,6 +211,8 @@
 				81A244C31F1FD012003147D3 /* Main.storyboard */,
 				81854FAC1F2A6DA600594277 /* ProfileViewController.h */,
 				81854FAD1F2A6DA600594277 /* ProfileViewController.m */,
+				818A48781F38F269001EE80C /* RecommendService.h */,
+				818A48791F38F269001EE80C /* RecommendService.m */,
 				8167796D1F33AE0100DE87A3 /* ReelViewController.h */,
 				8167796E1F33AE0100DE87A3 /* ReelViewController.m */,
 				8167796F1F33AE0100DE87A3 /* ReelViewController.xib */,
@@ -221,6 +231,9 @@
 				8137106E1F2172F900A7DC04 /* UserCollectionViewCell.h */,
 				8137106F1F2172F900A7DC04 /* UserCollectionViewCell.m */,
 				813710701F2172F900A7DC04 /* UserCollectionViewCell.xib */,
+				818A48721F38CA19001EE80C /* UserViewController.h */,
+				818A48731F38CA19001EE80C /* UserViewController.m */,
+				818A48741F38CA19001EE80C /* UserViewController.xib */,
 				816978CB1F2A96260004F17B /* ValidationsUtil.h */,
 				816978CC1F2A96260004F17B /* ValidationsUtil.m */,
 			);
@@ -349,6 +362,7 @@
 				81A244C71F1FD012003147D3 /* Assets.xcassets in Resources */,
 				81A244C51F1FD012003147D3 /* Main.storyboard in Resources */,
 				813710671F214FD500A7DC04 /* LocationViewController.xib in Resources */,
+				818A48761F38CA19001EE80C /* UserViewController.xib in Resources */,
 				8198543D1F200F9B0086AFA3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,12 +429,14 @@
 				81A244B91F1FD012003147D3 /* main.m in Sources */,
 				816978CD1F2A96260004F17B /* ValidationsUtil.m in Sources */,
 				816978D01F2A977B0004F17B /* RoleTableViewController.m in Sources */,
+				818A487A1F38F269001EE80C /* RecommendService.m in Sources */,
 				813710711F2172F900A7DC04 /* UserCollectionViewCell.m in Sources */,
 				81A244DC1F1FD26C003147D3 /* SignupViewController.m in Sources */,
 				8137106C1F216B1D00A7DC04 /* FeedViewController.m in Sources */,
 				813710611F2149B600A7DC04 /* RoleViewController.m in Sources */,
 				81A244D31F1FD246003147D3 /* IntroViewController.m in Sources */,
 				81854FAF1F2A6DA600594277 /* ProfileViewController.m in Sources */,
+				818A48751F38CA19001EE80C /* UserViewController.m in Sources */,
 				813710661F214FD500A7DC04 /* LocationViewController.m in Sources */,
 				81854FB41F2A6E6700594277 /* SettingsViewController.m in Sources */,
 			);

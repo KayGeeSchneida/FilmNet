@@ -10,10 +10,9 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <XCDYouTubeKit/XCDYouTubeKit.h>
 
-#import "UIImageView+AFNetworking.h"
-
 @import ImagePicker;
 
+#import "UIImageView+AFNetworking.h"
 #import "ProfileViewController.h"
 #import "SettingsViewController.h"
 #import "AppDelegate.h"
@@ -21,7 +20,8 @@
 #import "ValidationsUtil.h"
 #import "ReelViewController.h"
 
-@interface ProfileViewController ()  <RoleTableViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, ImagePickerDelegate>
+@interface ProfileViewController ()
+<RoleTableViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, ImagePickerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
@@ -35,13 +35,14 @@
 @property (nonatomic, weak) IBOutlet UITextView *details;
 @property (nonatomic, weak) IBOutlet UILabel *detailsPrompt;
 
-@property (nonatomic, weak) IBOutlet UIView *videoContainer;
+@property (nonatomic, weak) IBOutlet UIButton *connections;
+@property (nonatomic, weak) IBOutlet UIButton *recommendations;
 
+@property (nonatomic, weak) IBOutlet UIView *videoContainer;
 @property(nonatomic, strong) XCDYouTubeVideoPlayerViewController *videoPlayerViewController;
 
 @property (nonatomic, weak) IBOutlet UIView *tableHolder;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-
 @property (nonatomic, strong) RoleTableViewController *roleTVC;
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
@@ -50,6 +51,8 @@
 @end
 
 @implementation ProfileViewController
+
+#pragma mark - View Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -153,7 +156,18 @@
     self.location.text = self.userSnapshot.value[kZipcode];
     self.details.text = self.userSnapshot.value[kUserDetails];
     self.detailsPrompt.hidden = self.details.text.length > 0;
-    [self.userimage setImageWithURL:[NSURL URLWithString:self.userSnapshot.value[kProfilePic]]];
+    
+    if (self.userSnapshot.value[kProfilePic]) {
+        [self.userimage setImageWithURL:[NSURL URLWithString:self.userSnapshot.value[kProfilePic]]];
+    }
+    
+    NSArray *recommendations = self.userSnapshot.value[kRecommendedBy];
+    NSString *recString = [NSString stringWithFormat:@"%ld Recommendations", recommendations.count];
+    [self.recommendations setTitle:recString forState:UIControlStateNormal];
+    
+    NSArray *connections = self.userSnapshot.value[kConnections];
+    NSString *conString = [NSString stringWithFormat:@"%ld Connections", connections.count];
+    [self.connections setTitle:conString forState:UIControlStateNormal];
     
     if (self.userSnapshot.value[kReelURL]) {
         [self.videoPlayerViewController setVideoIdentifier:self.userSnapshot.value[kReelURL]];
@@ -163,6 +177,8 @@
     
     [self.videoPlayerViewController.moviePlayer play];
 }
+
+#pragma mark - User Image
 
 - (void)uploadUserImage:(UIImage *)userimage {
     
@@ -194,7 +210,6 @@
                         // Metadata contains file metadata such as size, content-type, and download URL.
                         NSURL *downloadURL = metadata.downloadURL;
                         [[[[_ref child:kUsers] child:[FIRAuth auth].currentUser.uid] child:kProfilePic] setValue:downloadURL.absoluteString];
-                        
                     }
                 }];
 }

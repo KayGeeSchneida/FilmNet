@@ -18,6 +18,7 @@
 #define ROLES @[@"Producer",@"Director",@"Screenwriter",@"Production Designer",@"Art Director",@"Costume Designer",@"Cinematographer",@"Editor",@"Actor",@"Music Supervisor",@"Script Supervisor",@"Make-Up Artist",@"Sound Designer",@"Location Sound",@"Production Assistant"]
 
 #define DEFAULT_reel    @"sAHSpCDPKn4"
+#define DEFAULT_user    @"defaultuserimage"
 
 #define kUsers          @"users"
 
@@ -32,5 +33,14 @@
 #define kUserDetails    @"userdetails"
 #define kProfilePic     @"profilepic"
 #define kReelURL        @"reelurl"
+
+#define kRequestsSent       @"requestssent"
+#define kRequestsReceived   @"requestsreceived"
+#define kConnections        @"connections"
+#define kConnectionCount    @"connectioncount"
+
+#define kRecommendations    @"recommendations"
+#define kRecommendedBy      @"recommendedby"
+#define kRecommendedCount   @"recommendedcount"
 
 #endif /* Constants_h */

@@ -19,6 +19,8 @@
 @property (nonatomic, weak) IBOutlet UIImageView *userimage;
 @property (nonatomic, weak) IBOutlet UIImageView *reelimage;
 @property (nonatomic, weak) IBOutlet UIView *videoContainer;
+@property (nonatomic, weak) IBOutlet UIButton *connections;
+@property (nonatomic, weak) IBOutlet UIButton *recommendations;
 
 @property(nonatomic, strong) XCDYouTubeVideoPlayerViewController *videoPlayerViewController;
 
