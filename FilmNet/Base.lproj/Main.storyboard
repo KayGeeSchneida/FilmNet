@@ -31,7 +31,7 @@
         <!--Feed-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FeedViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedViewController" id="9pv-A4-QxB" customClass="FeedViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -68,8 +68,8 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="1n2-6n-UFh" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="2zv-CG-bjN"/>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="1n2-6n-UFh" secondAttribute="bottom" id="aup-NX-r1r"/>
-                            <constraint firstItem="1n2-6n-UFh" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="o6D-y0-b37"/>
+                            <constraint firstItem="1n2-6n-UFh" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="Kcj-UC-PYK"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="1n2-6n-UFh" secondAttribute="bottom" id="sjz-ft-HaC"/>
                             <constraint firstAttribute="trailing" secondItem="1n2-6n-UFh" secondAttribute="trailing" id="vSB-Hw-G1c"/>
                         </constraints>
                     </view>
@@ -220,6 +220,9 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedRecommendations:" destination="L67-qC-Y8A" eventType="touchUpInside" id="9Jx-Ir-mzw"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4A7-hT-aGU">
                                                 <rect key="frame" x="110" y="55" width="250" height="40"/>

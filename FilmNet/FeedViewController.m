@@ -7,7 +7,6 @@
 //
 
 #import "FeedViewController.h"
-#import "AppDelegate.h"
 #import "UserCollectionViewCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "UserViewController.h"
@@ -21,7 +20,7 @@
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 
-@property (strong, nonatomic) NSArray *users;
+@property (strong, nonatomic) NSMutableDictionary *users;
 @property (strong, nonatomic) NSArray *keys;
 
 @end
@@ -33,11 +32,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
+
     [self.collectionView registerClass:[UserCollectionViewCell class]
             forCellWithReuseIdentifier:@"UserCollectionViewCell"];
     
     UINib *cellNib = [UINib nibWithNibName:@"UserCollectionViewCell" bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"UserCollectionViewCell"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(MPMoviePlayerPlaybackStateDidChange:)
+                                                 name:MPMoviePlayerPlaybackStateDidChangeNotification
+                                               object:nil];
     
     [self fetchFeed];
 }
@@ -45,13 +51,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(MPMoviePlayerPlaybackStateDidChange:)
-                                                 name:MPMoviePlayerPlaybackStateDidChangeNotification
-                                               object:nil];
-    
-    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:!self.shouldShowNavBar];
+}
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     if (self.focusedCell) {
         [self.focusedCell.videoPlayerViewController.moviePlayer play];
     }
@@ -60,13 +65,15 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
     [self.focusedCell.videoPlayerViewController.moviePlayer pause];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Feed Service Call
@@ -75,45 +82,66 @@
 
     self.ref = [[FIRDatabase database] reference];
     
-    FIRDatabaseReference *usersRef = [[FIRDatabase database] referenceWithPath:kUsers];
+    if (!self.feedReference) {
+        self.feedReference = [[FIRDatabase database] referenceWithPath:kUsers];
+    }
     
-    [usersRef observeEventType:FIRDataEventTypeValue
-                  withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
+    [self.feedReference observeEventType:FIRDataEventTypeValue
+                               withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
      {
-         self.users = [snapshot.value allValues];
          self.keys = [snapshot.value allKeys];
-         
          [self.collectionView reloadData];
          
-//         NSLog(@"users: %@", self.users);
-
+         [self populateFeed];
      }];
+}
+
+- (void)populateFeed {
+    
+    if (!self.users) {
+        self.users = [[NSMutableDictionary alloc] init];
+    }
+    
+    for (NSString *key in self.keys) {
+        [[[self.ref child:kUsers] child:key] observeSingleEventOfType:FIRDataEventTypeValue
+                                                           withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
+         {
+             [self.users setValue:snapshot forKey:key];
+             NSInteger index = [self.keys indexOfObject:key];
+             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+             [self.collectionView reloadItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+             
+         } withCancelBlock:^(NSError * _Nonnull error) {
+             NSLog(@"%@", error.localizedDescription);
+         }];
+
+    }
 }
 
 #pragma mark - Data
 
-- (void)mapUser:(NSDictionary *)user toCell:(UserCollectionViewCell *)cell
+- (void)mapUser:(FIRDataSnapshot *)user toCell:(UserCollectionViewCell *)cell
 {
-    [cell.userimage setImageWithURL:[NSURL URLWithString:[user valueForKey:kProfilePic]]
+    [cell.userimage setImageWithURL:[NSURL URLWithString:user.value[kProfilePic]]
                    placeholderImage:[UIImage imageNamed:DEFAULT_user]];
     
-    cell.username.text = [user valueForKey:kDisplayName];
-    cell.role.text = [user valueForKey:kPrimaryRole];
+    cell.username.text = user.value[kDisplayName];
+    cell.role.text = user.value[kPrimaryRole];
     
-    NSString *location = [NSString stringWithFormat:@"%@, %@", user[kCity], user[kState]];
+    NSString *location = [NSString stringWithFormat:@"%@, %@", user.value[kCity], user.value[kState]];
     cell.location.text = location;
     
-    if ([user valueForKey:kReelURL]) {
-        [cell.videoPlayerViewController setVideoIdentifier:[user valueForKey:kReelURL]];
+    if (user.value[kReelURL]) {
+        [cell.videoPlayerViewController setVideoIdentifier:user.value[kReelURL]];
     } else {
         [cell.videoPlayerViewController setVideoIdentifier:DEFAULT_reel];
     }
     
-    NSArray *recommendations = [user valueForKey:kRecommendedBy];
+    NSArray *recommendations = user.value[kRecommendedBy];
     NSString *recString = [NSString stringWithFormat:@"%ld Recommendations", recommendations.count];
     [cell.recommendations setTitle:recString forState:UIControlStateNormal];
     
-    NSArray *connections = [user valueForKey:kConnections];
+    NSArray *connections = user.value[kConnections];
     NSString *conString = [NSString stringWithFormat:@"%ld Connections", connections.count];
     [cell.connections setTitle:conString forState:UIControlStateNormal];
 }
@@ -130,7 +158,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.users.count;
+    return self.keys.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -141,25 +169,26 @@
         [cell.recommendations addTarget:self action:@selector(recommendTapped:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    NSDictionary *user = [self.users objectAtIndex:indexPath.row];
+    NSString *key = [self.keys objectAtIndex:indexPath.row];
+    FIRDataSnapshot *user = [self.users valueForKey:key];
     cell.recommendations.tag = indexPath.row;
     
-    [self mapUser:user toCell:cell];
-    
-    [cell.videoPlayerViewController.moviePlayer stop];
-    
-    if (!self.focusedCell) {
-        self.focusedCell = cell;
-        [self.focusedCell.videoPlayerViewController.moviePlayer play];
+    if (user) {
+        [self mapUser:user toCell:cell];
+        
+        if (!self.focusedCell) {
+            self.focusedCell = cell;
+            [self.focusedCell.videoPlayerViewController.moviePlayer play];
+        }
     }
-
+    
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    float statusAndTabHeight = 69.0f;
-    return CGSizeMake(kDeviceWidth, kDeviceHeight - statusAndTabHeight);
+//    float statusAndTabHeight = 69.0f;
+    return CGSizeMake(kDeviceWidth, collectionView.frame.size.height);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

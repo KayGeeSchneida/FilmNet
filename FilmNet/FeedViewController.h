@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "BaseViewController.h"
+#import "AppDelegate.h"
 
 @interface FeedViewController : UIViewController
-
+@property (nonatomic, strong) FIRDatabaseReference *feedReference;
+@property (nonatomic, assign) BOOL shouldShowNavBar;
 @end

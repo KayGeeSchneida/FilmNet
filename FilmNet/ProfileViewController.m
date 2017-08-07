@@ -19,6 +19,7 @@
 #import "RoleTableViewController.h"
 #import "ValidationsUtil.h"
 #import "ReelViewController.h"
+#import "FeedViewController.h"
 
 @interface ProfileViewController ()
 <RoleTableViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, ImagePickerDelegate>
@@ -285,6 +286,20 @@
 - (IBAction)tappedSelectReel:(id)sender {
     [self.videoPlayerViewController.moviePlayer stop];
     ReelViewController *vc = [[ReelViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)tappedRecommendations:(id)sender {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FeedViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FeedViewController"];
+    
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    NSString *path = [NSString stringWithFormat:@"%@/%@/%@",kUsers,userID,kRecommendedBy];
+    vc.feedReference = [[FIRDatabase database] referenceWithPath:path];
+    vc.title = @"Recommended By";
+    
+    vc.shouldShowNavBar = YES;
+    vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
