@@ -168,13 +168,32 @@
         [self.userImageView setImageWithURL:[NSURL URLWithString:self.userSnapshot.value[kProfilePic]]];
     }
     
-    NSArray *recommendations = self.userSnapshot.value[kRecommendedBy];
+    NSString *currentUserID = [FIRAuth auth].currentUser.uid;
+    
+    NSDictionary *recommendations = self.userSnapshot.value[kRecommendedBy];
     NSString *recString = [NSString stringWithFormat:@"%ld Recommendations", recommendations.count];
     [self.recommendationsButton setTitle:recString forState:UIControlStateNormal];
     
-    NSArray *connections = self.userSnapshot.value[kConnections];
+    BOOL hasRecommended = [recommendations valueForKey:currentUserID];
+    [self.recommendButton setTitle:hasRecommended?@"Recommended!":@"Recommend?" forState:UIControlStateNormal];
+    
+    NSDictionary *connections = self.userSnapshot.value[kConnections];
     NSString *conString = [NSString stringWithFormat:@"%ld Connections", connections.count];
     [self.connectionsButton setTitle:conString forState:UIControlStateNormal];
+    
+    BOOL hasConnected = [connections valueForKey:currentUserID];
+    BOOL hasRecievedRequest = [self.userSnapshot.value[kRequestsSent] valueForKey:currentUserID];
+    BOOL hasSentRequest = [self.userSnapshot.value[kRequestsReceived] valueForKey:currentUserID];
+    
+    if (hasConnected) {
+        [self.connectButton setTitle:@"Connected!" forState:UIControlStateNormal];
+    } else if (hasRecievedRequest) {
+        [self.connectButton setTitle:@"Accept Connect Request?" forState:UIControlStateNormal];
+    } else if (hasSentRequest) {
+        [self.connectButton setTitle:@"Connection Request Sent..." forState:UIControlStateNormal];
+    } else {
+        [self.connectButton setTitle:@"Connect?" forState:UIControlStateNormal];
+    }
     
     if (self.userSnapshot.value[kReelURL]) {
         [self.videoPlayerViewController setVideoIdentifier:self.userSnapshot.value[kReelURL]];

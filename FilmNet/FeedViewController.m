@@ -186,11 +186,13 @@
     UserCollectionViewCell *cell = (UserCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionViewCell" forIndexPath:indexPath];
     
     if (cell.recommendations.allTargets.count == 0) {
-        [cell.recommendations addTarget:self action:@selector(recommendTapped:) forControlEvents:UIControlEventTouchUpInside];
+        cell.recommendations.userInteractionEnabled = NO;
+//        [cell.recommendations addTarget:self action:@selector(recommendTapped:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     if (cell.connections.allTargets.count == 0) {
-        [cell.connections addTarget:self action:@selector(connectTapped:) forControlEvents:UIControlEventTouchUpInside];
+        cell.connections.userInteractionEnabled = NO;
+//        [cell.connections addTarget:self action:@selector(connectTapped:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     NSString *key = [self.keys objectAtIndex:indexPath.row];
