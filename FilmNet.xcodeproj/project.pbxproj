@@ -25,6 +25,7 @@
 		818A48751F38CA19001EE80C /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818A48731F38CA19001EE80C /* UserViewController.m */; };
 		818A48761F38CA19001EE80C /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818A48741F38CA19001EE80C /* UserViewController.xib */; };
 		818A487A1F38F269001EE80C /* RecommendService.m in Sources */ = {isa = PBXBuildFile; fileRef = 818A48791F38F269001EE80C /* RecommendService.m */; };
+		818A487D1F39277E001EE80C /* ConnectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 818A487C1F39277E001EE80C /* ConnectionService.m */; };
 		818EA87E1F2AB48A003C08DA /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818EA87B1F2AB447003C08DA /* ImagePicker.framework */; };
 		818EA87F1F2AB48A003C08DA /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 818EA87B1F2AB447003C08DA /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8198543D1F200F9B0086AFA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8198543C1F200F9B0086AFA3 /* GoogleService-Info.plist */; };
@@ -113,6 +114,8 @@
 		818A48741F38CA19001EE80C /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		818A48781F38F269001EE80C /* RecommendService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendService.h; sourceTree = "<group>"; };
 		818A48791F38F269001EE80C /* RecommendService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendService.m; sourceTree = "<group>"; };
+		818A487B1F39277E001EE80C /* ConnectionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionService.h; sourceTree = "<group>"; };
+		818A487C1F39277E001EE80C /* ConnectionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionService.m; sourceTree = "<group>"; };
 		818EA8751F2AB447003C08DA /* ImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ImagePicker.xcodeproj; path = "ImagePicker-master/ImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		8198543C1F200F9B0086AFA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		81A1E79F1F200E5600F75D11 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -213,6 +216,8 @@
 				81854FAD1F2A6DA600594277 /* ProfileViewController.m */,
 				818A48781F38F269001EE80C /* RecommendService.h */,
 				818A48791F38F269001EE80C /* RecommendService.m */,
+				818A487B1F39277E001EE80C /* ConnectionService.h */,
+				818A487C1F39277E001EE80C /* ConnectionService.m */,
 				8167796D1F33AE0100DE87A3 /* ReelViewController.h */,
 				8167796E1F33AE0100DE87A3 /* ReelViewController.m */,
 				8167796F1F33AE0100DE87A3 /* ReelViewController.xib */,
@@ -423,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81A244E31F1FD649003147D3 /* BaseViewController.m in Sources */,
+				818A487D1F39277E001EE80C /* ConnectionService.m in Sources */,
 				81A244BC1F1FD012003147D3 /* AppDelegate.m in Sources */,
 				816779701F33AE0100DE87A3 /* ReelViewController.m in Sources */,
 				81A244D71F1FD256003147D3 /* LoginViewController.m in Sources */,

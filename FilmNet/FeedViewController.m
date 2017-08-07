@@ -11,6 +11,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "UserViewController.h"
 #import "RecommendService.h"
+#import "ConnectionService.h"
 
 @interface FeedViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -83,16 +84,24 @@
     self.ref = [[FIRDatabase database] reference];
     
     if (!self.feedReference) {
+        // TODO: Main feed algorithm goes here (dont just grab ALL users)
+        // TODO: Pagination
         self.feedReference = [[FIRDatabase database] referenceWithPath:kUsers];
     }
     
     [self.feedReference observeEventType:FIRDataEventTypeValue
                                withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
      {
-         self.keys = [snapshot.value allKeys];
-         [self.collectionView reloadData];
+//         NSLog(@"snapshot: %@", snapshot);
          
-         [self populateFeed];
+         if ([snapshot hasChildren]) {
+         
+             self.keys = [snapshot.value allKeys];
+             [self.collectionView reloadData];
+             
+             [self populateFeed];
+             
+         }
      }];
 }
 
@@ -151,7 +160,18 @@
 - (void)recommendTapped:(id)sender {
     
     NSString *userID = [self.keys objectAtIndex:[sender tag]];
-    [RecommendService recommendUserWithID:userID inViewController:self];
+    if (![userID isEqualToString:[FIRAuth auth].currentUser.uid]) {
+        [RecommendService recommendUserWithID:userID inViewController:self];
+    }
+}
+
+#pragma mark - Connect
+
+- (void)connectTapped:(id)sender {
+    NSString *userID = [self.keys objectAtIndex:[sender tag]];
+    if (![userID isEqualToString:[FIRAuth auth].currentUser.uid]) {
+        [ConnectionService connectToUserWithID:userID inViewController:self];
+    }
 }
 
 #pragma mark - Collection View
@@ -169,9 +189,14 @@
         [cell.recommendations addTarget:self action:@selector(recommendTapped:) forControlEvents:UIControlEventTouchUpInside];
     }
     
+    if (cell.connections.allTargets.count == 0) {
+        [cell.connections addTarget:self action:@selector(connectTapped:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     NSString *key = [self.keys objectAtIndex:indexPath.row];
     FIRDataSnapshot *user = [self.users valueForKey:key];
     cell.recommendations.tag = indexPath.row;
+    cell.connections.tag = indexPath.row;
     
     if (user) {
         [self mapUser:user toCell:cell];
@@ -187,15 +212,18 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    float statusAndTabHeight = 69.0f;
     return CGSizeMake(kDeviceWidth, collectionView.frame.size.height);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UserViewController *vc = [[UserViewController alloc] init];
-    vc.userID = [self.keys objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSString *userID = [self.keys objectAtIndex:indexPath.row];
+
+    if (![userID isEqualToString:[FIRAuth auth].currentUser.uid]) {
+        UserViewController *vc = [[UserViewController alloc] init];
+        vc.userID = userID;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - ScrollViewDelegate

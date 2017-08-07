@@ -10,6 +10,8 @@
 #import "UIImageView+AFNetworking.h"
 #import <XCDYouTubeKit/XCDYouTubeKit.h>
 #import "RecommendService.h"
+#import "ConnectionService.h"
+#import "FeedViewController.h"
 
 @interface UserViewController ()
 
@@ -20,9 +22,9 @@
 @property (nonatomic, weak) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *primaryRoleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *locationLabel;
-@property (nonatomic, weak) IBOutlet UILabel *connectionsLabel;
+@property (nonatomic, weak) IBOutlet UIButton *connectionsButton;
 @property (nonatomic, weak) IBOutlet UIButton *connectButton;
-@property (nonatomic, weak) IBOutlet UILabel *recommendationsLabel;
+@property (nonatomic, weak) IBOutlet UIButton *recommendationsButton;
 @property (nonatomic, weak) IBOutlet UIButton *recommendButton;
 @property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
 
@@ -76,6 +78,39 @@
 - (IBAction)tappedRecommend:(id)sender
 {
     [RecommendService recommendUserWithID:self.userID inViewController:self];
+}
+
+- (IBAction)tappedRecommendations:(id)sender
+{
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FeedViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FeedViewController"];
+    
+    NSString *path = [NSString stringWithFormat:@"%@/%@/%@",kUsers,self.userID,kRecommendedBy];
+    vc.feedReference = [[FIRDatabase database] referenceWithPath:path];
+    vc.title = @"Recommended By";
+    
+    vc.shouldShowNavBar = YES;
+    vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)tappedConnect:(id)sender
+{
+    [ConnectionService connectToUserWithID:self.userID inViewController:self];
+}
+
+- (IBAction)tappedConnections:(id)sender
+{
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FeedViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FeedViewController"];
+    
+    NSString *path = [NSString stringWithFormat:@"%@/%@/%@",kUsers,self.userID,kConnections];
+    vc.feedReference = [[FIRDatabase database] referenceWithPath:path];
+    vc.title = @"Connections";
+    
+    vc.shouldShowNavBar = YES;
+    vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Additional Setup
@@ -135,11 +170,11 @@
     
     NSArray *recommendations = self.userSnapshot.value[kRecommendedBy];
     NSString *recString = [NSString stringWithFormat:@"%ld Recommendations", recommendations.count];
-    self.recommendationsLabel.text = recString;
+    [self.recommendationsButton setTitle:recString forState:UIControlStateNormal];
     
     NSArray *connections = self.userSnapshot.value[kConnections];
     NSString *conString = [NSString stringWithFormat:@"%ld Connections", connections.count];
-    self.connectionsLabel.text = conString;
+    [self.connectionsButton setTitle:conString forState:UIControlStateNormal];
     
     if (self.userSnapshot.value[kReelURL]) {
         [self.videoPlayerViewController setVideoIdentifier:self.userSnapshot.value[kReelURL]];

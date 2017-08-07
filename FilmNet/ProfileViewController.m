@@ -303,6 +303,21 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (IBAction)tappedConnections:(id)sender
+{
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FeedViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FeedViewController"];
+    
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    NSString *path = [NSString stringWithFormat:@"%@/%@/%@",kUsers,userID,kConnections];
+    vc.feedReference = [[FIRDatabase database] referenceWithPath:path];
+    vc.title = @"Connections";
+    
+    vc.shouldShowNavBar = YES;
+    vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
