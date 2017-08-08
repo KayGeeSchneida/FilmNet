@@ -19,7 +19,11 @@
 
     [FIRApp configure];
     
-    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithWhite:0.11 alpha:1.00]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithWhite:0.95 alpha:1.00]];
+
+    [[UITabBar appearance] setBarTintColor:[UIColor colorWithWhite:0.11 alpha:1.00]];
+    [[UITabBar appearance] setTintColor:[UIColor colorWithWhite:0.95 alpha:1.00]];
 
     [self registerForPushNotifications];
 

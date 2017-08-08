@@ -11,6 +11,10 @@
 
 #define ARC4RANDOM_MAX      0x100000000
 
+#define FONT_ApercuPro          @"ApercuPro"
+#define FONT_ApercuProBold      @"ApercuPro-Bold"
+#define FONT_GraphikStencilXQ   @"Graphik-StencilXQ-Regular"
+
 #define kDeviceWidth    [[UIScreen mainScreen] bounds].size.width
 #define kDeviceHeight   [[UIScreen mainScreen] bounds].size.height
 #define kStatusHeight   [UIApplication sharedApplication].statusBarFrame.size.height

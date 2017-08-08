@@ -21,8 +21,12 @@
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 
+@property (strong, nonatomic) FIRDataSnapshot *userSnapshot;
+
 @property (strong, nonatomic) NSMutableDictionary *users;
 @property (strong, nonatomic) NSArray *keys;
+
+@property (nonatomic, assign) BOOL isFirstLoad;
 
 @end
 
@@ -32,6 +36,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.isFirstLoad = YES;
     
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
 
@@ -46,6 +52,7 @@
                                                  name:MPMoviePlayerPlaybackStateDidChangeNotification
                                                object:nil];
     
+    [self fetchCurrentUser];
     [self fetchFeed];
 }
 
@@ -127,6 +134,20 @@
     }
 }
 
+- (void)fetchCurrentUser {
+    
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    
+    [[[_ref child:kUsers] child:userID] observeEventType:FIRDataEventTypeValue
+                                               withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
+     {
+         self.userSnapshot = snapshot;
+         
+     } withCancelBlock:^(NSError * _Nonnull error) {
+         NSLog(@"%@", error.localizedDescription);
+     }];
+}
+
 #pragma mark - Data
 
 - (void)mapUser:(FIRDataSnapshot *)user toCell:(UserCollectionViewCell *)cell
@@ -147,12 +168,32 @@
     }
     
     NSArray *recommendations = user.value[kRecommendedBy];
-    NSString *recString = [NSString stringWithFormat:@"%ld Recommendations", recommendations.count];
-    [cell.recommendations setTitle:recString forState:UIControlStateNormal];
+    NSString *recString = [NSString stringWithFormat:@"%ld", recommendations.count];
+    cell.recommendations.text = recString;
     
     NSArray *connections = user.value[kConnections];
-    NSString *conString = [NSString stringWithFormat:@"%ld Connections", connections.count];
-    [cell.connections setTitle:conString forState:UIControlStateNormal];
+    NSString *conString = [NSString stringWithFormat:@"%ld", connections.count];
+    cell.connections.text = conString;
+    
+    NSString *currentUserID = [FIRAuth auth].currentUser.uid;
+
+    if ([[user.value[kConnections] allKeys] containsObject:currentUserID]) {
+        cell.status.text = [NSString stringWithFormat:@"You are connected!"];
+    } else if ([[user.value[kRequestsSent] allKeys] containsObject:currentUserID]) {
+        cell.status.text = [NSString stringWithFormat:@"Connection request received!"];
+    } else if ([[user.value[kRequestsReceived] allKeys] containsObject:currentUserID]) {
+        cell.status.text = [NSString stringWithFormat:@"Connection request awaiting response..."];
+    } else if ([[user.value[kRecommendedBy] allKeys] containsObject:currentUserID]) {
+        cell.status.text = [NSString stringWithFormat:@"You recommend %@!", user.value[kDisplayName]];
+    } else {
+        NSMutableSet *currentUserConnections = [NSMutableSet setWithArray:[self.userSnapshot.value[kConnections] allKeys]];
+        NSMutableSet *thisUserConnections = [NSMutableSet setWithArray:[user.value[kConnections] allKeys]];
+        [currentUserConnections intersectSet:thisUserConnections];
+        NSInteger commonConnections = [currentUserConnections count];
+        cell.status.text = [NSString stringWithFormat:@"You share %ld connections", commonConnections];
+    }
+    
+//    NSLog(@"user: %@", user);
 }
 
 #pragma mark - Recommend
@@ -185,14 +226,14 @@
 {
     UserCollectionViewCell *cell = (UserCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionViewCell" forIndexPath:indexPath];
     
-    if (cell.recommendations.allTargets.count == 0) {
-        cell.recommendations.userInteractionEnabled = NO;
-//        [cell.recommendations addTarget:self action:@selector(recommendTapped:) forControlEvents:UIControlEventTouchUpInside];
+    if (cell.recommendationsButton.allTargets.count == 0) {
+        cell.recommendationsButton.userInteractionEnabled = NO;
+//        [recommendationsButton addTarget:self action:@selector(recommendTapped:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    if (cell.connections.allTargets.count == 0) {
-        cell.connections.userInteractionEnabled = NO;
-//        [cell.connections addTarget:self action:@selector(connectTapped:) forControlEvents:UIControlEventTouchUpInside];
+    if (cell.connectionsButton.allTargets.count == 0) {
+        cell.connectionsButton.userInteractionEnabled = NO;
+//        [connectionsButton addTarget:self action:@selector(connectTapped:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     NSString *key = [self.keys objectAtIndex:indexPath.row];
@@ -205,7 +246,11 @@
         
         if (!self.focusedCell) {
             self.focusedCell = cell;
-            [self.focusedCell.videoPlayerViewController.moviePlayer play];
+            
+            if (self.isFirstLoad) {
+                [self.focusedCell.videoPlayerViewController.moviePlayer play];
+                self.isFirstLoad = NO;
+            }
         }
     }
     

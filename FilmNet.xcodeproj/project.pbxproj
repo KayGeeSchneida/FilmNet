@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		80E6D3B7604DA331F711E2FD /* libPods-FilmNet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE6B4D4C841F0915B20BB8F /* libPods-FilmNet.a */; };
+		812D43C91F3A27B10039AFAC /* apercupro-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 812D43C61F3A27B10039AFAC /* apercupro-bold.ttf */; };
+		812D43CA1F3A27B10039AFAC /* apercupro-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 812D43C71F3A27B10039AFAC /* apercupro-regular.ttf */; };
+		812D43CB1F3A27B10039AFAC /* Graphik-StencilXQ-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 812D43C81F3A27B10039AFAC /* Graphik-StencilXQ-Regular.otf */; };
 		813710611F2149B600A7DC04 /* RoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8137105F1F2149B600A7DC04 /* RoleViewController.m */; };
 		813710621F2149B600A7DC04 /* RoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 813710601F2149B600A7DC04 /* RoleViewController.xib */; };
 		813710661F214FD500A7DC04 /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 813710641F214FD500A7DC04 /* LocationViewController.m */; };
@@ -85,6 +88,9 @@
 		2EE6B4D4C841F0915B20BB8F /* libPods-FilmNet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FilmNet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33674049578006DF5AB2A075 /* Pods-FilmNet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmNet.release.xcconfig"; path = "Pods/Target Support Files/Pods-FilmNet/Pods-FilmNet.release.xcconfig"; sourceTree = "<group>"; };
 		492F43C4C95E524459AA6CAE /* Pods-FilmNet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilmNet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FilmNet/Pods-FilmNet.debug.xcconfig"; sourceTree = "<group>"; };
+		812D43C61F3A27B10039AFAC /* apercupro-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "apercupro-bold.ttf"; sourceTree = "<group>"; };
+		812D43C71F3A27B10039AFAC /* apercupro-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "apercupro-regular.ttf"; sourceTree = "<group>"; };
+		812D43C81F3A27B10039AFAC /* Graphik-StencilXQ-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-StencilXQ-Regular.otf"; sourceTree = "<group>"; };
 		8137105E1F2149B600A7DC04 /* RoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoleViewController.h; sourceTree = "<group>"; };
 		8137105F1F2149B600A7DC04 /* RoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoleViewController.m; sourceTree = "<group>"; };
 		813710601F2149B600A7DC04 /* RoleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoleViewController.xib; sourceTree = "<group>"; };
@@ -161,6 +167,16 @@
 			);
 			name = Pods;
 			sourceTree = "<group>";
+		};
+		812D43C51F3A27B10039AFAC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				812D43C61F3A27B10039AFAC /* apercupro-bold.ttf */,
+				812D43C71F3A27B10039AFAC /* apercupro-regular.ttf */,
+				812D43C81F3A27B10039AFAC /* Graphik-StencilXQ-Regular.otf */,
+			);
+			path = Fonts;
+			sourceTree = SOURCE_ROOT;
 		};
 		818EA8761F2AB447003C08DA /* Products */ = {
 			isa = PBXGroup;
@@ -248,6 +264,7 @@
 		81A244B71F1FD012003147D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				812D43C51F3A27B10039AFAC /* Fonts */,
 				8198543C1F200F9B0086AFA3 /* GoogleService-Info.plist */,
 				81A1E79F1F200E5600F75D11 /* Podfile */,
 				81A244B81F1FD012003147D3 /* main.m */,
@@ -357,8 +374,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				813710621F2149B600A7DC04 /* RoleViewController.xib in Resources */,
+				812D43CB1F3A27B10039AFAC /* Graphik-StencilXQ-Regular.otf in Resources */,
+				812D43CA1F3A27B10039AFAC /* apercupro-regular.ttf in Resources */,
 				813710721F2172F900A7DC04 /* UserCollectionViewCell.xib in Resources */,
 				816779711F33AE0100DE87A3 /* ReelViewController.xib in Resources */,
+				812D43C91F3A27B10039AFAC /* apercupro-bold.ttf in Resources */,
 				81854FB51F2A6E6700594277 /* SettingsViewController.xib in Resources */,
 				81A1E7A01F200E5600F75D11 /* Podfile in Resources */,
 				81A244D81F1FD256003147D3 /* LoginViewController.xib in Resources */,
