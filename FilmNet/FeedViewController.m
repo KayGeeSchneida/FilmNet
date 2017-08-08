@@ -96,6 +96,28 @@
     
 }
 
+#pragma mark - Data Helpers
+
+- (NSSet *)keysForConnectionRequests {
+    NSSet *connections = [NSSet setWithArray:[self.userSnapshot.value[kConnections] allKeys]];
+    NSMutableSet *requests = [[NSSet setWithArray:[self.userSnapshot.value[kRequestsReceived] allKeys]] mutableCopy];
+    [requests minusSet:connections];
+    return requests;
+}
+
+- (NSSet *)keysForCommonConnectionsWithUser:(FIRDataSnapshot *)user {
+    NSSet *thisUserConnections = [NSSet setWithArray:[user.value[kConnections] allKeys]];
+    NSMutableSet *currentUserConnections = [NSMutableSet setWithArray:[self.userSnapshot.value[kConnections] allKeys]];
+    [currentUserConnections intersectSet:thisUserConnections];
+    return currentUserConnections;
+}
+
+- (NSSet *)keysForCommonConnectionsWithUser:(FIRDataSnapshot *)user excludingKeys:(NSSet *)keys {
+    NSMutableSet *thisUserConnections = [[NSSet setWithArray:[user.value[kConnections] allKeys]] mutableCopy];
+    [thisUserConnections minusSet:keys];
+    return thisUserConnections;
+}
+
 #pragma mark - Feed Service Call
 
 - (void)fetchData {
@@ -103,7 +125,6 @@
     self.ref = [[FIRDatabase database] reference];
     
     [self fetchCurrentUser];
-    [self fetchFeed];
 }
 
 - (void)fetchCurrentUser {
@@ -115,9 +136,7 @@
      {
          self.userSnapshot = snapshot;
          
-         NSSet *connections = [NSSet setWithArray:[self.userSnapshot.value[kConnections] allKeys]];
-         NSMutableSet *requests = [[NSSet setWithArray:[self.userSnapshot.value[kRequestsReceived] allKeys]] mutableCopy];
-         [requests minusSet:connections];
+         [self fetchFeed];
          
 //         NSLog(@"outstanding requests: %@", requests);
 //         NSLog(@"current user snapshot: %@", self.userSnapshot);
@@ -129,30 +148,125 @@
 
 - (void)fetchFeed {
     
-    if (!self.feedReference) {
+    if (self.feedReference) {
         
-        // TODO: Main feed algorithm goes here (dont just grab ALL users)
-        // TODO: Pagination
-        
-        self.feedReference = [[FIRDatabase database] referenceWithPath:kUsers];
-    }
-    
-    [self.feedReference observeEventType:FIRDataEventTypeValue
-                               withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
-     {
+        [self.feedReference observeEventType:FIRDataEventTypeValue
+                                   withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
+         {
 //         NSLog(@"snapshot: %@", snapshot);
-         
-         if ([snapshot hasChildren]) {
-         
-             self.keys = [snapshot.value allKeys];
-             [self.collectionView reloadData];
              
+             if ([snapshot hasChildren]) {
+                 
+                 self.keys = [snapshot.value allKeys];
+                 [self.collectionView reloadData];
+                 
+                 [self populateFeed];
+                 
 //             NSLog(@"Feed Keys: %@", self.keys);
 //             NSLog(@"Keys Count: %ld", self.keys.count);
-             
-             [self populateFeed];
-         }
-     }];
+                 
+             }
+         }];
+        
+    } else {
+        
+        [self fetchMainFeed];
+    }
+}
+
+- (void)fetchMainFeed {
+    
+    // TODO: Refactor this to be more efficient
+    
+    // TODO: Pagination
+    
+    // 1) Create array for keys to be added to
+    
+    NSMutableArray *buildKeysArray = [[NSMutableArray alloc] init];
+    
+    // 2) Top keys should be users who have requested connections
+    
+    [buildKeysArray addObjectsFromArray:[[self keysForConnectionRequests] allObjects]];
+    
+    // 3) Grab user snapshots for all of current users connections
+    
+    [[ConnectionService feedReferenceForCurrentUserConnections] observeSingleEventOfType:FIRDataEventTypeValue
+                                                        withBlock:^(FIRDataSnapshot * _Nonnull connectionSnapshot)
+    {
+        __block NSNumber *keyCount = [NSNumber numberWithUnsignedInteger:[[connectionSnapshot.value allKeys] count]];
+        
+        for (NSString *key in [connectionSnapshot.value allKeys]) {
+            [[[self.ref child:kUsers] child:key] observeSingleEventOfType:FIRDataEventTypeValue
+                                                                withBlock:^(FIRDataSnapshot * _Nonnull userSnapshot)
+             {
+                 // 4) Find common connections and add those keys (without doubling up)
+                 // ** Don't add users already connected with either
+                 
+                 NSMutableSet *excludeKeys = [NSMutableSet setWithArray:buildKeysArray];
+                 [excludeKeys addObjectsFromArray:[connectionSnapshot.value allKeys]];
+                 
+                 NSSet *addKeys = [self keysForCommonConnectionsWithUser:userSnapshot
+                                                           excludingKeys:excludeKeys];
+
+                 [buildKeysArray addObjectsFromArray:[addKeys allObjects]];
+                 
+                 keyCount = [NSNumber numberWithUnsignedInteger:[keyCount unsignedIntegerValue] - 1];
+                 
+                 if (keyCount.unsignedIntegerValue == 0) {
+                     
+                     // All keys accounted for
+                     
+                     FIRDatabaseQuery *recentPostsQuery = [[self.ref child:kUsers] queryLimitedToFirst:20];
+
+                     [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue
+                                                         withBlock:^(FIRDataSnapshot * _Nonnull allSnapshot)
+                      
+                      {
+                          
+                          // 5) Add other users to fill out the end of the set
+                          
+                          NSMutableSet *allKeys = [[NSSet setWithArray:[allSnapshot.value allKeys]] mutableCopy];
+                          [allKeys minusSet:[NSSet setWithArray:buildKeysArray]];
+                          [buildKeysArray addObjectsFromArray:[allKeys allObjects]];
+                          
+                          // 6) Don't get yourself, that's silly
+                          
+                          NSString *userID = [FIRAuth auth].currentUser.uid;
+                          if ([buildKeysArray containsObject:userID]) {
+                              [buildKeysArray removeObject:userID];
+                          }
+                          
+                          // 7) Set keys array with built array
+                          
+                          self.keys = buildKeysArray;
+                          
+                          // 8) Reload collection view for appropriate user count
+                          
+                          [self.collectionView reloadData];
+                          
+                          // 9) Grab each user data in turn for all keys
+                          
+                          [self populateFeed];
+                          
+                          // 10) Celebrate!
+                          
+                      } withCancelBlock:^(NSError * _Nonnull error) {
+                          NSLog(@"%@", error.localizedDescription);
+                      }];
+                 }
+   
+             } withCancelBlock:^(NSError * _Nonnull error) {
+                 
+                 keyCount = [NSNumber numberWithUnsignedInteger:[keyCount unsignedIntegerValue] - 1];
+                 
+                 NSLog(@"%@", error.localizedDescription);
+             }];
+        }
+        
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        NSLog(@"%@", error.localizedDescription);
+    }];
+    
 }
 
 - (void)populateFeed {
@@ -262,7 +376,7 @@
     cell.connections.tag = indexPath.row;
 }
 
-#pragma mark - Data
+#pragma mark - Data Mapping
 
 - (void)mapUser:(FIRDataSnapshot *)user toCell:(UserCollectionViewCell *)cell
 {
@@ -304,14 +418,15 @@
         cell.status.text = [NSString stringWithFormat:@"Connection request received!"];
     } else if ([[user.value[kRequestsReceived] allKeys] containsObject:currentUserID]) {
         cell.status.text = [NSString stringWithFormat:@"Connection request awaiting response..."];
-    } else if ([[user.value[kRecommendedBy] allKeys] containsObject:currentUserID]) {
-        cell.status.text = [NSString stringWithFormat:@"You recommend %@!", user.value[kDisplayName]];
     } else {
-        NSMutableSet *currentUserConnections = [NSMutableSet setWithArray:[self.userSnapshot.value[kConnections] allKeys]];
-        NSMutableSet *thisUserConnections = [NSMutableSet setWithArray:[user.value[kConnections] allKeys]];
-        [currentUserConnections intersectSet:thisUserConnections];
-        NSInteger commonConnections = [currentUserConnections count];
-        cell.status.text = [NSString stringWithFormat:@"You share %ld connections", commonConnections];
+        NSInteger commonConnections = [[self keysForCommonConnectionsWithUser:user] count];
+        if (commonConnections > 0) {
+            cell.status.text = [NSString stringWithFormat:@"You share %ld connections", commonConnections];
+        } else if ([[user.value[kRecommendedBy] allKeys] containsObject:currentUserID]) {
+            cell.status.text = [NSString stringWithFormat:@"You recommend %@!", user.value[kDisplayName]];
+        } else {
+            cell.status.text = [NSString stringWithFormat:@"Someone new!"];
+        }
     }
 }
 
