@@ -13,4 +13,7 @@
 
 + (void)recommendUserWithID:(NSString *)userID inViewController:(UIViewController *)vc;
 
++ (FIRDatabaseReference *)feedReferenceForCurrentUserRecommenders;
++ (FIRDatabaseReference *)feedReferenceForUserRecommenders:(NSString *)userID;
+
 @end

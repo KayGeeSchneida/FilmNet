@@ -175,4 +175,16 @@
     [[[[[ref child:kUsers] child:userID] child:kConnections] child:currentUserID] setValue:@YES];
 }
 
++ (FIRDatabaseReference *)feedReferenceForCurrentUserConnections
+{
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    return [ConnectionService feedReferenceForUserConnections:userID];
+}
+
++ (FIRDatabaseReference *)feedReferenceForUserConnections:(NSString *)userID
+{
+    NSString *path = [NSString stringWithFormat:@"%@/%@/%@",kUsers,userID,kConnections];
+    return [[FIRDatabase database] referenceWithPath:path];
+}
+
 @end

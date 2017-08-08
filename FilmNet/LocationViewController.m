@@ -21,8 +21,6 @@
 @property (nonatomic, weak) IBOutlet UITextField *zipField;
 @property (nonatomic, weak) IBOutlet UIButton *finishButton;
 
-@property (strong, nonatomic) FIRDatabaseReference *ref;
-
 @end
 
 @implementation LocationViewController
@@ -102,10 +100,7 @@
     [self.userData setValue:self.zipField.text
                      forKey:kZipcode];
     
-    self.ref = [[FIRDatabase database] reference];
-    
-    [[[_ref child:kUsers] child:[FIRAuth auth].currentUser.uid]
-     setValue:self.userData];
+    [[[[[FIRDatabase database] reference] child:kUsers] child:[FIRAuth auth].currentUser.uid] setValue:self.userData];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }

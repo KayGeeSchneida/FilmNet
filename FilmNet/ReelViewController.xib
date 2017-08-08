@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,23 +20,23 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time to add your reel!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2L-ul-a5r">
-                    <rect key="frame" x="20" y="100" width="335" height="36"/>
+                    <rect key="frame" x="20" y="80" width="335" height="36"/>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eER-DZ-MvC">
-                    <rect key="frame" x="10" y="156" width="355" height="220"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eER-DZ-MvC">
+                    <rect key="frame" x="10" y="136" width="355" height="220"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="220" id="W3O-9T-LxG"/>
                     </constraints>
-                    <mutableString key="text">For now, we are using YouTube,  but a more elegant solution is coming soon!  Step 1: Upload your reel to YouTube (if you haven't already).  Step 2:  Find your reel in youtube (the app or in a browser), tap share, and copy the link.  Step 3:  Paste the link in the text field below and tap Done!  That's it! You did it! Not so bad, right?</mutableString>
+                    <string key="text">For now, we are using YouTube,  but a more elegant solution is coming soon!  Step 1: Upload your reel to YouTube (if you haven't already).  Step 2:  Find your reel in youtube (the app or in a browser), tap share, and copy the link.  Step 3:  Paste the link in the text field below and tap Done!  That's it! You did it! Not so bad, right?</string>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ruv-4T-VBp">
-                    <rect key="frame" x="20" y="396" width="335" height="30"/>
+                    <rect key="frame" x="20" y="376" width="335" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="UDa-ke-KnU"/>
                     </constraints>
@@ -56,7 +56,7 @@
                 <constraint firstAttribute="trailing" secondItem="ruv-4T-VBp" secondAttribute="trailing" constant="20" id="Psk-sk-1Zl"/>
                 <constraint firstItem="a2L-ul-a5r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="S9c-rs-yqu"/>
                 <constraint firstItem="eER-DZ-MvC" firstAttribute="top" secondItem="a2L-ul-a5r" secondAttribute="bottom" constant="20" id="XKp-tF-3kl"/>
-                <constraint firstItem="a2L-ul-a5r" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="dFe-GI-d2c"/>
+                <constraint firstItem="a2L-ul-a5r" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="dFe-GI-d2c"/>
                 <constraint firstAttribute="trailing" secondItem="a2L-ul-a5r" secondAttribute="trailing" constant="20" id="fuT-YU-3Iu"/>
                 <constraint firstItem="ruv-4T-VBp" firstAttribute="top" secondItem="eER-DZ-MvC" secondAttribute="bottom" constant="20" id="n5k-Rl-iWE"/>
             </constraints>

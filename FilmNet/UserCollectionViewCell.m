@@ -29,14 +29,9 @@
     self.card.layer.borderColor = [UIColor darkGrayColor].CGColor;
     self.card.layer.borderWidth = 1.0f;
     
-    [self.userimage setImage:[UIImage imageNamed:@"defaultuserimage"]];
+    [self.userimage setImage:[UIImage imageNamed:DEFAULT_user]];
     self.userimage.layer.cornerRadius = self.userimage.frame.size.width/2;
     self.userimage.clipsToBounds = YES;
-    
-//    [self.reelimage setImage:[UIImage imageNamed:@"defaultreelimage"]];
-    self.reelimage.clipsToBounds = YES;
-    self.reelimage.layer.borderColor = [UIColor darkGrayColor].CGColor;
-    self.reelimage.layer.borderWidth = 1.0f;
     
     self.videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:nil];
     [self.videoPlayerViewController presentInView:self.videoContainer];

@@ -6,9 +6,10 @@
 //  Copyright © 2017 Thought Foundry. All rights reserved.
 //
 
+#import <XCDYouTubeKit/XCDYouTubeKit.h>
+
 #import "UserViewController.h"
 #import "UIImageView+AFNetworking.h"
-#import <XCDYouTubeKit/XCDYouTubeKit.h>
 #import "RecommendService.h"
 #import "ConnectionService.h"
 #import "FeedViewController.h"
@@ -31,7 +32,6 @@
 @property (nonatomic, weak) IBOutlet UIView *videoContainer;
 @property (nonatomic, strong) XCDYouTubeVideoPlayerViewController *videoPlayerViewController;
 
-@property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) FIRDataSnapshot *userSnapshot;
 
 @end
@@ -43,8 +43,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.ref = [[FIRDatabase database] reference];
-    
     [self setupScrollContent];
     
     [self additionalViewSetup];
@@ -55,7 +53,7 @@
     
     [self.navigationController setNavigationBarHidden:NO];
 
-    [self prepopulateUserData];
+    [self fetchUserData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -82,15 +80,9 @@
 
 - (IBAction)tappedRecommendations:(id)sender
 {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    FeedViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FeedViewController"];
-    
-    NSString *path = [NSString stringWithFormat:@"%@/%@/%@",kUsers,self.userID,kRecommendedBy];
-    vc.feedReference = [[FIRDatabase database] referenceWithPath:path];
+    FeedViewController *vc = [self feedViewController];
+    vc.feedReference = [RecommendService feedReferenceForUserRecommenders:self.userID];
     vc.title = @"Recommended By";
-    
-    vc.shouldShowNavBar = YES;
-    vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -101,16 +93,20 @@
 
 - (IBAction)tappedConnections:(id)sender
 {
+    FeedViewController *vc = [self feedViewController];
+    vc.feedReference = [ConnectionService feedReferenceForUserConnections:self.userID];
+    vc.title = @"Connections";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - Navigation
+
+- (FeedViewController *)feedViewController {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FeedViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FeedViewController"];
-    
-    NSString *path = [NSString stringWithFormat:@"%@/%@/%@",kUsers,self.userID,kConnections];
-    vc.feedReference = [[FIRDatabase database] referenceWithPath:path];
-    vc.title = @"Connections";
-    
     vc.shouldShowNavBar = YES;
     vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self.navigationController pushViewController:vc animated:YES];
+    return vc;
 }
 
 #pragma mark - Additional Setup
@@ -125,7 +121,7 @@
 
 - (void)additionalViewSetup {
     
-    UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+    UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                    target:self
                                                                                    action:@selector(tappedMessageButton)];
     self.navigationItem.rightBarButtonItem = messageButton;
@@ -141,12 +137,13 @@
 
 #pragma mark - Data
 
-- (void)prepopulateUserData {
+- (void)fetchUserData {
     
-    FIRDatabaseReference *usersRef = [[FIRDatabase database] referenceWithPath:kUsers];
+    NSString *path = [NSString stringWithFormat:@"%@/%@",kUsers,self.userID];
+    FIRDatabaseReference *userRef = [[FIRDatabase database] referenceWithPath:path];
     
-    [[usersRef child:self.userID] observeEventType:FIRDataEventTypeValue
-                     withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
+    [userRef observeEventType:FIRDataEventTypeValue
+                    withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
      {
          self.userSnapshot = snapshot;
          [self setUserData];
@@ -157,30 +154,52 @@
 }
 
 - (void)setUserData {
+    
     self.userNameLabel.text = self.userSnapshot.value[kDisplayName];
     self.primaryRoleLabel.text = self.userSnapshot.value[kPrimaryRole];
     
-    NSString *location = [NSString stringWithFormat:@"%@, %@", self.userSnapshot.value[kCity], self.userSnapshot.value[kState]];
+    NSString *location = [NSString stringWithFormat:@"%@, %@",
+                          self.userSnapshot.value[kCity],
+                          self.userSnapshot.value[kState]];
     self.locationLabel.text = location;
     
     self.descriptionLabel.text = self.userSnapshot.value[kUserDetails];
-    if (self.userSnapshot.value[kProfilePic]) {
-        [self.userImageView setImageWithURL:[NSURL URLWithString:self.userSnapshot.value[kProfilePic]]];
+    
+    [self.userImageView setImageWithURL:[NSURL URLWithString:self.userSnapshot.value[kProfilePic]]
+                       placeholderImage:[UIImage imageNamed:DEFAULT_user]];
+    
+    [self setRecommendButtonText];
+    [self setConnectButtonText];
+    
+    if (self.userSnapshot.value[kReelURL]) {
+        [self.videoPlayerViewController setVideoIdentifier:self.userSnapshot.value[kReelURL]];
+    } else {
+        [self.videoPlayerViewController setVideoIdentifier:DEFAULT_reel];
     }
     
-    NSString *currentUserID = [FIRAuth auth].currentUser.uid;
+    [self.videoPlayerViewController.moviePlayer play];
+}
+
+- (void)setRecommendButtonText {
     
     NSDictionary *recommendations = self.userSnapshot.value[kRecommendedBy];
     NSString *recString = [NSString stringWithFormat:@"%ld Recommendations", recommendations.count];
     [self.recommendationsButton setTitle:recString forState:UIControlStateNormal];
     
+    NSString *currentUserID = [FIRAuth auth].currentUser.uid;
+    
     BOOL hasRecommended = [recommendations valueForKey:currentUserID];
     [self.recommendButton setTitle:hasRecommended?@"Recommended!":@"Recommend?" forState:UIControlStateNormal];
+}
+
+- (void)setConnectButtonText {
     
     NSDictionary *connections = self.userSnapshot.value[kConnections];
     NSString *conString = [NSString stringWithFormat:@"%ld Connections", connections.count];
     [self.connectionsButton setTitle:conString forState:UIControlStateNormal];
     
+    NSString *currentUserID = [FIRAuth auth].currentUser.uid;
+
     BOOL hasConnected = [connections valueForKey:currentUserID];
     BOOL hasRecievedRequest = [self.userSnapshot.value[kRequestsSent] valueForKey:currentUserID];
     BOOL hasSentRequest = [self.userSnapshot.value[kRequestsReceived] valueForKey:currentUserID];
@@ -194,14 +213,6 @@
     } else {
         [self.connectButton setTitle:@"Connect?" forState:UIControlStateNormal];
     }
-    
-    if (self.userSnapshot.value[kReelURL]) {
-        [self.videoPlayerViewController setVideoIdentifier:self.userSnapshot.value[kReelURL]];
-    } else {
-        [self.videoPlayerViewController setVideoIdentifier:DEFAULT_reel];
-    }
-    
-    [self.videoPlayerViewController.moviePlayer play];
 }
 
 @end

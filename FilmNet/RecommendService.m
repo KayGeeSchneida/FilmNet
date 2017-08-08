@@ -89,4 +89,16 @@
     [[[[[ref child:kUsers] child:userID] child:kRecommendedBy] child:currentUserID] setValue:@YES];
 }
 
++ (FIRDatabaseReference *)feedReferenceForCurrentUserRecommenders
+{
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    return [RecommendService feedReferenceForUserRecommenders:userID];
+}
+
++ (FIRDatabaseReference *)feedReferenceForUserRecommenders:(NSString *)userID
+{
+    NSString *path = [NSString stringWithFormat:@"%@/%@/%@",kUsers,userID,kRecommendedBy];
+    return [[FIRDatabase database] referenceWithPath:path];
+}
+
 @end

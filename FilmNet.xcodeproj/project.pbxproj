@@ -208,46 +208,25 @@
 		81A244B61F1FD012003147D3 /* FilmNet */ = {
 			isa = PBXGroup;
 			children = (
-				81A244BA1F1FD012003147D3 /* AppDelegate.h */,
-				81A244BB1F1FD012003147D3 /* AppDelegate.m */,
 				81A244C61F1FD012003147D3 /* Assets.xcassets */,
-				81A244E11F1FD649003147D3 /* BaseViewController.h */,
-				81A244E21F1FD649003147D3 /* BaseViewController.m */,
-				817EA2341F2A647F00AE590F /* Constants.h */,
 				813710691F216B1D00A7DC04 /* FeedViewController.h */,
 				8137106A1F216B1D00A7DC04 /* FeedViewController.m */,
-				81A26E551F2024070056C008 /* FilmNet.entitlements */,
-				81A244CB1F1FD012003147D3 /* Info.plist */,
-				81A244D11F1FD246003147D3 /* IntroViewController.h */,
-				81A244D21F1FD246003147D3 /* IntroViewController.m */,
+				81B3ECB01F3A3DBD00788980 /* Helpers */,
 				81A244C81F1FD012003147D3 /* LaunchScreen.storyboard */,
-				813710631F214FD500A7DC04 /* LocationViewController.h */,
-				813710641F214FD500A7DC04 /* LocationViewController.m */,
-				813710651F214FD500A7DC04 /* LocationViewController.xib */,
-				81A244D41F1FD256003147D3 /* LoginViewController.h */,
-				81A244D51F1FD256003147D3 /* LoginViewController.m */,
-				81A244D61F1FD256003147D3 /* LoginViewController.xib */,
+				81B3ECAE1F3A3D9A00788980 /* Main */,
 				81A244C31F1FD012003147D3 /* Main.storyboard */,
+				81B3ECB11F3A3DFF00788980 /* Onboarding */,
 				81854FAC1F2A6DA600594277 /* ProfileViewController.h */,
 				81854FAD1F2A6DA600594277 /* ProfileViewController.m */,
-				818A48781F38F269001EE80C /* RecommendService.h */,
-				818A48791F38F269001EE80C /* RecommendService.m */,
-				818A487B1F39277E001EE80C /* ConnectionService.h */,
-				818A487C1F39277E001EE80C /* ConnectionService.m */,
 				8167796D1F33AE0100DE87A3 /* ReelViewController.h */,
 				8167796E1F33AE0100DE87A3 /* ReelViewController.m */,
 				8167796F1F33AE0100DE87A3 /* ReelViewController.xib */,
 				816978CE1F2A977B0004F17B /* RoleTableViewController.h */,
 				816978CF1F2A977B0004F17B /* RoleTableViewController.m */,
-				8137105E1F2149B600A7DC04 /* RoleViewController.h */,
-				8137105F1F2149B600A7DC04 /* RoleViewController.m */,
-				813710601F2149B600A7DC04 /* RoleViewController.xib */,
+				81B3ECAF1F3A3DB300788980 /* Services */,
 				81854FB11F2A6E6700594277 /* SettingsViewController.h */,
 				81854FB21F2A6E6700594277 /* SettingsViewController.m */,
 				81854FB31F2A6E6700594277 /* SettingsViewController.xib */,
-				81A244D91F1FD26C003147D3 /* SignupViewController.h */,
-				81A244DA1F1FD26C003147D3 /* SignupViewController.m */,
-				81A244DB1F1FD26C003147D3 /* SignupViewController.xib */,
 				81A244B71F1FD012003147D3 /* Supporting Files */,
 				8137106E1F2172F900A7DC04 /* UserCollectionViewCell.h */,
 				8137106F1F2172F900A7DC04 /* UserCollectionViewCell.m */,
@@ -255,8 +234,6 @@
 				818A48721F38CA19001EE80C /* UserViewController.h */,
 				818A48731F38CA19001EE80C /* UserViewController.m */,
 				818A48741F38CA19001EE80C /* UserViewController.xib */,
-				816978CB1F2A96260004F17B /* ValidationsUtil.h */,
-				816978CC1F2A96260004F17B /* ValidationsUtil.m */,
 			);
 			path = FilmNet;
 			sourceTree = "<group>";
@@ -270,6 +247,61 @@
 				81A244B81F1FD012003147D3 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		81B3ECAE1F3A3D9A00788980 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				81A244BA1F1FD012003147D3 /* AppDelegate.h */,
+				81A244BB1F1FD012003147D3 /* AppDelegate.m */,
+				817EA2341F2A647F00AE590F /* Constants.h */,
+				81A26E551F2024070056C008 /* FilmNet.entitlements */,
+				81A244CB1F1FD012003147D3 /* Info.plist */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		81B3ECAF1F3A3DB300788980 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				818A487B1F39277E001EE80C /* ConnectionService.h */,
+				818A487C1F39277E001EE80C /* ConnectionService.m */,
+				818A48781F38F269001EE80C /* RecommendService.h */,
+				818A48791F38F269001EE80C /* RecommendService.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		81B3ECB01F3A3DBD00788980 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				81A244E11F1FD649003147D3 /* BaseViewController.h */,
+				81A244E21F1FD649003147D3 /* BaseViewController.m */,
+				816978CB1F2A96260004F17B /* ValidationsUtil.h */,
+				816978CC1F2A96260004F17B /* ValidationsUtil.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		81B3ECB11F3A3DFF00788980 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				81A244D11F1FD246003147D3 /* IntroViewController.h */,
+				81A244D21F1FD246003147D3 /* IntroViewController.m */,
+				813710631F214FD500A7DC04 /* LocationViewController.h */,
+				813710641F214FD500A7DC04 /* LocationViewController.m */,
+				813710651F214FD500A7DC04 /* LocationViewController.xib */,
+				81A244D41F1FD256003147D3 /* LoginViewController.h */,
+				81A244D51F1FD256003147D3 /* LoginViewController.m */,
+				81A244D61F1FD256003147D3 /* LoginViewController.xib */,
+				8137105E1F2149B600A7DC04 /* RoleViewController.h */,
+				8137105F1F2149B600A7DC04 /* RoleViewController.m */,
+				813710601F2149B600A7DC04 /* RoleViewController.xib */,
+				81A244D91F1FD26C003147D3 /* SignupViewController.h */,
+				81A244DA1F1FD26C003147D3 /* SignupViewController.m */,
+				81A244DB1F1FD26C003147D3 /* SignupViewController.xib */,
+			);
+			name = Onboarding;
 			sourceTree = "<group>";
 		};
 		EE5899D3612D0B18E979EF45 /* Frameworks */ = {

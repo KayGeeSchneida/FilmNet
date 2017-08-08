@@ -13,4 +13,7 @@
 
 + (void)connectToUserWithID:(NSString *)userID inViewController:(UIViewController *)vc;
 
++ (FIRDatabaseReference *)feedReferenceForCurrentUserConnections;
++ (FIRDatabaseReference *)feedReferenceForUserConnections:(NSString *)userID;
+
 @end

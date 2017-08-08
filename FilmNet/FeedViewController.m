@@ -20,7 +20,6 @@
 @property (strong, nonatomic) UserCollectionViewCell *focusedCell;
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
-
 @property (strong, nonatomic) FIRDataSnapshot *userSnapshot;
 
 @property (strong, nonatomic) NSMutableDictionary *users;
@@ -39,21 +38,13 @@
     
     self.isFirstLoad = YES;
     
+    [self setupCollectionView];
+    
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
 
-    [self.collectionView registerClass:[UserCollectionViewCell class]
-            forCellWithReuseIdentifier:@"UserCollectionViewCell"];
+    [self setupNotifications];
     
-    UINib *cellNib = [UINib nibWithNibName:@"UserCollectionViewCell" bundle:nil];
-    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"UserCollectionViewCell"];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(MPMoviePlayerPlaybackStateDidChange:)
-                                                 name:MPMoviePlayerPlaybackStateDidChangeNotification
-                                               object:nil];
-    
-    [self fetchCurrentUser];
-    [self fetchFeed];
+    [self fetchData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -84,15 +75,65 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark - Additional Setup
+
+- (void)setupCollectionView {
+
+    [self.collectionView registerClass:[UserCollectionViewCell class]
+            forCellWithReuseIdentifier:@"UserCollectionViewCell"];
+    
+    UINib *cellNib = [UINib nibWithNibName:@"UserCollectionViewCell" bundle:nil];
+    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"UserCollectionViewCell"];
+
+}
+
+- (void)setupNotifications {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(MPMoviePlayerPlaybackStateDidChange:)
+                                                 name:MPMoviePlayerPlaybackStateDidChangeNotification
+                                               object:nil];
+    
+}
+
 #pragma mark - Feed Service Call
 
-- (void)fetchFeed {
-
+- (void)fetchData {
+    
     self.ref = [[FIRDatabase database] reference];
     
+    [self fetchCurrentUser];
+    [self fetchFeed];
+}
+
+- (void)fetchCurrentUser {
+    
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    
+    [[[_ref child:kUsers] child:userID] observeEventType:FIRDataEventTypeValue
+                                               withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
+     {
+         self.userSnapshot = snapshot;
+         
+         NSSet *connections = [NSSet setWithArray:[self.userSnapshot.value[kConnections] allKeys]];
+         NSMutableSet *requests = [[NSSet setWithArray:[self.userSnapshot.value[kRequestsReceived] allKeys]] mutableCopy];
+         [requests minusSet:connections];
+         
+//         NSLog(@"outstanding requests: %@", requests);
+//         NSLog(@"current user snapshot: %@", self.userSnapshot);
+         
+     } withCancelBlock:^(NSError * _Nonnull error) {
+         NSLog(@"%@", error.localizedDescription);
+     }];
+}
+
+- (void)fetchFeed {
+    
     if (!self.feedReference) {
+        
         // TODO: Main feed algorithm goes here (dont just grab ALL users)
         // TODO: Pagination
+        
         self.feedReference = [[FIRDatabase database] referenceWithPath:kUsers];
     }
     
@@ -106,8 +147,10 @@
              self.keys = [snapshot.value allKeys];
              [self.collectionView reloadData];
              
-             [self populateFeed];
+//             NSLog(@"Feed Keys: %@", self.keys);
+//             NSLog(@"Keys Count: %ld", self.keys.count);
              
+             [self populateFeed];
          }
      }];
 }
@@ -130,22 +173,93 @@
          } withCancelBlock:^(NSError * _Nonnull error) {
              NSLog(@"%@", error.localizedDescription);
          }];
-
     }
 }
 
-- (void)fetchCurrentUser {
+#pragma mark - Actions
+
+- (void)recommendTapped:(id)sender {
     
-    NSString *userID = [FIRAuth auth].currentUser.uid;
+    NSString *userID = [self.keys objectAtIndex:[sender tag]];
+    if (![userID isEqualToString:[FIRAuth auth].currentUser.uid]) {
+        [RecommendService recommendUserWithID:userID inViewController:self];
+    }
+}
+
+- (void)connectTapped:(id)sender {
+    NSString *userID = [self.keys objectAtIndex:[sender tag]];
+    if (![userID isEqualToString:[FIRAuth auth].currentUser.uid]) {
+        [ConnectionService connectToUserWithID:userID inViewController:self];
+    }
+}
+
+#pragma mark - Collection View
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.keys.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UserCollectionViewCell *cell = (UserCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionViewCell" forIndexPath:indexPath];
     
-    [[[_ref child:kUsers] child:userID] observeEventType:FIRDataEventTypeValue
-                                               withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
-     {
-         self.userSnapshot = snapshot;
-         
-     } withCancelBlock:^(NSError * _Nonnull error) {
-         NSLog(@"%@", error.localizedDescription);
-     }];
+    [self setupCell:cell atIndexPath:indexPath];
+    
+    NSString *key = [self.keys objectAtIndex:indexPath.row];
+    FIRDataSnapshot *user = [self.users valueForKey:key];
+    
+    if (user) {
+        
+        [self mapUser:user toCell:cell];
+        
+        if (!self.focusedCell) {
+            
+            self.focusedCell = cell;
+            
+            if (self.isFirstLoad) {
+                
+                [self.focusedCell.videoPlayerViewController.moviePlayer play];
+                self.isFirstLoad = NO;
+            }
+        }
+    }
+    
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(kDeviceWidth, collectionView.frame.size.height);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *userID = [self.keys objectAtIndex:indexPath.row];
+
+    if (![userID isEqualToString:[FIRAuth auth].currentUser.uid]) {
+        UserViewController *vc = [[UserViewController alloc] init];
+        vc.userID = userID;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+#pragma mark - Additional Cell Setup
+
+- (void)setupCell:(UserCollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
+    if (cell.recommendationsButton.allTargets.count == 0) {
+        cell.recommendationsButton.userInteractionEnabled = NO;
+        //        [recommendationsButton addTarget:self action:@selector(recommendTapped:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    if (cell.connectionsButton.allTargets.count == 0) {
+        cell.connectionsButton.userInteractionEnabled = NO;
+        //        [connectionsButton addTarget:self action:@selector(connectTapped:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    cell.recommendations.tag = indexPath.row;
+    cell.connections.tag = indexPath.row;
 }
 
 #pragma mark - Data
@@ -175,8 +289,15 @@
     NSString *conString = [NSString stringWithFormat:@"%ld", connections.count];
     cell.connections.text = conString;
     
-    NSString *currentUserID = [FIRAuth auth].currentUser.uid;
+    [self mapUserStatus:user toCell:cell];
+    
+//    NSLog(@"user: %@", user);
+}
 
+- (void)mapUserStatus:(FIRDataSnapshot *)user toCell:(UserCollectionViewCell *)cell
+{
+    NSString *currentUserID = [FIRAuth auth].currentUser.uid;
+    
     if ([[user.value[kConnections] allKeys] containsObject:currentUserID]) {
         cell.status.text = [NSString stringWithFormat:@"You are connected!"];
     } else if ([[user.value[kRequestsSent] allKeys] containsObject:currentUserID]) {
@@ -191,85 +312,6 @@
         [currentUserConnections intersectSet:thisUserConnections];
         NSInteger commonConnections = [currentUserConnections count];
         cell.status.text = [NSString stringWithFormat:@"You share %ld connections", commonConnections];
-    }
-    
-//    NSLog(@"user: %@", user);
-}
-
-#pragma mark - Recommend
-
-- (void)recommendTapped:(id)sender {
-    
-    NSString *userID = [self.keys objectAtIndex:[sender tag]];
-    if (![userID isEqualToString:[FIRAuth auth].currentUser.uid]) {
-        [RecommendService recommendUserWithID:userID inViewController:self];
-    }
-}
-
-#pragma mark - Connect
-
-- (void)connectTapped:(id)sender {
-    NSString *userID = [self.keys objectAtIndex:[sender tag]];
-    if (![userID isEqualToString:[FIRAuth auth].currentUser.uid]) {
-        [ConnectionService connectToUserWithID:userID inViewController:self];
-    }
-}
-
-#pragma mark - Collection View
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return self.keys.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UserCollectionViewCell *cell = (UserCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionViewCell" forIndexPath:indexPath];
-    
-    if (cell.recommendationsButton.allTargets.count == 0) {
-        cell.recommendationsButton.userInteractionEnabled = NO;
-//        [recommendationsButton addTarget:self action:@selector(recommendTapped:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    if (cell.connectionsButton.allTargets.count == 0) {
-        cell.connectionsButton.userInteractionEnabled = NO;
-//        [connectionsButton addTarget:self action:@selector(connectTapped:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    NSString *key = [self.keys objectAtIndex:indexPath.row];
-    FIRDataSnapshot *user = [self.users valueForKey:key];
-    cell.recommendations.tag = indexPath.row;
-    cell.connections.tag = indexPath.row;
-    
-    if (user) {
-        [self mapUser:user toCell:cell];
-        
-        if (!self.focusedCell) {
-            self.focusedCell = cell;
-            
-            if (self.isFirstLoad) {
-                [self.focusedCell.videoPlayerViewController.moviePlayer play];
-                self.isFirstLoad = NO;
-            }
-        }
-    }
-    
-    return cell;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(kDeviceWidth, collectionView.frame.size.height);
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *userID = [self.keys objectAtIndex:indexPath.row];
-
-    if (![userID isEqualToString:[FIRAuth auth].currentUser.uid]) {
-        UserViewController *vc = [[UserViewController alloc] init];
-        vc.userID = userID;
-        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

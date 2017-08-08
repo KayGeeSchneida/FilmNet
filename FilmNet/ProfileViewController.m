@@ -20,6 +20,8 @@
 #import "ValidationsUtil.h"
 #import "ReelViewController.h"
 #import "FeedViewController.h"
+#import "RecommendService.h"
+#import "ConnectionService.h"
 
 @interface ProfileViewController ()
 <RoleTableViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, ImagePickerDelegate>
@@ -46,7 +48,7 @@
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) RoleTableViewController *roleTVC;
 
-@property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (strong, nonatomic) FIRDatabaseReference *userRef;
 @property (strong, nonatomic) FIRDataSnapshot *userSnapshot;
 
 @end
@@ -58,8 +60,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.ref = [[FIRDatabase database] reference];
-    
     [self setupRoleTVC];
     
     [self setupScrollContent];
@@ -70,7 +70,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self prepopulateUserData];
+    [self fetchUserData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -85,27 +85,6 @@
 
 - (void)dealloc {
     self.roleTVC.delegate = nil;
-}
-
-#pragma mark - Role TVC
-
-- (void)setupRoleTVC {
-    self.roleTVC = [[RoleTableViewController alloc] init];
-    self.tableView.delegate = self.roleTVC;
-    self.tableView.dataSource = self.roleTVC;
-    [self.tableView reloadData];
-    self.roleTVC.delegate = self;
-    [self toggleTableVisable];
-}
-
-- (void)rolesTableView:(UITableView *)tableView didSelectRole:(NSString *)role {
-    [self.role setTitle:role forState:(UIControlStateNormal)];
-    [[[[_ref child:kUsers] child:[FIRAuth auth].currentUser.uid] child:kPrimaryRole] setValue:role];
-    [self toggleTableVisable];
-}
-
-- (void)toggleTableVisable {
-    [self.tableHolder setHidden:!self.tableHolder.hidden];
 }
 
 #pragma mark - Additional Setup
@@ -136,12 +115,14 @@
 
 #pragma mark - Data
 
-- (void)prepopulateUserData {
+- (void)fetchUserData {
     
     NSString *userID = [FIRAuth auth].currentUser.uid;
+    NSString *path = [NSString stringWithFormat:@"%@/%@",kUsers,userID];
+    self.userRef = [[FIRDatabase database] referenceWithPath:path];
     
-    [[[_ref child:kUsers] child:userID] observeSingleEventOfType:FIRDataEventTypeValue
-                                                       withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
+    [self.userRef observeSingleEventOfType:FIRDataEventTypeValue
+                                 withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
     {
         self.userSnapshot = snapshot;
         [self setUserData];
@@ -151,16 +132,17 @@
     }];
 }
 
-- (void)setUserData {
+- (void)setUserData
+{
     self.username.text = self.userSnapshot.value[kDisplayName];
     [self.role setTitle:self.userSnapshot.value[kPrimaryRole] forState:UIControlStateNormal];
     self.location.text = self.userSnapshot.value[kZipcode];
     self.details.text = self.userSnapshot.value[kUserDetails];
     self.detailsPrompt.hidden = self.details.text.length > 0;
     
-    if (self.userSnapshot.value[kProfilePic]) {
-        [self.userimage setImageWithURL:[NSURL URLWithString:self.userSnapshot.value[kProfilePic]]];
-    }
+    [self.userimage setImageWithURL:[NSURL URLWithString:self.userSnapshot.value[kProfilePic]]
+                   placeholderImage:[UIImage imageNamed:DEFAULT_user]];
+
     
     NSArray *recommendations = self.userSnapshot.value[kRecommendedBy];
     NSString *recString = [NSString stringWithFormat:@"%ld Recommendations", recommendations.count];
@@ -210,7 +192,7 @@
                     } else {
                         // Metadata contains file metadata such as size, content-type, and download URL.
                         NSURL *downloadURL = metadata.downloadURL;
-                        [[[[_ref child:kUsers] child:[FIRAuth auth].currentUser.uid] child:kProfilePic] setValue:downloadURL.absoluteString];
+                        [[self.userRef child:kProfilePic] setValue:downloadURL.absoluteString];
                     }
                 }];
 }
@@ -267,7 +249,6 @@
 #pragma mark - Actions
 
 - (IBAction)tappedSettings:(id)sender {
-    
     SettingsViewController *vc = [[SettingsViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -293,9 +274,7 @@
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FeedViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FeedViewController"];
     
-    NSString *userID = [FIRAuth auth].currentUser.uid;
-    NSString *path = [NSString stringWithFormat:@"%@/%@/%@",kUsers,userID,kRecommendedBy];
-    vc.feedReference = [[FIRDatabase database] referenceWithPath:path];
+    vc.feedReference = [RecommendService feedReferenceForCurrentUserRecommenders];
     vc.title = @"Recommended By";
     
     vc.shouldShowNavBar = YES;
@@ -303,14 +282,11 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (IBAction)tappedConnections:(id)sender
-{
+- (IBAction)tappedConnections:(id)sender {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FeedViewController *vc = [sb instantiateViewControllerWithIdentifier:@"FeedViewController"];
     
-    NSString *userID = [FIRAuth auth].currentUser.uid;
-    NSString *path = [NSString stringWithFormat:@"%@/%@/%@",kUsers,userID,kConnections];
-    vc.feedReference = [[FIRDatabase database] referenceWithPath:path];
+    vc.feedReference = [ConnectionService feedReferenceForCurrentUserConnections];
     vc.title = @"Connections";
     
     vc.shouldShowNavBar = YES;
@@ -326,13 +302,13 @@
         if (textField.text.length == 0) {
             [self showAlertWithMessage:@"You must enter a valid name to update." andSuccess:NO];
         } else {
-            [[[[_ref child:kUsers] child:[FIRAuth auth].currentUser.uid] child:kDisplayName] setValue:textField.text];
+            [[self.userRef child:kDisplayName] setValue:textField.text];
         }
     } else if (self.location == textField) {
         if (![ValidationsUtil validateZip:self.location.text]) {
             [self showAlertWithMessage:@"You must enter a valid zip code to update." andSuccess:NO];
         } else {
-            [[[[_ref child:kUsers] child:[FIRAuth auth].currentUser.uid] child:kZipcode] setValue:textField.text];
+            [[self.userRef child:kZipcode] setValue:textField.text];
             [self fetchLocationDataWithZip:textField.text];
         }
     }
@@ -354,7 +330,7 @@
     self.detailsPrompt.hidden = self.details.text.length > 0;
     
     if (self.details.text.length) {
-        [[[[_ref child:kUsers] child:[FIRAuth auth].currentUser.uid] child:kUserDetails] setValue:textView.text];
+        [[self.userRef child:kUserDetails] setValue:textView.text];
     }
 }
 
@@ -386,6 +362,27 @@
 
 }
 
+#pragma mark - Role TVC
+
+- (void)setupRoleTVC {
+    self.roleTVC = [[RoleTableViewController alloc] init];
+    self.tableView.delegate = self.roleTVC;
+    self.tableView.dataSource = self.roleTVC;
+    [self.tableView reloadData];
+    self.roleTVC.delegate = self;
+    [self toggleTableVisable];
+}
+
+- (void)rolesTableView:(UITableView *)tableView didSelectRole:(NSString *)role {
+    [self.role setTitle:role forState:(UIControlStateNormal)];
+    [[self.userRef child:kPrimaryRole] setValue:role];
+    [self toggleTableVisable];
+}
+
+- (void)toggleTableVisable {
+    [self.tableHolder setHidden:!self.tableHolder.hidden];
+}
+
 #pragma mark - Location
 
 - (void)fetchLocationDataWithZip:(NSString*)zip
@@ -400,10 +397,9 @@
                              NSString* state = placemark.addressDictionary[(NSString*)kABPersonAddressStateKey];
                              NSString* country = placemark.addressDictionary[(NSString*)kABPersonAddressCountryCodeKey];
                              
-                             NSString *uid = [FIRAuth auth].currentUser.uid;
-                             [[[[_ref child:kUsers] child:uid] child:kCity] setValue:city];
-                             [[[[_ref child:kUsers] child:uid] child:kState] setValue:state];
-                             [[[[_ref child:kUsers] child:uid] child:kCountry] setValue:country];
+                             [[self.userRef child:kCity] setValue:city];
+                             [[self.userRef child:kState] setValue:state];
+                             [[self.userRef child:kCountry] setValue:country];
                              
                          } else {
                              // TODO: Handle Lookup Failed
