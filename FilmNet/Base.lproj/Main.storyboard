@@ -16,7 +16,7 @@
             <objects>
                 <navigationController id="Xaa-zh-sJg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Feed" id="yWz-3D-Kfw"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wGg-dW-bZs">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wGg-dW-bZs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -65,7 +65,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="1n2-6n-UFh" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="2zv-CG-bjN"/>
                             <constraint firstItem="1n2-6n-UFh" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="Kcj-UC-PYK"/>
@@ -148,7 +148,7 @@
             <objects>
                 <navigationController id="F4R-RV-cPU" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="second" id="FKJ-AY-sYW"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YaD-GD-pVe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="YaD-GD-pVe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -417,7 +417,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="FPY-dB-grd" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Vx-kM-Q5B">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3Vx-kM-Q5B">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

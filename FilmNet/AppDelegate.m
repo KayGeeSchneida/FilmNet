@@ -24,6 +24,12 @@
 
     [[UITabBar appearance] setBarTintColor:[UIColor colorWithWhite:0.11 alpha:1.00]];
     [[UITabBar appearance] setTintColor:[UIColor colorWithWhite:0.95 alpha:1.00]];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:
+     @{
+       NSForegroundColorAttributeName: [UIColor colorWithWhite:0.95 alpha:1.00],
+       NSFontAttributeName: [UIFont fontWithName:FONT_ApercuProBold size:20.0f]
+       }];
 
     [self registerForPushNotifications];
 
