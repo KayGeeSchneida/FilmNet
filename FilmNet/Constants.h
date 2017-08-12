@@ -51,4 +51,8 @@
 #define kAlertYes           @"Absolutely!"
 #define kAlertNo            @"Let me think about it..."
 
+#define COLOR_Green         [UIColor colorWithRed:(90.0/255.0) green:(196.0/255.0) blue:(107.0/255.0) alpha:1.0]
+#define COLOR_DarkGray      [UIColor colorWithWhite:0.11 alpha:1.00]
+#define COLOR_AlmostWhite   [UIColor colorWithWhite:0.95 alpha:1.00]
+
 #endif /* Constants_h */

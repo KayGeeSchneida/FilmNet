@@ -96,30 +96,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FilmNet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ae-cc-REm">
-                                <rect key="frame" x="36" y="140" width="303" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FILM NET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ae-cc-REm">
+                                <rect key="frame" x="36" y="20" width="303" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.35294117650000001" green="0.76862745099999996" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create. Share. Connect." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMy-wB-d5B">
+                                <rect key="frame" x="31" y="73" width="313" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qfr-dM-3wm">
+                                <rect key="frame" x="0.0" y="117" width="375" height="390"/>
+                                <color key="backgroundColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="0.5" colorSpace="calibratedRGB"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGY-Sl-v2H">
-                                <rect key="frame" x="36" y="527" width="303" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="36" y="537" width="303" height="40"/>
+                                <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="A0e-Z3-NTi"/>
                                 </constraints>
-                                <state key="normal" title="Log In"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="tappedLogin:" destination="hMI-EP-Sqz" eventType="touchUpInside" id="94h-o2-yFr"/>
                                 </connections>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LJX-7Y-PNZ">
+                                <rect key="frame" x="16" y="127" width="343" height="370"/>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJL-H3-iJe">
-                                <rect key="frame" x="36" y="587" width="303" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="36" y="597" width="303" height="40"/>
+                                <color key="backgroundColor" red="0.35294117650000001" green="0.76862745099999996" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="FB1-iL-VGG"/>
                                 </constraints>
-                                <state key="normal" title="Sign Up"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="tappedSignup:" destination="hMI-EP-Sqz" eventType="touchUpInside" id="S4q-9a-YWJ"/>
                                 </connections>
@@ -127,22 +144,40 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="LJX-7Y-PNZ" firstAttribute="leading" secondItem="7Xj-0h-M4L" secondAttribute="leadingMargin" id="2Cd-5C-Jfr"/>
+                            <constraint firstItem="3Ae-cc-REm" firstAttribute="top" secondItem="7Xj-0h-M4L" secondAttribute="topMargin" constant="20" id="50D-ei-bVg"/>
                             <constraint firstItem="lJL-H3-iJe" firstAttribute="top" secondItem="LGY-Sl-v2H" secondAttribute="bottom" constant="20" id="8fu-kT-Ki8"/>
+                            <constraint firstItem="Qfr-dM-3wm" firstAttribute="top" secondItem="sMy-wB-d5B" secondAttribute="bottom" constant="20" id="8hi-1l-Rv0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3Ae-cc-REm" secondAttribute="trailing" constant="20" id="BVH-bQ-0jR"/>
-                            <constraint firstItem="3Ae-cc-REm" firstAttribute="top" secondItem="Z2b-79-fD0" secondAttribute="bottom" constant="120" id="GKR-hg-FLy"/>
+                            <constraint firstItem="LJX-7Y-PNZ" firstAttribute="bottom" secondItem="Qfr-dM-3wm" secondAttribute="bottom" constant="-10" id="BtU-0B-pvN"/>
+                            <constraint firstItem="LGY-Sl-v2H" firstAttribute="top" secondItem="Qfr-dM-3wm" secondAttribute="bottom" constant="30" id="Dsa-bz-z9W"/>
+                            <constraint firstItem="vSa-Lr-kJa" firstAttribute="top" secondItem="lJL-H3-iJe" secondAttribute="bottom" constant="30" id="FmW-XG-Yf4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sMy-wB-d5B" secondAttribute="trailing" constant="15" id="GXi-2A-X3g"/>
                             <constraint firstItem="lJL-H3-iJe" firstAttribute="leading" secondItem="7Xj-0h-M4L" secondAttribute="leadingMargin" constant="20" id="JJO-Vh-CC9"/>
                             <constraint firstItem="3Ae-cc-REm" firstAttribute="leading" secondItem="7Xj-0h-M4L" secondAttribute="leadingMargin" constant="20" id="QRm-wh-tye"/>
+                            <constraint firstItem="sMy-wB-d5B" firstAttribute="top" secondItem="3Ae-cc-REm" secondAttribute="bottom" constant="5" id="a8s-ih-Qdx"/>
+                            <constraint firstItem="sMy-wB-d5B" firstAttribute="leading" secondItem="7Xj-0h-M4L" secondAttribute="leadingMargin" constant="15" id="bSp-8w-2wq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LJX-7Y-PNZ" secondAttribute="trailing" id="cv8-IQ-AsJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LGY-Sl-v2H" secondAttribute="trailing" constant="20" id="diL-fZ-zdx"/>
-                            <constraint firstItem="vSa-Lr-kJa" firstAttribute="top" secondItem="lJL-H3-iJe" secondAttribute="bottom" constant="40" id="ly5-bS-F77"/>
+                            <constraint firstItem="Qfr-dM-3wm" firstAttribute="leading" secondItem="7Xj-0h-M4L" secondAttribute="leading" id="fes-VC-QsF"/>
+                            <constraint firstAttribute="trailing" secondItem="Qfr-dM-3wm" secondAttribute="trailing" id="mUb-Z9-k78"/>
                             <constraint firstItem="LGY-Sl-v2H" firstAttribute="leading" secondItem="7Xj-0h-M4L" secondAttribute="leadingMargin" constant="20" id="ngT-nl-TqK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lJL-H3-iJe" secondAttribute="trailing" constant="20" id="sEj-dI-RjW"/>
+                            <constraint firstItem="LJX-7Y-PNZ" firstAttribute="top" secondItem="Qfr-dM-3wm" secondAttribute="top" constant="10" id="yba-BY-a5m"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="x18-PM-vkn"/>
+                    <connections>
+                        <outlet property="filmnetLabel" destination="3Ae-cc-REm" id="5Qb-8v-jXd"/>
+                        <outlet property="loginButton" destination="LGY-Sl-v2H" id="DBy-Mj-02y"/>
+                        <outlet property="signupButton" destination="lJL-H3-iJe" id="55V-al-CGB"/>
+                        <outlet property="slidesScrollView" destination="LJX-7Y-PNZ" id="wFo-Gn-VsM"/>
+                        <outlet property="sloganLabel" destination="sMy-wB-d5B" id="rMO-2x-5D6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KUW-Fn-3d5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2550" y="14"/>
+            <point key="canvasLocation" x="2549.5999999999999" y="13.943028485757123"/>
         </scene>
         <!--Profile-->
         <scene sceneID="2N2-2b-xsR">
