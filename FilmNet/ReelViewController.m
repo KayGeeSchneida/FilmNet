@@ -11,12 +11,18 @@
 
 @interface ReelViewController () <UITextFieldDelegate>
 
+@property (nonatomic, weak) IBOutlet UILabel *reelLabel;
+@property (nonatomic, weak) IBOutlet UITextView *stepsView;
+
 @end
 
 @implementation ReelViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.reelLabel.font = [UIFont fontWithName:FONT_GraphikStencilXQ size:30];
+    self.stepsView.font = [UIFont fontWithName:FONT_ApercuPro size:12];
 }
 
 - (void)didReceiveMemoryWarning {

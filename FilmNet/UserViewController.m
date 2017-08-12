@@ -14,6 +14,7 @@
 #import "ConnectionService.h"
 #import "FeedViewController.h"
 #import "ComingSoonHelper.h"
+#import "FNButton.h"
 
 @interface UserViewController ()
 
@@ -24,11 +25,11 @@
 @property (nonatomic, weak) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *primaryRoleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *locationLabel;
-@property (nonatomic, weak) IBOutlet UIButton *connectionsButton;
-@property (nonatomic, weak) IBOutlet UIButton *connectButton;
-@property (nonatomic, weak) IBOutlet UIButton *recommendationsButton;
-@property (nonatomic, weak) IBOutlet UIButton *recommendButton;
-@property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
+@property (nonatomic, weak) IBOutlet FNButton *connectionsButton;
+@property (nonatomic, weak) IBOutlet FNButton *connectButton;
+@property (nonatomic, weak) IBOutlet FNButton *recommendationsButton;
+@property (nonatomic, weak) IBOutlet FNButton *recommendButton;
+@property (nonatomic, weak) IBOutlet UITextView *descriptionTextView;
 
 @property (nonatomic, weak) IBOutlet UIView *videoContainer;
 @property (nonatomic, strong) XCDYouTubeVideoPlayerViewController *videoPlayerViewController;
@@ -135,6 +136,17 @@
     self.videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:nil];
     [self.videoPlayerViewController presentInView:self.videoContainer];
     [self.videoPlayerViewController.moviePlayer prepareToPlay];
+    
+    self.userNameLabel.font = [UIFont fontWithName:FONT_ApercuProBold size:20.0f];
+    self.primaryRoleLabel.font = [UIFont fontWithName:FONT_ApercuProBold size:15.0f];
+    self.locationLabel.font = [UIFont fontWithName:FONT_ApercuProBold size:15.0f];
+    
+    [self.connectButton setFnButtonStyle:FNButtonStyleGreen];
+    [self.connectionsButton setFnButtonStyle:FNButtonStyleWhiteBordered];
+    [self.recommendButton setFnButtonStyle:FNButtonStyleGreen];
+    [self.recommendationsButton setFnButtonStyle:FNButtonStyleWhiteBordered];
+    
+    self.descriptionTextView.font = [UIFont fontWithName:FONT_ApercuPro size:12.0f];
 }
 
 #pragma mark - Data
@@ -165,7 +177,7 @@
                           self.userSnapshot.value[kState]];
     self.locationLabel.text = location;
     
-    self.descriptionLabel.text = self.userSnapshot.value[kUserDetails];
+    self.descriptionTextView.text = self.userSnapshot.value[kUserDetails];
     
     [self.userImageView setImageWithURL:[NSURL URLWithString:self.userSnapshot.value[kProfilePic]]
                        placeholderImage:[UIImage imageNamed:DEFAULT_user]];
@@ -215,6 +227,9 @@
     } else {
         [self.connectButton setTitle:@"Connect?" forState:UIControlStateNormal];
     }
+    
+    self.connectButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.connectButton.titleLabel.textAlignment = NSTextAlignmentCenter;
 }
 
 @end

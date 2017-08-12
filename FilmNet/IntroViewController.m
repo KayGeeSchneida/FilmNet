@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.slidesCount = 3;
+    self.slidesCount = 6;
     
     [self additionalSetup];
 }
@@ -75,7 +75,7 @@
                                                    self.slidesScrollView.frame.size.height);
     
     if (!self.timer) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(scrollSlide) userInfo:nil repeats:YES];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(scrollSlide) userInfo:nil repeats:YES];
     }
 }
 

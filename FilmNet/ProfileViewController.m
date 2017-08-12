@@ -22,6 +22,7 @@
 #import "FeedViewController.h"
 #import "RecommendService.h"
 #import "ConnectionService.h"
+#import "FNButton.h"
 
 @interface ProfileViewController ()
 <RoleTableViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate, ImagePickerDelegate>
@@ -30,16 +31,17 @@
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 
 @property (nonatomic, weak) IBOutlet UITextField *username;
-@property (nonatomic, weak) IBOutlet UIButton *role;
+@property (nonatomic, weak) IBOutlet FNButton *role;
 @property (nonatomic, weak) IBOutlet UITextField *location;
 @property (nonatomic, weak) IBOutlet UIImageView *userimage;
 @property (nonatomic, weak) IBOutlet UIButton *selectUserImage;
 @property (nonatomic, weak) IBOutlet UIImageView *reelimage;
+@property (nonatomic, weak) IBOutlet UIButton *updateReelButton;
 @property (nonatomic, weak) IBOutlet UITextView *details;
 @property (nonatomic, weak) IBOutlet UILabel *detailsPrompt;
 
-@property (nonatomic, weak) IBOutlet UIButton *connections;
-@property (nonatomic, weak) IBOutlet UIButton *recommendations;
+@property (nonatomic, weak) IBOutlet FNButton *connections;
+@property (nonatomic, weak) IBOutlet FNButton *recommendations;
 
 @property (nonatomic, weak) IBOutlet UIView *videoContainer;
 @property(nonatomic, strong) XCDYouTubeVideoPlayerViewController *videoPlayerViewController;
@@ -111,6 +113,13 @@
     self.videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:nil];
     [self.videoPlayerViewController presentInView:self.videoContainer];
     [self.videoPlayerViewController.moviePlayer prepareToPlay];
+    
+    [self.role setFnButtonStyle:FNButtonStyleWhiteBordered];
+    [self.connections setFnButtonStyle:FNButtonStyleGreen];
+    [self.recommendations setFnButtonStyle:FNButtonStyleGreen];
+    
+    [self.updateReelButton.titleLabel setFont:[UIFont fontWithName:FONT_GraphikStencilXQ size:15.0f]];
+    [self.updateReelButton setTitleColor:COLOR_Green forState:UIControlStateNormal];
 }
 
 #pragma mark - Data
@@ -143,14 +152,8 @@
     [self.userimage setImageWithURL:[NSURL URLWithString:self.userSnapshot.value[kProfilePic]]
                    placeholderImage:[UIImage imageNamed:DEFAULT_user]];
 
-    
-    NSArray *recommendations = self.userSnapshot.value[kRecommendedBy];
-    NSString *recString = [NSString stringWithFormat:@"%ld Recommendations", recommendations.count];
-    [self.recommendations setTitle:recString forState:UIControlStateNormal];
-    
-    NSArray *connections = self.userSnapshot.value[kConnections];
-    NSString *conString = [NSString stringWithFormat:@"%ld Connections", connections.count];
-    [self.connections setTitle:conString forState:UIControlStateNormal];
+    [self setRecommendationsButtonText];
+    [self setConnectionsButtonText];
     
     if (self.userSnapshot.value[kReelURL]) {
         [self.videoPlayerViewController setVideoIdentifier:self.userSnapshot.value[kReelURL]];
@@ -161,17 +164,62 @@
     [self.videoPlayerViewController.moviePlayer play];
 }
 
+- (void)setRecommendationsButtonText {
+    NSArray *recommendations = self.userSnapshot.value[kRecommendedBy];
+    NSString *recNumber = [NSString stringWithFormat:@"%ld", recommendations.count];
+    NSString *recString = [NSString stringWithFormat:@"%@\nReccos", recNumber];
+    
+    NSMutableAttributedString * attrRecString = [[NSMutableAttributedString alloc] initWithString:recString];
+    [attrRecString addAttribute:NSForegroundColorAttributeName value:COLOR_AlmostWhite range:NSMakeRange(0,recString.length)];
+    [attrRecString addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_ApercuProBold size:15.0f]
+                          range:NSMakeRange(0,recString.length)];
+    [attrRecString addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_GraphikStencilXQ size:30.0f]
+                          range:[recString rangeOfString:recNumber]];
+    
+    self.recommendations.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.recommendations.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    [self.recommendations setAttributedTitle:attrRecString forState:UIControlStateNormal];
+}
+
+- (void)setConnectionsButtonText {
+    NSArray *connections = self.userSnapshot.value[kConnections];
+    NSString *conNumber = [NSString stringWithFormat:@"%ld", connections.count];
+    NSString *conString = [NSString stringWithFormat:@"%@\nConnections", conNumber];
+    
+    NSMutableAttributedString * attrString = [[NSMutableAttributedString alloc] initWithString:conString];
+    [attrString addAttribute:NSForegroundColorAttributeName value:COLOR_AlmostWhite range:NSMakeRange(0,conString.length)];
+    [attrString addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_ApercuProBold size:15.0f]
+                          range:NSMakeRange(0,conString.length)];
+    [attrString addAttribute:NSFontAttributeName value:[UIFont fontWithName:FONT_GraphikStencilXQ size:30.0f]
+                          range:[conString rangeOfString:conNumber]];
+    
+    self.connections.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.connections.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    [self.connections setAttributedTitle:attrString forState:UIControlStateNormal];
+}
+
 #pragma mark - User Image
+
+- (UIImage *)imageWithImage:(UIImage *)sourceImage scaledToWidth:(float)i_width
+{
+    float oldWidth = sourceImage.size.width;
+    float scaleFactor = i_width / oldWidth;
+    
+    float newHeight = sourceImage.size.height * scaleFactor;
+    float newWidth = oldWidth * scaleFactor;
+    
+    UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
+    [sourceImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 
 - (void)uploadUserImage:(UIImage *)userimage {
     
-    CGRect rect = CGRectMake(0,0,512,512);
-    UIGraphicsBeginImageContext( rect.size );
-    [userimage drawInRect:rect];
-    UIImage *resized = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    NSData *imageData = UIImagePNGRepresentation(resized);
+    NSData *imageData = UIImagePNGRepresentation([self imageWithImage:userimage scaledToWidth:512]);
     
     FIRStorage *storage = [FIRStorage storage];
 

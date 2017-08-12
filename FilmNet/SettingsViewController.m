@@ -13,6 +13,7 @@
 @interface SettingsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableview;
+@property (nonatomic, weak) IBOutlet UILabel *settingsLabel;
 
 @property (nonatomic, strong) NSArray *settings;
 
@@ -23,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.settingsLabel.font = [UIFont fontWithName:FONT_GraphikStencilXQ size:40];
+
     self.settings = @[@"FAQ",@"Terms & Conditions",@"Contact Us",@"Delete Account",@"Log Out"];
 }
 
@@ -48,6 +51,10 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     }
+    
+    cell.textLabel.textColor = (indexPath.row%2 == 1)?COLOR_DarkGray:COLOR_AlmostWhite;
+    cell.backgroundColor = (indexPath.row%2 == 0)?COLOR_DarkGray:COLOR_AlmostWhite;
+    cell.textLabel.font = [UIFont fontWithName:FONT_ApercuProBold size:20.0];
     
     [cell.textLabel setText:self.settings[indexPath.row]];
     
