@@ -13,6 +13,7 @@
 #import "RecommendService.h"
 #import "ConnectionService.h"
 #import "FeedViewController.h"
+#import "ComingSoonHelper.h"
 
 @interface UserViewController ()
 
@@ -70,7 +71,7 @@
 
 - (void)tappedMessageButton
 {
-    NSLog(@"Message tapped");
+    [ComingSoonHelper showMessageComingSoonInViewController:self];
 }
 
 - (IBAction)tappedRecommend:(id)sender
@@ -121,9 +122,10 @@
 
 - (void)additionalViewSetup {
     
-    UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                                   target:self
-                                                                                   action:@selector(tappedMessageButton)];
+    UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"message"]
+                                                                      style:UIBarButtonItemStylePlain
+                                                                     target:self
+                                                                     action:@selector(tappedMessageButton)];
     self.navigationItem.rightBarButtonItem = messageButton;
     
     [self.userImageView setImage:[UIImage imageNamed:@"defaultuserimage"]];

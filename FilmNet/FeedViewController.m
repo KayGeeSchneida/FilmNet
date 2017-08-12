@@ -12,6 +12,7 @@
 #import "UserViewController.h"
 #import "RecommendService.h"
 #import "ConnectionService.h"
+#import "ComingSoonHelper.h"
 
 @interface FeedViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -33,8 +34,18 @@
 
 #pragma mark - View Lifecycle
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.title = @"Film Net";
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self additionalViewSetup];
     
     self.isFirstLoad = YES;
     
@@ -50,7 +61,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:!self.shouldShowNavBar];
+//    [self.navigationController setNavigationBarHidden:!self.shouldShowNavBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -76,6 +87,14 @@
 }
 
 #pragma mark - Additional Setup
+
+- (void)additionalViewSetup {
+    
+    UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
+                                                                                   target:self
+                                                                                   action:@selector(tappedSearch)];
+    self.navigationItem.rightBarButtonItem = messageButton;
+}
 
 - (void)setupCollectionView {
 
@@ -147,6 +166,12 @@
 }
 
 - (void)fetchFeed {
+    
+    // TODO: REMOVE THIS
+    // Main feed is temporarily all users
+    if (!self.feedReference) {
+        self.feedReference = [[[FIRDatabase database] reference] child:kUsers];
+    }
     
     if (self.feedReference) {
         
@@ -305,6 +330,10 @@
     if (![userID isEqualToString:[FIRAuth auth].currentUser.uid]) {
         [ConnectionService connectToUserWithID:userID inViewController:self];
     }
+}
+
+- (void)tappedSearch {
+    [ComingSoonHelper showSearchComingSoonInViewController:self];
 }
 
 #pragma mark - Collection View

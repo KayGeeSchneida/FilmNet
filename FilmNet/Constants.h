@@ -47,4 +47,8 @@
 #define kRecommendedBy      @"recommendedby"
 #define kRecommendedCount   @"recommendedcount"
 
+#define kAlertOK            @"Got it!"
+#define kAlertYes           @"Absolutely!"
+#define kAlertNo            @"Let me think about it..."
+
 #endif /* Constants_h */

@@ -115,7 +115,7 @@
                                 preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *okButton = [UIAlertAction
-                               actionWithTitle:@"Got It!"
+                               actionWithTitle:kAlertOK
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction *action) {
                                    if (success) {

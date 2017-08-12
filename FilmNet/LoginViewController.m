@@ -72,8 +72,7 @@
                          completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
                              
                              if (user) {
-                                 NSString *message = [NSString stringWithFormat:@"Log in with email %@ successful.",
-                                                      self.emailField.text];
+                                 NSString *message = [NSString stringWithFormat:@"Log In Successful"];
                                  
                                  [self showAlertWithMessage:message andSuccess:YES];
                              } else {
@@ -96,7 +95,7 @@
                                 preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *okButton = [UIAlertAction
-                               actionWithTitle:@"Got It!"
+                               actionWithTitle:kAlertOK
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction *action) {
                                    if (success) {

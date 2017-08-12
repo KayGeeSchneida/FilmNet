@@ -84,8 +84,7 @@
                                      changeRequest.displayName = self.nameField.text;
                                      [changeRequest commitChangesWithCompletion:^(NSError *_Nullable error) {
                                          
-                                         NSString *message = [NSString stringWithFormat:@"User with email %@ created.",
-                                                              self.emailField.text];
+                                         NSString *message = [NSString stringWithFormat:@"User created!"];
                                          
                                          [self showAlertWithMessage:message andSuccess:YES];
                                          
@@ -118,7 +117,7 @@
                                  preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *okButton = [UIAlertAction
-                                actionWithTitle:@"Got It!"
+                                actionWithTitle:kAlertOK
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction *action) {
                                     if (success) {

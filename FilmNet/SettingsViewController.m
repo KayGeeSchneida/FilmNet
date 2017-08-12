@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "AppDelegate.h"
+#import "ComingSoonHelper.h"
 
 @interface SettingsViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -56,15 +57,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.row) {
-            case 0:
+        case 0:
+            [ComingSoonHelper showFeatureComingSoon:@"FAQ" inViewController:self];
             break;
-            case 1:
+        case 1:
+            [ComingSoonHelper showFeatureComingSoon:@"Terms & Conditions" inViewController:self];
             break;
-            case 2:
+        case 2:
+            [ComingSoonHelper showFeatureComingSoon:@"Contact Us" inViewController:self];
             break;
-            case 3:
+        case 3:
+            [ComingSoonHelper showFeatureComingSoon:@"Delete Account" inViewController:self];
             break;
-            case 4:
+        case 4:
             [self logout];
             break;
         default:

@@ -40,7 +40,7 @@
                                 preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *yesButton = [UIAlertAction
-                                actionWithTitle:@"OK!"
+                                actionWithTitle:kAlertOK
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction *action) {
 
@@ -59,7 +59,7 @@
                                 preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *yesButton = [UIAlertAction
-                                actionWithTitle:@"Absolutely!"
+                                actionWithTitle:kAlertYes
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction *action) {
                                     [RecommendService sendRecommendForUserWithID:userID];
@@ -68,7 +68,7 @@
     [alert addAction:yesButton];
     
     UIAlertAction *noButton = [UIAlertAction
-                               actionWithTitle:@"Let me think about it..."
+                               actionWithTitle:kAlertNo
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction *action) {
                                    
