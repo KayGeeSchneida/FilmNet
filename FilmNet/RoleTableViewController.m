@@ -44,6 +44,10 @@
         cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"cell"];
     }
     
+    cell.textLabel.textColor = COLOR_DarkGray;
+    cell.backgroundColor = COLOR_AlmostWhite;
+    cell.textLabel.font = [UIFont fontWithName:FONT_ApercuPro size:15.0];
+    
     cell.textLabel.text = _roles[indexPath.row];
     
     return cell;
@@ -58,7 +62,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 40.0f;
+    return 50.0f;
 }
 
 @end

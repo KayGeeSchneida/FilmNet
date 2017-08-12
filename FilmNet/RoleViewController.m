@@ -9,13 +9,17 @@
 #import "RoleViewController.h"
 #import "LocationViewController.h"
 #import "RoleTableViewController.h"
+#import "ComingSoonHelper.h"
+#import "FNButton.h"
 
 @interface RoleViewController () <RoleTableViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIView *tableHolder;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UIButton *primaryRoleButton;
-@property (nonatomic, weak) IBOutlet UIButton *nextButton;
+@property (nonatomic, weak) IBOutlet FNButton *primaryRoleButton;
+@property (nonatomic, weak) IBOutlet FNButton *secondaryRoleButton;
+@property (nonatomic, weak) IBOutlet FNButton *interestsButton;
+@property (nonatomic, weak) IBOutlet FNButton *nextButton;
 
 @property (nonatomic, strong) RoleTableViewController *roleTVC;
 
@@ -25,7 +29,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
+    
+    [self additionalSetup];
+
     [self toggleTableVisable];
     
     [self setupRoleTVC];
@@ -37,6 +43,17 @@
 
 - (void)dealloc {
     self.roleTVC.delegate = nil;
+}
+
+#pragma mark - Additional Setup
+
+- (void)additionalSetup {
+    
+    [self.primaryRoleButton setFnButtonStyle:FNButtonStyleWhiteBordered];
+    [self.secondaryRoleButton setFnButtonStyle:FNButtonStyleWhiteBordered];
+    [self.interestsButton setFnButtonStyle:FNButtonStyleWhiteBordered];
+    
+    [self.nextButton setFnButtonStyle:FNButtonStyleGreen];
 }
 
 #pragma mark - Role TVC
@@ -51,6 +68,7 @@
 
 - (void)rolesTableView:(UITableView *)tableView didSelectRole:(NSString *)role {
     [self.primaryRoleButton setTitle:role forState:(UIControlStateNormal)];
+    [self.primaryRoleButton setTitleColor:COLOR_Green forState:UIControlStateNormal];
     [self.userData setValue:role
                      forKey:kPrimaryRole];
     [self toggleTableVisable];
@@ -65,6 +83,14 @@
 
 - (IBAction)tappedPrimaryRole:(id)sender {
     [self toggleTableVisable];
+}
+
+- (IBAction)tappedSecondaryRole:(id)sender {
+    [ComingSoonHelper showSecondaryRolesComingSoonInViewController:self];
+}
+
+- (IBAction)tappedInterests:(id)sender {
+    [ComingSoonHelper showInterestsComingSoonInViewController:self];
 }
 
 - (IBAction)tappedNext:(id)sender {

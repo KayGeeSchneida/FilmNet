@@ -11,14 +11,15 @@
 
 #import "SignupViewController.h"
 #import "LoginViewController.h"
+#import "FNButton.h"
 
 @interface IntroViewController ()
 
 @property (nonatomic, weak) IBOutlet UIScrollView *slidesScrollView;
 @property (nonatomic, weak) IBOutlet UILabel *filmnetLabel;
 @property (nonatomic, weak) IBOutlet UILabel *sloganLabel;
-@property (nonatomic, weak) IBOutlet UIButton *loginButton;
-@property (nonatomic, weak) IBOutlet UIButton *signupButton;
+@property (nonatomic, weak) IBOutlet FNButton *loginButton;
+@property (nonatomic, weak) IBOutlet FNButton *signupButton;
 
 @property (nonatomic, assign) int slidesCount;
 @property (nonatomic, strong) NSTimer *timer;
@@ -60,11 +61,9 @@
 - (void)additionalSetup {
     self.filmnetLabel.font = [UIFont fontWithName:FONT_GraphikStencilXQ size:40];
     self.sloganLabel.font = [UIFont fontWithName:FONT_ApercuProBold size:20];
-    self.signupButton.titleLabel.font = [UIFont fontWithName:FONT_ApercuProBold size:15];
-    self.loginButton.titleLabel.font = [UIFont fontWithName:FONT_ApercuProBold size:15];
     
-    self.loginButton.layer.borderColor = COLOR_DarkGray.CGColor;
-    self.loginButton.layer.borderWidth = 1.0f;
+    [self.signupButton setFnButtonStyle:FNButtonStyleGreen];
+    [self.loginButton setFnButtonStyle:FNButtonStyleWhiteBordered];
 }
 
 #pragma mark - Slides
@@ -91,6 +90,7 @@
         imageView.frame = frame;
         [self.slidesScrollView addSubview:imageView];
     }
+    
 }
 
 - (void)scrollSlide {

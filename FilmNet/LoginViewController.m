@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "AppDelegate.h"
 #import "ValidationsUtil.h"
+#import "FNButton.h"
 
 @interface LoginViewController ()
 
@@ -16,6 +17,8 @@
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 @property (nonatomic, weak) IBOutlet UITextField *emailField;
 @property (nonatomic, weak) IBOutlet UITextField *passwordField;
+@property (nonatomic, weak) IBOutlet FNButton *loginButton;
+@property (nonatomic, weak) IBOutlet UILabel *loginLabel;
 
 @end
 
@@ -28,6 +31,10 @@
     
     [self setupScrollContent];
     
+    [self.loginButton setFnButtonStyle:FNButtonStyleGreen];
+    
+    self.loginLabel.font = [UIFont fontWithName:FONT_GraphikStencilXQ size:40];
+
     [self.navigationController setNavigationBarHidden:NO];
 }
 

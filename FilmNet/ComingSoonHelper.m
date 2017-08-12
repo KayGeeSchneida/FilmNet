@@ -42,9 +42,23 @@
     [self showComingSoonAlertWithMessage:message inViewController:vc];
 }
 
++ (void)showSecondaryRolesComingSoonInViewController:(UIViewController *)vc {
+    
+    NSString *message = @"The secondary roles feature will allow you to select other roles you would be willing to fill when participating in another user's project. This will allow you to be found during a search for more than one role.";
+    
+    [self showComingSoonAlertWithMessage:message inViewController:vc];
+}
+
++ (void)showInterestsComingSoonInViewController:(UIViewController *)vc {
+    
+    NSString *message = @"The interests feature will help connect you to more users with similar interests. Some interests may include: comedy, horror, action, western, etc.";
+    
+    [self showComingSoonAlertWithMessage:message inViewController:vc];
+}
+
 + (void)showFeatureComingSoon:(NSString *)feature inViewController:(UIViewController *)vc {
     
-    NSString *message = [NSString stringWithFormat:@"%@ is coming soon...", feature];
+    NSString *message = [NSString stringWithFormat:@"%@ coming soon...", feature];
     
     [self showComingSoonAlertWithMessage:message inViewController:vc];
 }

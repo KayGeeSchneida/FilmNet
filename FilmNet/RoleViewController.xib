@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,8 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RoleViewController">
             <connections>
+                <outlet property="interestsButton" destination="bOK-vA-ZAg" id="HjG-0T-XHo"/>
                 <outlet property="nextButton" destination="cUy-gI-Eqq" id="ijY-2X-2lX"/>
                 <outlet property="primaryRoleButton" destination="kcc-dU-XOU" id="TQU-yV-3n8"/>
+                <outlet property="secondaryRoleButton" destination="3Zr-ct-7cz" id="qMt-yr-EWv"/>
                 <outlet property="tableHolder" destination="OZZ-wS-1M2" id="XqF-eE-UvZ"/>
                 <outlet property="tableView" destination="34f-wx-CJE" id="IdG-l4-zc1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -23,24 +25,54 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcc-dU-XOU">
-                    <rect key="frame" x="20" y="100" width="335" height="50"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcc-dU-XOU" customClass="FNButton">
+                    <rect key="frame" x="20" y="90" width="335" height="50"/>
+                    <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="WcU-ms-AZw"/>
                     </constraints>
-                    <state key="normal" title="Primary Role"/>
+                    <state key="normal" title="Primary Role">
+                        <color key="titleColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="tappedPrimaryRole:" destination="-1" eventType="touchUpInside" id="4sG-vX-G57"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cUy-gI-Eqq">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zr-ct-7cz" customClass="FNButton">
+                    <rect key="frame" x="20" y="160" width="335" height="50"/>
+                    <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Sg6-fq-Dsh"/>
+                    </constraints>
+                    <state key="normal" title="Secondary Role(s)">
+                        <color key="titleColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="tappedSecondaryRole:" destination="-1" eventType="touchUpInside" id="g2L-D1-XEU"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOK-vA-ZAg" customClass="FNButton">
+                    <rect key="frame" x="20" y="230" width="335" height="50"/>
+                    <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Wvr-vC-qiV"/>
+                    </constraints>
+                    <state key="normal" title="Interests">
+                        <color key="titleColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="tappedInterests:" destination="-1" eventType="touchUpInside" id="Fr7-9w-7vd"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cUy-gI-Eqq" customClass="FNButton">
                     <rect key="frame" x="0.0" y="617" width="375" height="50"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.35294117650000001" green="0.76862745099999996" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="YrQ-kA-TJ3"/>
                     </constraints>
-                    <state key="normal" title="Next"/>
+                    <state key="normal" title="Next">
+                        <color key="titleColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <state key="disabled">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -69,14 +101,21 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="cUy-gI-Eqq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2Kt-aW-10d"/>
+                <constraint firstItem="bOK-vA-ZAg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="4cJ-Jf-Bh1"/>
                 <constraint firstItem="OZZ-wS-1M2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="9YH-vO-Tyf"/>
                 <constraint firstAttribute="trailing" secondItem="cUy-gI-Eqq" secondAttribute="trailing" id="9tt-Ut-klJ"/>
+                <constraint firstItem="bOK-vA-ZAg" firstAttribute="top" secondItem="3Zr-ct-7cz" secondAttribute="bottom" constant="20" id="E1g-eq-enq"/>
                 <constraint firstItem="OZZ-wS-1M2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="L8Z-6Q-lxZ"/>
                 <constraint firstItem="kcc-dU-XOU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="OVf-hw-vnR"/>
+                <constraint firstItem="3Zr-ct-7cz" firstAttribute="top" secondItem="kcc-dU-XOU" secondAttribute="bottom" constant="20" id="OaE-aN-rFh"/>
                 <constraint firstAttribute="bottom" secondItem="cUy-gI-Eqq" secondAttribute="bottom" id="Snd-Xz-gno"/>
+                <constraint firstItem="3Zr-ct-7cz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="YUu-kE-Ac6"/>
                 <constraint firstAttribute="bottom" secondItem="OZZ-wS-1M2" secondAttribute="bottom" id="adX-Q6-jx6"/>
                 <constraint firstAttribute="trailing" secondItem="OZZ-wS-1M2" secondAttribute="trailing" id="cf8-qW-YNT"/>
-                <constraint firstItem="kcc-dU-XOU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="mb0-pF-7Qw"/>
+                <constraint firstItem="bOK-vA-ZAg" firstAttribute="top" secondItem="3Zr-ct-7cz" secondAttribute="bottom" constant="20" id="liL-SJ-O8j"/>
+                <constraint firstItem="kcc-dU-XOU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="90" id="mb0-pF-7Qw"/>
+                <constraint firstAttribute="trailing" secondItem="bOK-vA-ZAg" secondAttribute="trailing" constant="20" id="oOD-mb-rxO"/>
+                <constraint firstAttribute="trailing" secondItem="3Zr-ct-7cz" secondAttribute="trailing" constant="20" id="scA-kW-KNk"/>
                 <constraint firstAttribute="trailing" secondItem="kcc-dU-XOU" secondAttribute="trailing" constant="20" id="w59-Qf-3Am"/>
             </constraints>
         </view>

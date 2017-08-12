@@ -18,7 +18,7 @@
                     <tabBarItem key="tabBarItem" title="Film Net" image="filmnet" id="yWz-3D-Kfw">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wGg-dW-bZs">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wGg-dW-bZs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -112,7 +112,7 @@
                                 <rect key="frame" x="0.0" y="117" width="375" height="390"/>
                                 <color key="backgroundColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="0.5" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGY-Sl-v2H">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGY-Sl-v2H" customClass="FNButton">
                                 <rect key="frame" x="36" y="537" width="303" height="40"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -125,10 +125,10 @@
                                     <action selector="tappedLogin:" destination="hMI-EP-Sqz" eventType="touchUpInside" id="94h-o2-yFr"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LJX-7Y-PNZ">
-                                <rect key="frame" x="16" y="127" width="343" height="370"/>
+                            <scrollView multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LJX-7Y-PNZ">
+                                <rect key="frame" x="70" y="127" width="235" height="370"/>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJL-H3-iJe">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJL-H3-iJe" customClass="FNButton">
                                 <rect key="frame" x="36" y="597" width="303" height="40"/>
                                 <color key="backgroundColor" red="0.35294117650000001" green="0.76862745099999996" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -144,10 +144,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="LJX-7Y-PNZ" firstAttribute="leading" secondItem="7Xj-0h-M4L" secondAttribute="leadingMargin" id="2Cd-5C-Jfr"/>
                             <constraint firstItem="3Ae-cc-REm" firstAttribute="top" secondItem="7Xj-0h-M4L" secondAttribute="topMargin" constant="20" id="50D-ei-bVg"/>
                             <constraint firstItem="lJL-H3-iJe" firstAttribute="top" secondItem="LGY-Sl-v2H" secondAttribute="bottom" constant="20" id="8fu-kT-Ki8"/>
                             <constraint firstItem="Qfr-dM-3wm" firstAttribute="top" secondItem="sMy-wB-d5B" secondAttribute="bottom" constant="20" id="8hi-1l-Rv0"/>
+                            <constraint firstAttribute="trailing" secondItem="LJX-7Y-PNZ" secondAttribute="trailing" constant="70" id="AMO-bh-iOg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3Ae-cc-REm" secondAttribute="trailing" constant="20" id="BVH-bQ-0jR"/>
                             <constraint firstItem="LJX-7Y-PNZ" firstAttribute="bottom" secondItem="Qfr-dM-3wm" secondAttribute="bottom" constant="-10" id="BtU-0B-pvN"/>
                             <constraint firstItem="LGY-Sl-v2H" firstAttribute="top" secondItem="Qfr-dM-3wm" secondAttribute="bottom" constant="30" id="Dsa-bz-z9W"/>
@@ -157,9 +157,9 @@
                             <constraint firstItem="3Ae-cc-REm" firstAttribute="leading" secondItem="7Xj-0h-M4L" secondAttribute="leadingMargin" constant="20" id="QRm-wh-tye"/>
                             <constraint firstItem="sMy-wB-d5B" firstAttribute="top" secondItem="3Ae-cc-REm" secondAttribute="bottom" constant="5" id="a8s-ih-Qdx"/>
                             <constraint firstItem="sMy-wB-d5B" firstAttribute="leading" secondItem="7Xj-0h-M4L" secondAttribute="leadingMargin" constant="15" id="bSp-8w-2wq"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="LJX-7Y-PNZ" secondAttribute="trailing" id="cv8-IQ-AsJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LGY-Sl-v2H" secondAttribute="trailing" constant="20" id="diL-fZ-zdx"/>
                             <constraint firstItem="Qfr-dM-3wm" firstAttribute="leading" secondItem="7Xj-0h-M4L" secondAttribute="leading" id="fes-VC-QsF"/>
+                            <constraint firstItem="LJX-7Y-PNZ" firstAttribute="leading" secondItem="7Xj-0h-M4L" secondAttribute="leading" constant="70" id="j3C-jk-gRS"/>
                             <constraint firstAttribute="trailing" secondItem="Qfr-dM-3wm" secondAttribute="trailing" id="mUb-Z9-k78"/>
                             <constraint firstItem="LGY-Sl-v2H" firstAttribute="leading" secondItem="7Xj-0h-M4L" secondAttribute="leadingMargin" constant="20" id="ngT-nl-TqK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lJL-H3-iJe" secondAttribute="trailing" constant="20" id="sEj-dI-RjW"/>
@@ -184,7 +184,7 @@
             <objects>
                 <navigationController id="F4R-RV-cPU" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="profile" id="FKJ-AY-sYW"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="YaD-GD-pVe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YaD-GD-pVe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -453,7 +453,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="FPY-dB-grd" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3Vx-kM-Q5B">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Vx-kM-Q5B">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

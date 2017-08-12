@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "RoleViewController.h"
 #import "ValidationsUtil.h"
+#import "FNButton.h"
 
 @interface SignupViewController ()
 
@@ -19,6 +20,8 @@
 @property (nonatomic, weak) IBOutlet UITextField *emailField;
 @property (nonatomic, weak) IBOutlet UITextField *passwordField;
 @property (nonatomic, weak) IBOutlet UITextField *confirmField;
+@property (nonatomic, weak) IBOutlet FNButton *signupButton;
+@property (nonatomic, weak) IBOutlet UILabel *signupLabel;
 
 @end
 
@@ -31,11 +34,19 @@
     
     [self setupScrollContent];
     
+    [self.signupButton setFnButtonStyle:FNButtonStyleGreen];
+    
+    self.signupLabel.font = [UIFont fontWithName:FONT_GraphikStencilXQ size:40];
+    
     [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

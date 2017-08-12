@@ -13,13 +13,17 @@
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "ValidationsUtil.h"
+#import "FNButton.h"
+#import "ComingSoonHelper.h"
 
 @interface LocationViewController ()
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 @property (nonatomic, weak) IBOutlet UITextField *zipField;
-@property (nonatomic, weak) IBOutlet UIButton *finishButton;
+@property (nonatomic, weak) IBOutlet FNButton *locationButton;
+@property (nonatomic, weak) IBOutlet FNButton *finishButton;
+@property (nonatomic, weak) IBOutlet UILabel *orLabel;
 
 @end
 
@@ -31,6 +35,11 @@
     [super viewDidLoad];
     
     [self setupScrollContent];
+    
+    self.orLabel.font = [UIFont fontWithName:FONT_GraphikStencilXQ size:20.0f];
+    
+    [self.locationButton setFnButtonStyle:FNButtonStyleWhiteBordered];
+    [self.finishButton setFnButtonStyle:FNButtonStyleGreen];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,7 +59,7 @@
 #pragma mark - Location Services
 
 - (IBAction)tappedEnableLocationServices:(id)sender {
-    [self showAlertWithMessage:@"Location services coming soon!" andSuccess:NO];
+    [ComingSoonHelper showFeatureComingSoon:@"Location Services" inViewController:self];
 }
 
 #pragma mark - Finish

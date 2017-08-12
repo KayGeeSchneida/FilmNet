@@ -13,6 +13,8 @@
 
 + (void)showSearchComingSoonInViewController:(UIViewController *)vc;
 + (void)showMessageComingSoonInViewController:(UIViewController *)vc;
++ (void)showSecondaryRolesComingSoonInViewController:(UIViewController *)vc;
++ (void)showInterestsComingSoonInViewController:(UIViewController *)vc;
 + (void)showFeatureComingSoon:(NSString *)feature inViewController:(UIViewController *)vc;
 
 @end

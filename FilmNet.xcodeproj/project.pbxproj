@@ -44,6 +44,8 @@
 		81A244DC1F1FD26C003147D3 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244DA1F1FD26C003147D3 /* SignupViewController.m */; };
 		81A244DD1F1FD26C003147D3 /* SignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A244DB1F1FD26C003147D3 /* SignupViewController.xib */; };
 		81A244E31F1FD649003147D3 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A244E21F1FD649003147D3 /* BaseViewController.m */; };
+		81B2B02B1F3FAE7F00AA64AC /* FNTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B2B02A1F3FAE7F00AA64AC /* FNTextField.m */; };
+		81B2B02E1F3FB3F500AA64AC /* FNButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B2B02D1F3FB3F500AA64AC /* FNButton.m */; };
 		81B54EAD1F3F879B0090B7CD /* ComingSoonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B54EAC1F3F879B0090B7CD /* ComingSoonHelper.m */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +147,10 @@
 		81A244E11F1FD649003147D3 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		81A244E21F1FD649003147D3 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		81A26E551F2024070056C008 /* FilmNet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FilmNet.entitlements; sourceTree = "<group>"; };
+		81B2B0291F3FAE7F00AA64AC /* FNTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FNTextField.h; sourceTree = "<group>"; };
+		81B2B02A1F3FAE7F00AA64AC /* FNTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FNTextField.m; sourceTree = "<group>"; };
+		81B2B02C1F3FB3F500AA64AC /* FNButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FNButton.h; sourceTree = "<group>"; };
+		81B2B02D1F3FB3F500AA64AC /* FNButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FNButton.m; sourceTree = "<group>"; };
 		81B54EAB1F3F879B0090B7CD /* ComingSoonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComingSoonHelper.h; sourceTree = "<group>"; };
 		81B54EAC1F3F879B0090B7CD /* ComingSoonHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComingSoonHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -282,6 +288,10 @@
 				81A244E21F1FD649003147D3 /* BaseViewController.m */,
 				81B54EAB1F3F879B0090B7CD /* ComingSoonHelper.h */,
 				81B54EAC1F3F879B0090B7CD /* ComingSoonHelper.m */,
+				81B2B02C1F3FB3F500AA64AC /* FNButton.h */,
+				81B2B02D1F3FB3F500AA64AC /* FNButton.m */,
+				81B2B0291F3FAE7F00AA64AC /* FNTextField.h */,
+				81B2B02A1F3FAE7F00AA64AC /* FNTextField.m */,
 				816978CB1F2A96260004F17B /* ValidationsUtil.h */,
 				816978CC1F2A96260004F17B /* ValidationsUtil.m */,
 			);
@@ -493,8 +503,10 @@
 				81B54EAD1F3F879B0090B7CD /* ComingSoonHelper.m in Sources */,
 				816978CD1F2A96260004F17B /* ValidationsUtil.m in Sources */,
 				816978D01F2A977B0004F17B /* RoleTableViewController.m in Sources */,
+				81B2B02B1F3FAE7F00AA64AC /* FNTextField.m in Sources */,
 				818A487A1F38F269001EE80C /* RecommendService.m in Sources */,
 				813710711F2172F900A7DC04 /* UserCollectionViewCell.m in Sources */,
+				81B2B02E1F3FB3F500AA64AC /* FNButton.m in Sources */,
 				81A244DC1F1FD26C003147D3 /* SignupViewController.m in Sources */,
 				8137106C1F216B1D00A7DC04 /* FeedViewController.m in Sources */,
 				813710611F2149B600A7DC04 /* RoleViewController.m in Sources */,
